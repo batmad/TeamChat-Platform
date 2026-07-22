@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: realtime-chat-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: realtime_chat
+      POSTGRES_USER: chat_app
+      POSTGRES_PASSWORD: chat_app_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - realtime_chat_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chat_app -d realtime_chat"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  realtime_chat_postgres_data:

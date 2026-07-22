@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website A — Floating Chat Widget Demo</title>
+  <style>
+    body { margin:0; font-family:Inter,system-ui,sans-serif; color:#0f172a; background:#eef2ff; }
+    header { padding:24px 32px; background:#312e81; color:white; }
+    main { max-width:1050px; margin:0 auto; padding:42px 24px 140px; }
+    .hero { padding:42px; border-radius:28px; background:white; box-shadow:0 20px 50px rgba(49,46,129,.12); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:24px; }
+    .card { padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:18px; }
+    form { margin-top:26px; display:grid; gap:12px; }
+    label { display:grid; gap:6px; font-size:13px; font-weight:650; }
+    input { padding:11px 12px; border:1px solid #cbd5e1; border-radius:10px; font:inherit; }
+    button { width:max-content; padding:11px 18px; border:0; border-radius:10px; background:#312e81; color:white; font-weight:700; cursor:pointer; }
+    code { font-size:12px; }
+  </style>
+</head>
+<body>
+  <header><strong>Website A</strong> — Host application simulation</header>
+  <main>
+    <section class="hero">
+      <p style="color:#6366f1;font-weight:700">Integration test page</p>
+      <h1>This page intentionally has its own CSS.</h1>
+      <p>The chat widget is injected with Shadow DOM, so the host styles below should not affect the widget UI.</p>
+      <div class="grid">
+        <div class="card"><strong>Host card</strong><p>Private and group chat run in the floating bubble.</p></div>
+        <div class="card"><strong>Realtime</strong><p>The Socket.IO process can use a separate URL.</p></div>
+        <div class="card"><strong>Isolation</strong><p>Widget CSS is isolated from this page.</p></div>
+      </div>
+      <form id="demo-form">
+        <label>Chat Base URL<input id="chat-url" value="http://localhost:3000" /></label>
+        <label>Realtime URL<input id="realtime-url" value="http://localhost:3001" /></label>
+        <label>Application Key<input id="app-key" placeholder="your-application-key" /></label>
+        <label>Signed Bootstrap Token<input id="bootstrap-token" placeholder="Paste short-lived signed token" /></label>
+        <button type="submit">Mount Widget</button>
+      </form>
+      <p style="margin-top:18px;color:#64748b">The bootstrap token must be generated server-side by the host application. Never put the application signing secret in this page.</p>
+    </section>
+  </main>
+  <script>
+    document.getElementById('demo-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (window.ChatWidget) window.ChatWidget.destroy();
+      var script = document.createElement('script');
+      var chatUrl = document.getElementById('chat-url').value.replace(/\/+$/, '');
+      script.src = chatUrl + '/chat-widget.js';
+      script.dataset.chatBaseUrl = chatUrl;
+      script.dataset.realtimeUrl = document.getElementById('realtime-url').value;
+      script.dataset.applicationKey = document.getElementById('app-key').value;
+      script.dataset.bootstrapToken = document.getElementById('bootstrap-token').value;
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
+</html>

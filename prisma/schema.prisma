@@ -1,0 +1,840 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ApplicationStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum IntegrationType {
+  DATABASE
+  API
+}
+
+enum IntegrationStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  ERROR
+}
+
+enum DatabaseType {
+  POSTGRESQL
+  MYSQL
+  MARIADB
+  SQLSERVER
+}
+
+enum DatabaseSslMode {
+  DISABLE
+  REQUIRE
+}
+
+enum ApiAuthenticationMode {
+  NONE
+  BEARER
+  API_KEY
+  BASIC
+}
+
+enum UserSource {
+  DATABASE
+  API
+  INTERNAL
+}
+
+enum PermissionEffect {
+  ALLOW
+  DENY
+}
+
+enum GroupSource {
+  EXTERNAL
+  INTERNAL
+}
+
+enum PresenceStatus {
+  ONLINE
+  OFFLINE
+}
+
+enum RoomType {
+  PRIVATE
+  GROUP
+}
+
+enum MessageType {
+  TEXT
+}
+
+enum NotificationType {
+  MESSAGE
+  SYSTEM
+  MODERATION
+}
+
+enum ForbiddenWordScope {
+  GLOBAL
+  APPLICATION
+  GROUP
+}
+
+enum ForbiddenMatchMode {
+  EXACT_WORD
+  CONTAINS
+}
+
+enum ViolationStatus {
+  BLOCKED
+}
+
+enum LogType {
+  INTEGRATION
+  API
+  AUTHENTICATION
+  ERROR
+  SYSTEM
+  USER_ACTIVITY
+  CHAT_ACTIVITY
+  CONTENT_VIOLATION
+  REPORT
+}
+
+enum LogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+  FATAL
+}
+
+enum RetentionDataType {
+  LOG
+  CHAT
+}
+
+enum ReportScopeType {
+  OWN_GROUP
+  SELECTED_GROUPS
+  ALL_GROUPS
+}
+
+enum ReportSubjectType {
+  ROLE
+  USER
+}
+
+model Application {
+  id             String            @id @default(uuid())
+  key            String            @unique
+  name           String
+  description    String?
+  status         ApplicationStatus @default(ACTIVE)
+  allowedOrigins String[]           @default([])
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  credentials        ApplicationCredential[]
+  integrations       IntegrationConfig[]
+  userIdentities     UserIdentity[]
+  roles              Role[]
+  groups             Group[]
+  rooms              Room[]
+  messages           Message[]
+  notifications      Notification[]
+  forbiddenWords     ForbiddenWord[]
+  violationLogs      ContentViolationLog[]
+  systemLogs         SystemLog[]
+  auditLogs          AuditLog[]
+  retentionPolicies  RetentionPolicy[]
+  reportScopes       ReportScopeAssignment[]
+  widgetConfig       WidgetConfig?
+
+  @@index([status])
+  @@map("applications")
+}
+
+model ApplicationCredential {
+  id              String   @id @default(uuid())
+  applicationId   String
+  keyId           String
+  name            String
+  secretEncrypted String
+  isActive        Boolean  @default(true)
+  expiresAt       DateTime?
+  lastUsedAt      DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@unique([applicationId, keyId])
+  @@index([applicationId, isActive])
+  @@map("application_credentials")
+}
+
+model IntegrationConfig {
+  id                  String            @id @default(uuid())
+  applicationId       String
+  name                String
+  type                IntegrationType
+  status              IntegrationStatus @default(DRAFT)
+  timeoutMs           Int               @default(10000)
+  isDefaultUserSource     Boolean           @default(false)
+  mappingRevision         Int               @default(0)
+  previewedMappingRevision Int?
+  lastMappingPreviewAt    DateTime?
+  lastTestedAt            DateTime?
+  lastSuccessAt           DateTime?
+  lastErrorAt             DateTime?
+  createdAt               DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  application   Application                 @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  databaseConfig DatabaseIntegrationConfig?
+  apiConfig      ApiIntegrationConfig?
+  fieldMappings  IntegrationFieldMapping[]
+  roleMappings   IntegrationRoleMapping[]
+
+  @@index([applicationId, type, status])
+  @@index([applicationId, isDefaultUserSource])
+  @@map("integration_configs")
+}
+
+model DatabaseIntegrationConfig {
+  id                String          @id @default(uuid())
+  integrationId     String          @unique
+  databaseType      DatabaseType
+  host              String
+  port              Int
+  databaseName      String
+  username          String
+  passwordEncrypted String?
+  schemaName        String?
+  sslMode           DatabaseSslMode @default(DISABLE)
+  userTable         String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  integration IntegrationConfig @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@index([databaseType, host, port])
+  @@map("database_integration_configs")
+}
+
+model ApiIntegrationConfig {
+  id                   String                @id @default(uuid())
+  integrationId        String                @unique
+  baseUrl              String
+  endpoint             String
+  testEndpoint         String?
+  authenticationMode   ApiAuthenticationMode @default(NONE)
+  credentialEncrypted  String?
+  requestConfig        Json
+  responseMapping      Json
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  integration IntegrationConfig @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@index([authenticationMode])
+  @@map("api_integration_configs")
+}
+
+model IntegrationFieldMapping {
+  id              String   @id @default(uuid())
+  integrationId   String
+  targetField     String
+  sourceField     String
+  defaultValue    String?
+  transformConfig Json?
+  isRequired      Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  integration IntegrationConfig @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@unique([integrationId, targetField])
+  @@map("integration_field_mappings")
+}
+
+model IntegrationRoleMapping {
+  id            String   @id @default(uuid())
+  integrationId String
+  sourceRole    String
+  roleId        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  integration IntegrationConfig @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+  role        Role              @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([integrationId, sourceRole])
+  @@index([roleId])
+  @@map("integration_role_mappings")
+}
+
+model InternalUser {
+  id              String    @id @default(uuid())
+  username        String    @unique
+  name            String
+  passwordHash    String
+  isProtectedRoot Boolean   @default(false)
+  isActive        Boolean   @default(true)
+  lastLoginAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  identities UserIdentity[]
+  auditLogs  AuditLog[]
+
+  @@index([isActive])
+  @@map("internal_users")
+}
+
+model UserIdentity {
+  id                  String     @id @default(uuid())
+  applicationId       String
+  username            String
+  source              UserSource
+  internalUserId      String?
+  displayNameSnapshot String?
+  sourceReference     String?
+  isActive            Boolean    @default(true)
+  lastSyncedAt        DateTime?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  application          Application               @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  internalUser         InternalUser?              @relation(fields: [internalUserId], references: [id], onDelete: SetNull)
+  userOverride         UserOverride?
+  presence             UserPresence?
+  permissionOverrides  UserPermissionOverride[]
+  groupMemberships     UserGroup[]
+  roomMemberships      RoomMember[]
+  sentMessages         Message[]                  @relation("MessageSenderIdentity")
+  messageReads         MessageRead[]
+  notificationSetting  NotificationSetting?
+  roomMutes            RoomMute[]
+  notifications        Notification[]
+  violationLogs        ContentViolationLog[]
+  reportScopes         ReportScopeAssignment[]
+
+  @@unique([applicationId, username])
+  @@index([applicationId, source, isActive])
+  @@index([internalUserId])
+  @@map("user_identities")
+}
+
+model UserOverride {
+  id               String   @id @default(uuid())
+  userIdentityId   String   @unique
+  roleOverrideId   String?
+  isAccessDisabled Boolean  @default(false)
+  metadata         Json?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  roleOverride Role?        @relation("UserRoleOverrides", fields: [roleOverrideId], references: [id], onDelete: SetNull)
+
+  @@index([roleOverrideId])
+  @@map("user_overrides")
+}
+
+model Role {
+  id            String   @id @default(uuid())
+  applicationId String
+  code          String
+  name          String
+  description   String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  application        Application              @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  permissions        RolePermission[]
+  integrationMappings IntegrationRoleMapping[]
+  userOverrides      UserOverride[]            @relation("UserRoleOverrides")
+  presenceRecords    UserPresence[]
+  reportScopes       ReportScopeAssignment[]
+
+  @@unique([applicationId, code])
+  @@index([applicationId, isActive])
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  module      String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rolePermissions RolePermission[]
+  userOverrides   UserPermissionOverride[]
+
+  @@index([module, isActive])
+  @@map("permissions")
+}
+
+model RolePermission {
+  id           String   @id @default(uuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model UserPermissionOverride {
+  id             String           @id @default(uuid())
+  userIdentityId String
+  permissionId   String
+  effect         PermissionEffect
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  permission   Permission   @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([userIdentityId, permissionId])
+  @@index([permissionId])
+  @@map("user_permission_overrides")
+}
+
+model Group {
+  id            String      @id @default(uuid())
+  applicationId String
+  code          String
+  name          String
+  description   String?
+  source        GroupSource
+  externalKey   String?
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  application    Application            @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  members        UserGroup[]
+  rooms          Room[]
+  forbiddenWords ForbiddenWord[]
+  violationLogs  ContentViolationLog[]
+  reportScopeGroups ReportScopeGroup[]
+  messageContexts MessageGroupContext[]
+
+  @@unique([applicationId, code])
+  @@index([applicationId, source, isActive])
+  @@index([applicationId, externalKey])
+  @@map("groups")
+}
+
+model UserGroup {
+  id             String      @id @default(uuid())
+  userIdentityId String
+  groupId        String
+  source         GroupSource
+  isPrimary      Boolean     @default(false)
+  syncedAt       DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  group        Group        @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userIdentityId, groupId])
+  @@index([groupId, source])
+  @@index([userIdentityId, isPrimary])
+  @@map("user_groups")
+}
+
+model UserPresence {
+  id              String         @id @default(uuid())
+  userIdentityId  String         @unique
+  effectiveRoleId String?
+  status          PresenceStatus @default(OFFLINE)
+  connectionCount Int            @default(0)
+  loginAt         DateTime?
+  lastSeenAt      DateTime?
+  logoutAt        DateTime?
+  offlineAt       DateTime?
+  sessionReference String?
+  metadata        Json?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  userIdentity  UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  effectiveRole Role?        @relation(fields: [effectiveRoleId], references: [id], onDelete: SetNull)
+
+  @@index([status, offlineAt])
+  @@index([effectiveRoleId])
+  @@map("user_presence")
+}
+
+model Room {
+  id            String   @id @default(uuid())
+  applicationId String
+  type          RoomType
+  name          String?
+  groupId       String?
+  privateKey    String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  application Application           @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  group       Group?                @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  members     RoomMember[]
+  messages    Message[]
+  mutes       RoomMute[]
+  notifications Notification[]
+  violationLogs ContentViolationLog[]
+
+  @@unique([applicationId, privateKey])
+  @@unique([applicationId, groupId, type])
+  @@index([applicationId, type, isActive])
+  @@map("rooms")
+}
+
+model RoomMember {
+  id                  String    @id @default(uuid())
+  roomId              String
+  userIdentityId      String
+  usernameSnapshot    String
+  displayNameSnapshot String?
+  joinedAt            DateTime  @default(now())
+  leftAt              DateTime?
+  isActive            Boolean   @default(true)
+
+  room         Room         @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Restrict)
+
+  @@unique([roomId, userIdentityId])
+  @@index([userIdentityId, isActive])
+  @@map("room_members")
+}
+
+model Message {
+  id                   String      @id @default(uuid())
+  applicationId        String
+  roomId               String
+  senderUserIdentityId String?
+  senderUsername       String
+  senderName           String?
+  type                 MessageType @default(TEXT)
+  content              String
+  clientMessageId      String?
+  replyMessageId       String?
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  editedAt             DateTime?
+  deletedAt            DateTime?
+
+  application Application   @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  room        Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  senderIdentity UserIdentity? @relation("MessageSenderIdentity", fields: [senderUserIdentityId], references: [id], onDelete: SetNull)
+  replyTo     Message?      @relation("MessageReplies", fields: [replyMessageId], references: [id], onDelete: SetNull)
+  replies     Message[]     @relation("MessageReplies")
+  reads       MessageRead[]
+  notifications Notification[]
+  groupContexts MessageGroupContext[]
+
+  @@unique([applicationId, clientMessageId])
+  @@index([applicationId, roomId, createdAt])
+  @@index([applicationId, senderUsername, createdAt])
+  @@index([replyMessageId])
+  @@map("messages")
+}
+
+
+model MessageGroupContext {
+  id        String   @id @default(uuid())
+  messageId String
+  groupId   String
+  createdAt DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  group   Group   @relation(fields: [groupId], references: [id], onDelete: Restrict)
+
+  @@unique([messageId, groupId])
+  @@index([groupId, messageId])
+  @@map("message_group_contexts")
+}
+
+model MessageRead {
+  id             String   @id @default(uuid())
+  messageId      String
+  userIdentityId String
+  usernameSnapshot String
+  readAt         DateTime @default(now())
+
+  message      Message      @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userIdentityId])
+  @@index([userIdentityId, readAt])
+  @@map("message_reads")
+}
+
+model NotificationSetting {
+  id                         String   @id @default(uuid())
+  userIdentityId             String   @unique
+  soundEnabled               Boolean  @default(true)
+  browserNotificationEnabled Boolean  @default(true)
+  muteAll                    Boolean  @default(false)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+
+  @@map("notification_settings")
+}
+
+model RoomMute {
+  id             String   @id @default(uuid())
+  userIdentityId String
+  roomId         String
+  mutedUntil     DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  room         Room         @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([userIdentityId, roomId])
+  @@map("room_mutes")
+}
+
+model Notification {
+  id                      String           @id @default(uuid())
+  applicationId           String
+  recipientUserIdentityId String
+  type                    NotificationType
+  title                   String
+  body                    String?
+  roomId                  String?
+  messageId               String?
+  metadata                Json?
+  dedupeKey               String?          @unique
+  readAt                  DateTime?
+  createdAt               DateTime         @default(now())
+
+  application Application  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  recipient   UserIdentity @relation(fields: [recipientUserIdentityId], references: [id], onDelete: Cascade)
+  room        Room?        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  message     Message?     @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([recipientUserIdentityId, readAt, createdAt])
+  @@index([recipientUserIdentityId, roomId, readAt])
+  @@index([applicationId, createdAt])
+  @@map("notifications")
+}
+
+model ForbiddenWord {
+  id                String             @id @default(uuid())
+  applicationId     String?
+  groupId           String?
+  scope             ForbiddenWordScope
+  pattern           String
+  normalizedPattern String
+  matchMode         ForbiddenMatchMode
+  isActive          Boolean            @default(true)
+  createdByUsername String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  application   Application?          @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  group         Group?                @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  violationLogs ContentViolationLog[]
+
+  @@index([scope, applicationId, groupId, isActive])
+  @@index([normalizedPattern, matchMode])
+  @@map("forbidden_words")
+}
+
+model ContentViolationLog {
+  id                   String          @id @default(uuid())
+  applicationId        String
+  userIdentityId       String?
+  username             String
+  userName             String?
+  roomId               String?
+  roomType             RoomType?
+  groupId              String?
+  forbiddenWordId      String?
+  matchedText          String
+  attemptedMessage     String
+  status               ViolationStatus @default(BLOCKED)
+  metadata             Json?
+  attemptedAt          DateTime        @default(now())
+
+  application   Application    @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  userIdentity  UserIdentity?  @relation(fields: [userIdentityId], references: [id], onDelete: SetNull)
+  room          Room?          @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  group         Group?         @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  forbiddenWord ForbiddenWord? @relation(fields: [forbiddenWordId], references: [id], onDelete: SetNull)
+
+  @@index([applicationId, attemptedAt])
+  @@index([username, attemptedAt])
+  @@index([groupId, attemptedAt])
+  @@map("content_violation_logs")
+}
+
+model SystemLog {
+  id            String    @id @default(uuid())
+  applicationId String?
+  type          LogType
+  level         LogLevel
+  requestId     String?
+  username      String?
+  action        String?
+  message       String
+  metadata      Json?
+  createdAt     DateTime  @default(now())
+
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId, type, createdAt])
+  @@index([level, createdAt])
+  @@index([requestId])
+  @@index([username, createdAt])
+  @@map("system_logs")
+}
+
+model AuditLog {
+  id                  String   @id @default(uuid())
+  applicationId       String?
+  actorInternalUserId String?
+  actorUsername       String
+  action              String
+  entityType          String
+  entityId            String?
+  beforeData          Json?
+  afterData           Json?
+  metadata            Json?
+  createdAt           DateTime @default(now())
+
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  actor       InternalUser? @relation(fields: [actorInternalUserId], references: [id], onDelete: SetNull)
+
+  @@index([applicationId, createdAt])
+  @@index([actorUsername, createdAt])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}
+
+model RetentionPolicy {
+  id            String            @id @default(uuid())
+  key           String            @unique
+  applicationId String?
+  dataType      RetentionDataType
+  category      String
+  retentionDays Int?
+  keepForever   Boolean           @default(false)
+  isActive      Boolean           @default(true)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId, dataType, category, isActive])
+  @@map("retention_policies")
+}
+
+model ReportDefinition {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  isSystem    Boolean  @default(true)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  scopes ReportScopeAssignment[]
+
+  @@index([isActive])
+  @@map("report_definitions")
+}
+
+model ReportScopeAssignment {
+  id             String            @id @default(uuid())
+  reportId       String
+  applicationId  String
+  subjectType    ReportSubjectType
+  subjectKey     String
+  roleId         String?
+  userIdentityId String?
+  scopeType      ReportScopeType
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  report       ReportDefinition @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  application  Application      @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  role         Role?            @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  userIdentity UserIdentity?    @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+  groups       ReportScopeGroup[]
+
+  @@unique([reportId, applicationId, subjectKey])
+  @@index([applicationId, subjectType])
+  @@map("report_scope_assignments")
+}
+
+model ReportScopeGroup {
+  id                String   @id @default(uuid())
+  scopeAssignmentId String
+  groupId           String
+  createdAt         DateTime @default(now())
+
+  scopeAssignment ReportScopeAssignment @relation(fields: [scopeAssignmentId], references: [id], onDelete: Cascade)
+  group           Group                 @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([scopeAssignmentId, groupId])
+  @@index([groupId])
+  @@map("report_scope_groups")
+}
+
+model WidgetConfig {
+  id                String   @id @default(uuid())
+  applicationId     String   @unique
+  position          String   @default("right-bottom")
+  bubbleIconUrl     String?
+  bubbleSize        Int      @default(60)
+  primaryColor      String   @default("#2563EB")
+  windowWidth       Int      @default(380)
+  windowHeight      Int      @default(600)
+  soundEnabledByDefault Boolean @default(true)
+  browserNotificationEnabledByDefault Boolean @default(true)
+  config            Json?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@map("widget_configs")
+}
+
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       Json
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("system_settings")
+}

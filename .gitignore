@@ -1,0 +1,102 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js
+.next/
+out/
+dist/
+build/
+
+# Environment variables dan rahasia
+.env
+.env.*
+!.env.example
+
+# Jangan commit credential atau key
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+secrets/
+.secret/
+private/
+
+# Database lokal
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+prisma/dev.db
+prisma/dev.db-journal
+
+# Tetap commit Prisma schema dan migrations
+# prisma/schema.prisma
+# prisma/migrations/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime
+*.pid
+*.pid.lock
+pids/
+
+# Test dan coverage
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+
+# Cache
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+*.tsbuildinfo
+
+# Upload atau file sementara aplikasi
+uploads/
+tmp/
+temp/
+storage/
+public/uploads/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vercel
+.vercel/
+
+# Local certificates
+certs/
+ssl/
+
+# Archive
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
+# Backup
+*.bak
+*.backup
+*.old
