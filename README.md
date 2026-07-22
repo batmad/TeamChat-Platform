@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SYSCCA TEAMCHAT PLATFORM
 
 ## Stack
@@ -94,3 +95,7 @@ Then open `http://localhost:3000/widget-demo.html`, enter the application key an
 - ROOT is protected and bypasses normal business-role authorization.
 - Frontend menu visibility is never treated as backend authorization.
 - Role and permission changes are resolved from the database on protected server requests.
+=======
+# TeamChat-Platform
+Internal team central realtime floating chat platform
+>>>>>>> babd314a4f0d282b64e918a9c73ef07c8880f427
