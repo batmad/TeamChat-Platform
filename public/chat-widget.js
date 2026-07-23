@@ -235,11 +235,170 @@
     this.typingTimer = null;
     this.boundEvents = [];
     this.eventsInstalled = false;
+    this.dragState = {
+      dragging: false,
+      startX: 0,
+      startY: 0,
+      startLeft: 0,
+      startTop: 0,
+    };
+
+    this.dragMoved = false;
   }
 
   Widget.prototype.bind = function (target, name, handler) {
     target.addEventListener(name, handler);
     this.boundEvents.push([target, name, handler]);
+  };
+
+  Widget.prototype.enableDrag = function () {
+    var self = this;
+
+    if (!this.launcher || !this.panel || !this.root) {
+      return;
+    }
+
+    var activePointerId = null;
+
+    function clamp(value, minimum, maximum) {
+      return Math.max(minimum, Math.min(value, maximum));
+    }
+
+    function applyDraggedPosition(left, top) {
+      var padding = 8;
+      var gap = 14;
+
+      var bubbleSize = Number(self.config.bubbleSize) || 60;
+
+      var panelWidth = Math.min(
+        Number(self.config.windowWidth) || 380,
+        global.innerWidth - 24,
+      );
+
+      var panelHeight = Math.min(
+        Number(self.config.windowHeight) || 600,
+        global.innerHeight - 110,
+      );
+
+      // Batasi bubble agar tidak keluar viewport.
+      left = clamp(
+        left,
+        padding,
+        Math.max(padding, global.innerWidth - bubbleSize - padding),
+      );
+
+      top = clamp(
+        top,
+        padding,
+        Math.max(padding, global.innerHeight - bubbleSize - padding),
+      );
+
+      /*
+       * Jika bubble berada di sisi kanan layar,
+       * sejajarkan sisi kanan panel dengan sisi kanan bubble.
+       * Jika di sisi kiri, sejajarkan sisi kirinya.
+       */
+      var panelLeft =
+        left + bubbleSize / 2 > global.innerWidth / 2
+          ? left + bubbleSize - panelWidth
+          : left;
+
+      panelLeft = clamp(
+        panelLeft,
+        padding,
+        Math.max(padding, global.innerWidth - panelWidth - padding),
+      );
+
+      // Secara default panel muncul di atas bubble.
+      var panelTop = top - panelHeight - gap;
+
+      // Jika ruang di atas tidak cukup, tampilkan di bawah bubble.
+      if (panelTop < padding) {
+        panelTop = top + bubbleSize + gap;
+      }
+
+      panelTop = clamp(
+        panelTop,
+        padding,
+        Math.max(padding, global.innerHeight - panelHeight - padding),
+      );
+
+      self.root.classList.add("cw-dragged");
+
+      self.root.style.setProperty("--cw-launcher-left", left + "px");
+
+      self.root.style.setProperty("--cw-launcher-top", top + "px");
+
+      self.root.style.setProperty("--cw-panel-left", panelLeft + "px");
+
+      self.root.style.setProperty("--cw-panel-top", panelTop + "px");
+    }
+
+    this.bind(this.launcher, "pointerdown", function (event) {
+      // Hanya tombol kiri mouse.
+      if (event.pointerType === "mouse" && event.button !== 0) {
+        return;
+      }
+
+      var rect = self.launcher.getBoundingClientRect();
+
+      activePointerId = event.pointerId;
+
+      self.dragState.dragging = true;
+      self.dragMoved = false;
+
+      self.dragState.startX = event.clientX;
+      self.dragState.startY = event.clientY;
+      self.dragState.startLeft = rect.left;
+      self.dragState.startTop = rect.top;
+
+      if (self.launcher.setPointerCapture) {
+        self.launcher.setPointerCapture(activePointerId);
+      }
+    });
+
+    this.bind(this.launcher, "pointermove", function (event) {
+      if (!self.dragState.dragging || event.pointerId !== activePointerId) {
+        return;
+      }
+
+      var deltaX = event.clientX - self.dragState.startX;
+      var deltaY = event.clientY - self.dragState.startY;
+
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        self.dragMoved = true;
+      }
+
+      // Jangan mengubah posisi jika masih dianggap klik biasa.
+      if (!self.dragMoved) {
+        return;
+      }
+
+      applyDraggedPosition(
+        self.dragState.startLeft + deltaX,
+        self.dragState.startTop + deltaY,
+      );
+    });
+
+    function finishDrag(event) {
+      if (event.pointerId !== activePointerId) {
+        return;
+      }
+
+      self.dragState.dragging = false;
+
+      if (
+        self.launcher.hasPointerCapture &&
+        self.launcher.hasPointerCapture(activePointerId)
+      ) {
+        self.launcher.releasePointerCapture(activePointerId);
+      }
+
+      activePointerId = null;
+    }
+
+    this.bind(this.launcher, "pointerup", finishDrag);
+    this.bind(this.launcher, "pointercancel", finishDrag);
   };
 
   Widget.prototype.unbindAll = function () {
@@ -321,8 +480,45 @@
       }
       .cw-launcher:hover { transform: translateY(-2px) scale(1.02); }
       .cw-launcher:focus-visible { outline: 3px solid color-mix(in srgb, var(--cw-primary) 35%, white); outline-offset: 3px; }
-      .cw-right .cw-launcher, .cw-right .cw-panel { right: 20px; }
-      .cw-left .cw-launcher, .cw-left .cw-panel { left: 20px; }
+      
+      /* Posisi default tetap mengikuti konfigurasi left-bottom/right-bottom */
+      .cw-right .cw-launcher,
+      .cw-right .cw-panel {
+        right: 20px;
+      }
+
+      .cw-left .cw-launcher,
+      .cw-left .cw-panel {
+        left: 20px;
+      }
+
+      /* Aktif setelah pengguna melakukan drag */
+      .cw-root.cw-dragged .cw-launcher {
+        left: var(--cw-launcher-left);
+        top: var(--cw-launcher-top);
+        right: auto;
+        bottom: auto;
+      }
+
+      .cw-root.cw-dragged .cw-panel {
+        left: var(--cw-panel-left);
+        top: var(--cw-panel-top);
+        right: auto;
+        bottom: auto;
+        width: min(${this.config.windowWidth}px, calc(100vw - 24px));
+        height: min(${this.config.windowHeight}px, calc(100dvh - 110px));
+      }
+
+      .cw-launcher {
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+      }
+
+      .cw-launcher:active {
+        cursor: grabbing;
+      }
+
       .cw-launcher-icon { width: 28px; height: 28px; object-fit: contain; }
       .cw-badge {
         position: absolute; top: -5px; right: -5px;
@@ -456,7 +652,16 @@
     this.launcher = this.shadow.querySelector(".cw-launcher");
     this.panel = this.shadow.querySelector(".cw-panel");
     this.badge = this.shadow.querySelector(".cw-badge");
-    this.launcher.addEventListener("click", this.toggle.bind(this));
+    var self = this;
+
+    this.launcher.addEventListener("click", function () {
+      if (self.dragMoved) {
+        self.dragMoved = false;
+        return;
+      }
+
+      self.toggle();
+    });
   };
 
   Widget.prototype.renderPanel = function () {
@@ -1500,7 +1705,11 @@
       this.error = error.message;
     }
     this.renderShell();
+
+    this.enableDrag();
+
     this.renderPanel();
+
     await this.initializeSession();
     return this;
   };
