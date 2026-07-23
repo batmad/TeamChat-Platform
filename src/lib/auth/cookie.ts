@@ -8,7 +8,7 @@ export async function setSessionCookie(token: string) {
 
   store.set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
-    secure: env.NODE_ENV === "production",
+    secure: process.env.COOKIE_SECURE !== "false", // default true, override via .env
     sameSite: "lax",
     path: "/",
     maxAge: env.SESSION_TTL_SECONDS,
