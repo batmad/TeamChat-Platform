@@ -8,7 +8,7 @@
     "dev:realtime": "tsx --conditions=react-server server/realtime.ts",
     "build": "next build",
     "start": "node scripts/start-next.mjs start",
-    "start:realtime": "tsx server/realtime.ts",
+    "start:realtime": "tsx --conditions=react-server server/realtime.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate",

@@ -13,7 +13,9 @@ export type ChatSessionPayload = {
 
 function chatSessionKey() {
   const env = getServerEnv();
-  return new TextEncoder().encode(env.CHAT_SESSION_SECRET ?? env.SESSION_SECRET);
+  return new TextEncoder().encode(
+    env.CHAT_SESSION_SECRET ?? env.SESSION_SECRET,
+  );
 }
 
 export async function createChatSessionToken(payload: ChatSessionPayload) {
@@ -26,18 +28,20 @@ export async function createChatSessionToken(payload: ChatSessionPayload) {
   })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
     .setSubject(payload.sub)
-    .setIssuer("central-realtime-chat-platform")
+    .setIssuer("central-syscca-teamchat-platform")
     .setAudience(CHAT_SESSION_AUDIENCE)
     .setIssuedAt()
     .setExpirationTime(`${env.CHAT_SESSION_TTL_SECONDS}s`)
     .sign(chatSessionKey());
 }
 
-export async function verifyChatSessionToken(token: string): Promise<ChatSessionPayload | null> {
+export async function verifyChatSessionToken(
+  token: string,
+): Promise<ChatSessionPayload | null> {
   try {
     const { payload } = await jwtVerify(token, chatSessionKey(), {
       algorithms: ["HS256"],
-      issuer: "central-realtime-chat-platform",
+      issuer: "central-syscca-teamchat-platform",
       audience: CHAT_SESSION_AUDIENCE,
     });
 

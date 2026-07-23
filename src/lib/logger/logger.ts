@@ -4,7 +4,7 @@ import { getServerEnv } from "@/lib/env/server";
 const env = getServerEnv();
 
 export const logger = pino({
-  name: "realtime-chat-platform",
+  name: "syscca-teamchat-platform",
   level: env.LOG_LEVEL,
   redact: {
     paths: [

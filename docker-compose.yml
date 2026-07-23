@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: realtime-chat-postgres
+    container_name: syscca-teamchat-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: realtime_chat
