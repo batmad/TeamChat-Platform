@@ -46,10 +46,10 @@ const handledPatch = withApiHandler(async (request) => {
 
 export const GET = async (request: Request) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledGet(request), requestOrigin);
+  return applyWidgetCors(await handledGet(request), requestOrigin);
 };
 
 export const PATCH = async (request: Request) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledPatch(request), requestOrigin);
+  return applyWidgetCors(await handledPatch(request), requestOrigin);
 };

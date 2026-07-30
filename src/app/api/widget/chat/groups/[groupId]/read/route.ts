@@ -38,5 +38,5 @@ const handledPost = withApiHandler(async (request, context: Context) => {
 
 export const POST = async (request: Request, context: Context) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledPost(request, context), requestOrigin);
+  return applyWidgetCors(await handledPost(request, context), requestOrigin);
 };

@@ -89,5 +89,5 @@ const handledGet = withApiHandler(async (request, context: Context) => {
 
 export const GET = async (request: Request, context: Context) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledGet(request, context), requestOrigin);
+  return applyWidgetCors(await handledGet(request, context), requestOrigin);
 };

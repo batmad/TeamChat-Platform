@@ -58,10 +58,10 @@ const handledDelete = withApiHandler(async (request, context: Context) => {
 
 export const PUT = async (request: Request, context: Context) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledPut(request, context), requestOrigin);
+  return applyWidgetCors(await handledPut(request, context), requestOrigin);
 };
 
 export const DELETE = async (request: Request, context: Context) => {
   const requestOrigin = getRequestOrigin(request);
-  applyWidgetCors(await handledDelete(request, context), requestOrigin);
+  return applyWidgetCors(await handledDelete(request, context), requestOrigin);
 };
