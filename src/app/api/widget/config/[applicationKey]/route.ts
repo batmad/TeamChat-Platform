@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import { AppError } from "@/lib/api/app-error";
 import { withApiHandler } from "@/lib/api/with-api-handler";
 import { prisma } from "@/lib/db/prisma";
-import { applyWidgetCors, widgetPreflightResponse } from "@/lib/widget-auth/cors";
+import {
+  applyWidgetCors,
+  widgetPreflightResponse,
+} from "@/lib/widget-auth/cors";
 import { assertWidgetOriginAllowed } from "@/lib/widget-auth/origin";
+import { getRequestOrigin } from "@//lib/widget-auth/request-origin";
 
 type Context = { params: Promise<{ applicationKey: string }> };
 
@@ -12,12 +16,14 @@ type WidgetJsonConfig = {
 };
 
 function readTheme(value: unknown): "light" | "dark" | "auto" {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return "light";
+  if (!value || typeof value !== "object" || Array.isArray(value))
+    return "light";
   const theme = (value as WidgetJsonConfig).theme;
   return theme === "dark" || theme === "auto" ? theme : "light";
 }
 
-export const OPTIONS = async (request: Request) => widgetPreflightResponse(request, "GET, OPTIONS");
+export const OPTIONS = async (request: Request) =>
+  widgetPreflightResponse(request, "GET, OPTIONS");
 
 const handledGet = withApiHandler(async (request, context: Context) => {
   const { applicationKey } = await context.params;
@@ -46,10 +52,15 @@ const handledGet = withApiHandler(async (request, context: Context) => {
   });
 
   if (!application || application.status !== "ACTIVE") {
-    throw new AppError(404, "WIDGET_APPLICATION_NOT_FOUND", "Widget application is unavailable");
+    throw new AppError(
+      404,
+      "WIDGET_APPLICATION_NOT_FOUND",
+      "Widget application is unavailable",
+    );
   }
 
-  assertWidgetOriginAllowed(application.allowedOrigins, request.headers.get("origin"));
+  const requestOrigin = getRequestOrigin(request);
+  assertWidgetOriginAllowed(application.allowedOrigins, requestOrigin);
 
   const config = application.widgetConfig;
   return NextResponse.json({
@@ -69,11 +80,14 @@ const handledGet = withApiHandler(async (request, context: Context) => {
         windowHeight: config?.windowHeight ?? 600,
         theme: readTheme(config?.config),
         soundEnabledByDefault: config?.soundEnabledByDefault ?? true,
-        browserNotificationEnabledByDefault: config?.browserNotificationEnabledByDefault ?? true,
+        browserNotificationEnabledByDefault:
+          config?.browserNotificationEnabledByDefault ?? true,
       },
     },
   });
 });
 
-export const GET = async (request: Request, context: Context) =>
-  applyWidgetCors(await handledGet(request, context), request.headers.get("origin"));
+export const GET = async (request: Request, context: Context) => {
+  const requestOrigin = getRequestOrigin(request);
+  applyWidgetCors(await handledGet(request, context), requestOrigin);
+};

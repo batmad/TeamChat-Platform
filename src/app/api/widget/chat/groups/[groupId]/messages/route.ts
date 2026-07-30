@@ -4,7 +4,11 @@ import { withApiHandler } from "@/lib/api/with-api-handler";
 import { getGroupMessageHistory } from "@/lib/chat/group-chat";
 import { toChatAppError } from "@/lib/chat/http";
 import { requireChatSession } from "@/lib/widget-auth/current-chat-user";
-import { applyWidgetCors, widgetPreflightResponse } from "@/lib/widget-auth/cors";
+import {
+  applyWidgetCors,
+  widgetPreflightResponse,
+} from "@/lib/widget-auth/cors";
+import { getRequestOrigin } from "@//lib/widget-auth/request-origin";
 
 type Context = { params: Promise<{ groupId: string }> };
 
@@ -13,7 +17,8 @@ const querySchema = z.object({
   limit: z.coerce.number().int().min(1).max(100).default(50),
 });
 
-export const OPTIONS = async (request: Request) => widgetPreflightResponse(request, "GET, OPTIONS");
+export const OPTIONS = async (request: Request) =>
+  widgetPreflightResponse(request, "GET, OPTIONS");
 
 const handledGet = withApiHandler(async (request, context: Context) => {
   const current = await requireChatSession(request);
@@ -37,5 +42,7 @@ const handledGet = withApiHandler(async (request, context: Context) => {
   }
 });
 
-export const GET = async (request: Request, context: Context) =>
-  applyWidgetCors(await handledGet(request, context), request.headers.get("origin"));
+export const GET = async (request: Request, context: Context) => {
+  const requestOrigin = getRequestOrigin(request);
+  applyWidgetCors(await handledGet(request, context), requestOrigin);
+};

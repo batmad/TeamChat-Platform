@@ -6,7 +6,11 @@ import {
   updateNotificationSettings,
 } from "@/lib/notifications/service";
 import { requireChatSession } from "@/lib/widget-auth/current-chat-user";
-import { applyWidgetCors, widgetPreflightResponse } from "@/lib/widget-auth/cors";
+import {
+  applyWidgetCors,
+  widgetPreflightResponse,
+} from "@/lib/widget-auth/cors";
+import { getRequestOrigin } from "@//lib/widget-auth/request-origin";
 
 const bodySchema = z
   .object({
@@ -14,14 +18,19 @@ const bodySchema = z
     browserNotificationEnabled: z.boolean().optional(),
     muteAll: z.boolean().optional(),
   })
-  .refine((value) => Object.keys(value).length > 0, "At least one notification setting is required");
+  .refine(
+    (value) => Object.keys(value).length > 0,
+    "At least one notification setting is required",
+  );
 
 export const OPTIONS = async (request: Request) =>
   widgetPreflightResponse(request, "GET, PATCH, OPTIONS");
 
 const handledGet = withApiHandler(async (request) => {
   const current = await requireChatSession(request);
-  const settings = await getNotificationSettings(current.authorization.userIdentityId);
+  const settings = await getNotificationSettings(
+    current.authorization.userIdentityId,
+  );
   return NextResponse.json({ success: true, data: settings });
 });
 
@@ -35,8 +44,12 @@ const handledPatch = withApiHandler(async (request) => {
   return NextResponse.json({ success: true, data: settings });
 });
 
-export const GET = async (request: Request) =>
-  applyWidgetCors(await handledGet(request), request.headers.get("origin"));
+export const GET = async (request: Request) => {
+  const requestOrigin = getRequestOrigin(request);
+  applyWidgetCors(await handledGet(request), requestOrigin);
+};
 
-export const PATCH = async (request: Request) =>
-  applyWidgetCors(await handledPatch(request), request.headers.get("origin"));
+export const PATCH = async (request: Request) => {
+  const requestOrigin = getRequestOrigin(request);
+  applyWidgetCors(await handledPatch(request), requestOrigin);
+};

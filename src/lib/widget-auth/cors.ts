@@ -1,4 +1,9 @@
-export function applyWidgetCors(response: Response, origin: string | null): Response {
+import { getRequestOrigin } from "@//lib/widget-auth/request-origin";
+
+export function applyWidgetCors(
+  response: Response,
+  origin: string | null,
+): Response {
   if (origin) {
     response.headers.set("access-control-allow-origin", origin);
     response.headers.set("vary", "Origin");
@@ -6,8 +11,11 @@ export function applyWidgetCors(response: Response, origin: string | null): Resp
   return response;
 }
 
-export function widgetPreflightResponse(request: Request, methods: string): Response {
-  const origin = request.headers.get("origin");
+export function widgetPreflightResponse(
+  request: Request,
+  methods: string,
+): Response {
+  const origin = getRequestOrigin(request);
   const headers = new Headers({
     "access-control-allow-methods": methods,
     "access-control-allow-headers": "Content-Type, Authorization, X-Request-ID",

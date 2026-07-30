@@ -4,7 +4,11 @@ import { withApiHandler } from "@/lib/api/with-api-handler";
 import { markGroupMessagesRead } from "@/lib/chat/group-chat";
 import { toChatAppError } from "@/lib/chat/http";
 import { requireChatSession } from "@/lib/widget-auth/current-chat-user";
-import { applyWidgetCors, widgetPreflightResponse } from "@/lib/widget-auth/cors";
+import {
+  applyWidgetCors,
+  widgetPreflightResponse,
+} from "@/lib/widget-auth/cors";
+import { getRequestOrigin } from "@//lib/widget-auth/request-origin";
 
 type Context = { params: Promise<{ groupId: string }> };
 
@@ -12,7 +16,8 @@ const bodySchema = z.object({
   upToMessageId: z.string().uuid().nullable().optional(),
 });
 
-export const OPTIONS = async (request: Request) => widgetPreflightResponse(request, "POST, OPTIONS");
+export const OPTIONS = async (request: Request) =>
+  widgetPreflightResponse(request, "POST, OPTIONS");
 
 const handledPost = withApiHandler(async (request, context: Context) => {
   const current = await requireChatSession(request);
@@ -31,5 +36,7 @@ const handledPost = withApiHandler(async (request, context: Context) => {
   }
 });
 
-export const POST = async (request: Request, context: Context) =>
-  applyWidgetCors(await handledPost(request, context), request.headers.get("origin"));
+export const POST = async (request: Request, context: Context) => {
+  const requestOrigin = getRequestOrigin(request);
+  applyWidgetCors(await handledPost(request, context), requestOrigin);
+};
