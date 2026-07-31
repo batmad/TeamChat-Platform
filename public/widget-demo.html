@@ -1,58 +1,648 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Website A — Floating Chat Widget Demo</title>
-  <style>
-    body { margin:0; font-family:Inter,system-ui,sans-serif; color:#0f172a; background:#eef2ff; }
-    header { padding:24px 32px; background:#312e81; color:white; }
-    main { max-width:1050px; margin:0 auto; padding:42px 24px 140px; }
-    .hero { padding:42px; border-radius:28px; background:white; box-shadow:0 20px 50px rgba(49,46,129,.12); }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:24px; }
-    .card { padding:20px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:18px; }
-    form { margin-top:26px; display:grid; gap:12px; }
-    label { display:grid; gap:6px; font-size:13px; font-weight:650; }
-    input { padding:11px 12px; border:1px solid #cbd5e1; border-radius:10px; font:inherit; }
-    button { width:max-content; padding:11px 18px; border:0; border-radius:10px; background:#312e81; color:white; font-weight:700; cursor:pointer; }
-    code { font-size:12px; }
-  </style>
-</head>
-<body>
-  <header><strong>Website A</strong> — Host application simulation</header>
-  <main>
-    <section class="hero">
-      <p style="color:#6366f1;font-weight:700">Integration test page</p>
-      <h1>This page intentionally has its own CSS.</h1>
-      <p>The chat widget is injected with Shadow DOM, so the host styles below should not affect the widget UI.</p>
-      <div class="grid">
-        <div class="card"><strong>Host card</strong><p>Private and group chat run in the floating bubble.</p></div>
-        <div class="card"><strong>Realtime</strong><p>The Socket.IO process can use a separate URL.</p></div>
-        <div class="card"><strong>Isolation</strong><p>Widget CSS is isolated from this page.</p></div>
-      </div>
-      <form id="demo-form">
-        <label>Chat Base URL<input id="chat-url" value="http://localhost:3000" /></label>
-        <label>Realtime URL<input id="realtime-url" value="http://localhost:3001" /></label>
-        <label>Application Key<input id="app-key" placeholder="your-application-key" /></label>
-        <label>Signed Bootstrap Token<input id="bootstrap-token" placeholder="Paste short-lived signed token" /></label>
-        <button type="submit">Mount Widget</button>
-      </form>
-      <p style="margin-top:18px;color:#64748b">The bootstrap token must be generated server-side by the host application. Never put the application signing secret in this page.</p>
-    </section>
-  </main>
-  <script>
-    document.getElementById('demo-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (window.ChatWidget) window.ChatWidget.destroy();
-      var script = document.createElement('script');
-      var chatUrl = document.getElementById('chat-url').value.replace(/\/+$/, '');
-      script.src = chatUrl + '/chat-widget.js';
-      script.dataset.chatBaseUrl = chatUrl;
-      script.dataset.realtimeUrl = document.getElementById('realtime-url').value;
-      script.dataset.applicationKey = document.getElementById('app-key').value;
-      script.dataset.bootstrapToken = document.getElementById('bootstrap-token').value;
-      document.body.appendChild(script);
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TeamChat Widget Demo</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: #0f172a;
+        background: #eef2ff;
+      }
+
+      header {
+        padding: 24px 32px;
+        background: #312e81;
+        color: #fff;
+      }
+
+      main {
+        max-width: 1050px;
+        margin: 0 auto;
+        padding: 42px 24px 140px;
+      }
+
+      .hero {
+        padding: 42px;
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 20px 50px rgba(49, 46, 129, 0.12);
+      }
+
+      .eyebrow {
+        color: #6366f1;
+        font-weight: 700;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        background: #fff;
+        font: inherit;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: 3px solid rgba(99, 102, 241, 0.15);
+        border-color: #6366f1;
+      }
+
+      .password-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .password-row input {
+        flex: 1;
+      }
+
+      button {
+        width: max-content;
+        padding: 11px 18px;
+        border: 0;
+        border-radius: 10px;
+        background: #312e81;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3730a3;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.65;
+      }
+
+      .secondary-button {
+        background: #475569;
+      }
+
+      .secondary-button:hover {
+        background: #334155;
+      }
+
+      .danger-button {
+        background: #b91c1c;
+      }
+
+      .danger-button:hover {
+        background: #991b1b;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .notice {
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid #fde68a;
+        border-radius: 12px;
+        color: #854d0e;
+        background: #fefce8;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .status {
+        display: none;
+        margin-top: 18px;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .status.success {
+        display: block;
+        color: #166534;
+        border: 1px solid #86efac;
+        background: #f0fdf4;
+      }
+
+      .status.error {
+        display: block;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+        background: #fef2f2;
+      }
+
+      .token-output {
+        display: none;
+        margin-top: 18px;
+      }
+
+      .token-output textarea {
+        min-height: 150px;
+        resize: vertical;
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <strong>Website A</strong>
+      — TeamChat host simulation
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Integration test page</p>
+
+        <h1>TeamChat Floating Widget Demo</h1>
+
+        <p>
+          Halaman ini membuat bootstrap token melalui API Next.js, kemudian
+          memasang widget berdasarkan nilai dari form.
+        </p>
+
+        <form id="demo-form">
+          <div class="form-grid">
+            <label>
+              Chat Base URL
+
+              <input
+                id="chat-url"
+                type="url"
+                value="http://localhost:3010/chat"
+                placeholder="http://localhost:3010/chat"
+                required
+              />
+            </label>
+
+            <label>
+              Realtime URL
+
+              <input
+                id="realtime-url"
+                type="url"
+                value="http://localhost:3001/realtime"
+                placeholder="http://localhost:3001/realtime"
+                required
+              />
+            </label>
+
+            <label>
+              Application Key
+
+              <input
+                id="app-key"
+                type="text"
+                value="dev-chat-internal"
+                placeholder="dev-chat-internal"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <label>
+              Signing Key ID
+
+              <input
+                id="signing-key-id"
+                type="text"
+                placeholder="chat-key-01"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <label>
+              Signing Secret
+
+              <div class="password-row">
+                <input
+                  id="signing-secret"
+                  type="password"
+                  placeholder="Minimal 32 karakter"
+                  autocomplete="off"
+                  required
+                />
+
+                <button
+                  id="toggle-secret"
+                  class="secondary-button"
+                  type="button"
+                >
+                  Show
+                </button>
+              </div>
+            </label>
+
+            <label>
+              Username
+
+              <input
+                id="username"
+                type="text"
+                value="CC.54.DEMO"
+                placeholder="CC.54.DEMO"
+                autocomplete="off"
+                required
+              />
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="mount-button" type="submit">
+              Generate Token & Mount Widget
+            </button>
+
+            <button id="generate-button" class="secondary-button" type="button">
+              Generate Token Only
+            </button>
+
+            <button id="destroy-button" class="danger-button" type="button">
+              Destroy Widget
+            </button>
+          </div>
+        </form>
+
+        <div class="notice">
+          <strong>Testing only.</strong>
+          Signing Key ID dan Signing Secret dikirim melalui browser dan dapat
+          dilihat di DevTools. Jangan gunakan secret production di halaman ini.
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div id="token-output" class="token-output">
+          <label>
+            Generated Bootstrap Token
+            <textarea id="generated-token" readonly></textarea>
+          </label>
+
+          <div class="actions">
+            <button id="copy-token" class="secondary-button" type="button">
+              Copy Token
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var form = document.getElementById("demo-form");
+        var mountButton = document.getElementById("mount-button");
+        var generateButton = document.getElementById("generate-button");
+        var destroyButton = document.getElementById("destroy-button");
+        var toggleSecretButton = document.getElementById("toggle-secret");
+        var copyTokenButton = document.getElementById("copy-token");
+
+        var statusElement = document.getElementById("status");
+        var tokenOutput = document.getElementById("token-output");
+        var generatedToken = document.getElementById("generated-token");
+
+        function getInputValue(id) {
+          var element = document.getElementById(id);
+
+          if (!(element instanceof HTMLInputElement)) {
+            return "";
+          }
+
+          return element.value.trim();
+        }
+
+        function removeTrailingSlash(value) {
+          return value.replace(/\/+$/, "");
+        }
+
+        function getCurrentBasePath() {
+          return new URL(".", window.location.href).pathname.replace(/\/$/, "");
+        }
+
+        function showStatus(message, type) {
+          statusElement.className =
+            "status " + (type === "success" ? "success" : "error");
+
+          statusElement.textContent = message;
+        }
+
+        function clearStatus() {
+          statusElement.className = "status";
+          statusElement.textContent = "";
+        }
+
+        function setButtonLoading(button, loading, loadingText) {
+          if (loading) {
+            button.dataset.originalText = button.textContent;
+            button.textContent = loadingText;
+            button.disabled = true;
+            return;
+          }
+
+          button.textContent =
+            button.dataset.originalText || button.textContent;
+
+          button.disabled = false;
+        }
+
+        function getFormData() {
+          var chatUrl = removeTrailingSlash(getInputValue("chat-url"));
+          var realtimeUrl = removeTrailingSlash(getInputValue("realtime-url"));
+          var applicationKey = getInputValue("app-key");
+          var signingKeyId = getInputValue("signing-key-id");
+          var signingSecret = getInputValue("signing-secret");
+          var username = getInputValue("username");
+
+          if (!chatUrl) {
+            throw new Error("Chat Base URL wajib diisi.");
+          }
+
+          if (!realtimeUrl) {
+            throw new Error("Realtime URL wajib diisi.");
+          }
+
+          if (!applicationKey) {
+            throw new Error("Application Key wajib diisi.");
+          }
+
+          if (!signingKeyId) {
+            throw new Error("Signing Key ID wajib diisi.");
+          }
+
+          if (!signingSecret) {
+            throw new Error("Signing Secret wajib diisi.");
+          }
+
+          if (signingSecret.length < 32) {
+            throw new Error("Signing Secret minimal 32 karakter.");
+          }
+
+          if (!username) {
+            throw new Error("Username wajib diisi.");
+          }
+
+          return {
+            chatUrl: chatUrl,
+            realtimeUrl: realtimeUrl,
+            applicationKey: applicationKey,
+            signingKeyId: signingKeyId,
+            signingSecret: signingSecret,
+            username: username,
+          };
+        }
+
+        async function requestBootstrapToken(data) {
+          var basePath = getCurrentBasePath();
+          var endpoint = basePath + "/api/widget/bootstrap-token";
+
+          var response = await fetch(endpoint, {
+            method: "POST",
+            credentials: "same-origin",
+            cache: "no-store",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              applicationKey: data.applicationKey,
+              signingKeyId: data.signingKeyId,
+              signingSecret: data.signingSecret,
+              username: data.username,
+            }),
+          });
+
+          var result;
+
+          try {
+            result = await response.json();
+          } catch {
+            throw new Error("API tidak mengembalikan JSON yang valid.");
+          }
+
+          if (!response.ok || !result.success) {
+            throw new Error(
+              result.message || "Gagal menghasilkan bootstrap token.",
+            );
+          }
+
+          if (!result.bootstrapToken) {
+            throw new Error(
+              "Bootstrap token tidak ditemukan pada response API.",
+            );
+          }
+
+          return result;
+        }
+
+        function destroyWidget() {
+          try {
+            if (
+              window.ChatWidget &&
+              typeof window.ChatWidget.destroy === "function"
+            ) {
+              window.ChatWidget.destroy();
+            }
+          } catch (error) {
+            console.warn("ChatWidget.destroy() menghasilkan error:", error);
+          }
+
+          document
+            .querySelectorAll('script[data-teamchat-widget="true"]')
+            .forEach(function (script) {
+              script.remove();
+            });
+
+          document
+            .querySelectorAll("[data-chat-widget-host], #chat-widget-host")
+            .forEach(function (element) {
+              element.remove();
+            });
+        }
+
+        function mountWidget(data, bootstrapToken) {
+          return new Promise(function (resolve, reject) {
+            destroyWidget();
+
+            var script = document.createElement("script");
+
+            script.src =
+              data.chatUrl +
+              "/chat-widget.js?v=" +
+              encodeURIComponent(Date.now());
+
+            script.async = true;
+            script.dataset.teamchatWidget = "true";
+
+            script.setAttribute("data-chat-base-url", data.chatUrl);
+            script.setAttribute("data-realtime-url", data.realtimeUrl);
+            script.setAttribute("data-application-key", data.applicationKey);
+            script.setAttribute("data-bootstrap-token", bootstrapToken);
+
+            script.onload = function () {
+              resolve();
+            };
+
+            script.onerror = function () {
+              script.remove();
+
+              reject(
+                new Error("Gagal memuat " + data.chatUrl + "/chat-widget.js"),
+              );
+            };
+
+            document.body.appendChild(script);
+          });
+        }
+
+        function displayToken(result) {
+          generatedToken.value = result.bootstrapToken;
+          tokenOutput.style.display = "block";
+        }
+
+        async function generateOnly() {
+          clearStatus();
+          setButtonLoading(generateButton, true, "Generating...");
+
+          try {
+            var data = getFormData();
+            var result = await requestBootstrapToken(data);
+
+            displayToken(result);
+
+            showStatus(
+              "Token berhasil dibuat.\nBerlaku selama " +
+                result.expiresIn +
+                " detik.\nExpired: " +
+                result.expiresAt,
+              "success",
+            );
+          } catch (error) {
+            console.error("Generate token error:", error);
+
+            showStatus(
+              error instanceof Error ? error.message : "Terjadi kesalahan.",
+              "error",
+            );
+          } finally {
+            setButtonLoading(generateButton, false);
+          }
+        }
+
+        async function generateAndMount(event) {
+          event.preventDefault();
+          clearStatus();
+
+          setButtonLoading(mountButton, true, "Generating & Mounting...");
+
+          try {
+            var data = getFormData();
+            var result = await requestBootstrapToken(data);
+
+            displayToken(result);
+
+            await mountWidget(data, result.bootstrapToken);
+
+            showStatus(
+              "Bootstrap token berhasil dibuat dan widget berhasil dimuat.\n" +
+                "Token berlaku selama " +
+                result.expiresIn +
+                " detik.",
+              "success",
+            );
+          } catch (error) {
+            console.error("Mount widget error:", error);
+
+            showStatus(
+              error instanceof Error ? error.message : "Terjadi kesalahan.",
+              "error",
+            );
+          } finally {
+            setButtonLoading(mountButton, false);
+          }
+        }
+
+        form.addEventListener("submit", generateAndMount);
+        generateButton.addEventListener("click", generateOnly);
+
+        destroyButton.addEventListener("click", function () {
+          destroyWidget();
+          showStatus("Widget berhasil dihancurkan.", "success");
+        });
+
+        toggleSecretButton.addEventListener("click", function () {
+          var secretInput = document.getElementById("signing-secret");
+
+          if (!(secretInput instanceof HTMLInputElement)) {
+            return;
+          }
+
+          var visible = secretInput.type === "text";
+
+          secretInput.type = visible ? "password" : "text";
+          toggleSecretButton.textContent = visible ? "Show" : "Hide";
+        });
+
+        copyTokenButton.addEventListener("click", async function () {
+          var token = generatedToken.value;
+
+          if (!token) {
+            showStatus("Belum ada token yang dapat disalin.", "error");
+            return;
+          }
+
+          try {
+            await navigator.clipboard.writeText(token);
+            showStatus("Token berhasil disalin.", "success");
+          } catch {
+            generatedToken.focus();
+            generatedToken.select();
+            document.execCommand("copy");
+
+            showStatus("Token berhasil disalin.", "success");
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
