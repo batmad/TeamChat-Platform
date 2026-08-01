@@ -1714,54 +1714,164 @@
     return this;
   };
 
-  Widget.prototype.destroy = function () {
+  Widget.prototype.destroy = async function (options) {
+    options = options || {};
+
+    var clearAuth = options.clearAuth === true;
+
+    // Hentikan semua timer
     clearTimeout(this.contactSearchTimer);
+    clearTimeout(this.typingTimer);
+
+    this.contactSearchTimer = null;
+    this.typingTimer = null;
     this.contactSearchRequestId += 1;
 
+    // Keluar dari room aktif sebelum client dihancurkan
+    try {
+      this.leaveActiveRoom();
+    } catch (error) {
+      if (global.console && console.error) {
+        console.error("[ChatWidget] Failed leaving active room", error);
+      }
+    }
+
+    // Hapus seluruh event listener global
     this.unbindAll();
-    this.leaveActiveRoom();
 
+    // Hentikan notification client
     if (this.notifications) {
-      this.notifications.stop();
+      try {
+        await Promise.resolve(this.notifications.stop());
+      } catch (error) {
+        if (global.console && console.error) {
+          console.error("[ChatWidget] Failed stopping notifications", error);
+        }
+      }
     }
 
+    // Putuskan koneksi Socket.IO
     if (this.realtimeClient) {
-      this.realtimeClient.disconnect();
+      try {
+        await Promise.resolve(this.realtimeClient.disconnect());
+      } catch (error) {
+        if (global.console && console.error) {
+          console.error("[ChatWidget] Failed disconnecting realtime", error);
+        }
+      }
     }
 
+    /*
+     * Bersihkan authentication hanya ketika logout.
+     *
+     * Nama method yang tersedia bergantung pada
+     * chat-widget-auth.js Anda.
+     */
+    if (clearAuth && this.authClient) {
+      try {
+        if (typeof this.authClient.logout === "function") {
+          await this.authClient.logout();
+        } else if (typeof this.authClient.clearSession === "function") {
+          await Promise.resolve(this.authClient.clearSession());
+        } else if (typeof this.authClient.clearToken === "function") {
+          await Promise.resolve(this.authClient.clearToken());
+        }
+      } catch (error) {
+        if (global.console && console.error) {
+          console.error("[ChatWidget] Failed clearing auth session", error);
+        }
+      }
+    }
+
+    // Hapus elemen widget
     if (this.host) {
       this.host.remove();
     }
 
+    // Bersihkan state user
+    this.session = null;
+    this.bootstrapToken = null;
+    this.application = null;
+
+    this.groups = [];
+    this.conversations = [];
+    this.contacts = [];
+    this.messages = [];
+    this.unreadByRoom = {};
+    this.totalUnread = 0;
+
+    this.activeRoom = null;
+    this.replyTo = null;
+    this.typingText = "";
+
+    // Bersihkan reference client
+    this.notifications = null;
+    this.groupClient = null;
+    this.privateClient = null;
+    this.realtimeClient = null;
+    this.authClient = null;
+
     this.host = null;
     this.shadow = null;
     this.root = null;
+    this.launcher = null;
+    this.panel = null;
+    this.badge = null;
+
+    this.opened = false;
   };
 
   global.ChatWidget = {
     instance: null,
     Widget: Widget,
+
     init: async function (options) {
-      if (global.ChatWidget.instance) global.ChatWidget.instance.destroy();
-      var widget = new Widget(options);
-      global.ChatWidget.instance = widget;
-      await widget.init();
-      return widget;
-    },
-    open: function () {
-      if (global.ChatWidget.instance) global.ChatWidget.instance.open();
-    },
-    close: function () {
-      if (global.ChatWidget.instance) global.ChatWidget.instance.close();
-    },
-    toggle: function () {
-      if (global.ChatWidget.instance) global.ChatWidget.instance.toggle();
-    },
-    destroy: function () {
       if (global.ChatWidget.instance) {
-        global.ChatWidget.instance.destroy();
+        await global.ChatWidget.instance.destroy({
+          clearAuth: false,
+        });
+
         global.ChatWidget.instance = null;
       }
+
+      var widget = new Widget(options);
+
+      global.ChatWidget.instance = widget;
+
+      await widget.init();
+
+      return widget;
+    },
+
+    open: function () {
+      if (global.ChatWidget.instance) {
+        global.ChatWidget.instance.open();
+      }
+    },
+
+    close: function () {
+      if (global.ChatWidget.instance) {
+        global.ChatWidget.instance.close();
+      }
+    },
+
+    toggle: function () {
+      if (global.ChatWidget.instance) {
+        global.ChatWidget.instance.toggle();
+      }
+    },
+
+    destroy: async function (options) {
+      if (!global.ChatWidget.instance) {
+        return;
+      }
+
+      var instance = global.ChatWidget.instance;
+
+      // Kosongkan lebih dahulu agar tidak digunakan ulang
+      global.ChatWidget.instance = null;
+
+      await instance.destroy(options || {});
     },
   };
 
