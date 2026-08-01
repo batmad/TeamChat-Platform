@@ -38,6 +38,14 @@
     }
   };
 
+  Client.prototype.logout = function () {
+    this.clear();
+
+    return Promise.resolve({
+      success: true,
+    });
+  };
+
   Client.prototype.getSession = function () {
     if (this.memorySession) return this.memorySession;
     if (this.storage !== "session" || !global.sessionStorage) return null;
@@ -45,7 +53,12 @@
     if (!raw) return null;
     try {
       var session = JSON.parse(raw);
-      if (!session.accessToken || !session.application || session.application.key !== this.applicationKey || session.expiresAt <= Date.now()) {
+      if (
+        !session.accessToken ||
+        !session.application ||
+        session.application.key !== this.applicationKey ||
+        session.expiresAt <= Date.now()
+      ) {
         this.clear();
         return null;
       }
@@ -67,39 +80,64 @@
   Client.prototype.request = async function (url, options) {
     var response = await fetch(url, options);
     var body = null;
-    try { body = await response.json(); } catch {}
+    try {
+      body = await response.json();
+    } catch {}
     if (!response.ok || !body || !body.success || !body.data) {
       throw new AuthError(
-        body && body.error && body.error.message ? body.error.message : "Chat authentication request failed with HTTP " + response.status,
-        body && body.error && body.error.code ? body.error.code : "CHAT_WIDGET_AUTH_REQUEST_FAILED",
+        body && body.error && body.error.message
+          ? body.error.message
+          : "Chat authentication request failed with HTTP " + response.status,
+        body && body.error && body.error.code
+          ? body.error.code
+          : "CHAT_WIDGET_AUTH_REQUEST_FAILED",
         response.status,
-        body && body.requestId ? body.requestId : response.headers.get("x-request-id") || undefined,
-        body && body.error ? body.error.details : undefined
+        body && body.requestId
+          ? body.requestId
+          : response.headers.get("x-request-id") || undefined,
+        body && body.error ? body.error.details : undefined,
       );
     }
     return body.data;
   };
 
   Client.prototype.authenticate = async function (bootstrapToken) {
-    var exchanged = await this.request(this.chatBaseUrl + "/api/widget/auth/exchange", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ token: bootstrapToken })
-    });
-    if (!exchanged.application || exchanged.application.key !== this.applicationKey) {
-      throw new AuthError("Authenticated application does not match widget application key", "CHAT_WIDGET_APPLICATION_MISMATCH", 401);
+    var exchanged = await this.request(
+      this.chatBaseUrl + "/api/widget/auth/exchange",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token: bootstrapToken }),
+      },
+    );
+    if (
+      !exchanged.application ||
+      exchanged.application.key !== this.applicationKey
+    ) {
+      throw new AuthError(
+        "Authenticated application does not match widget application key",
+        "CHAT_WIDGET_APPLICATION_MISMATCH",
+        401,
+      );
     }
-    var session = Object.assign({}, exchanged, { expiresAt: Date.now() + exchanged.expiresIn * 1000 });
+    var session = Object.assign({}, exchanged, {
+      expiresAt: Date.now() + exchanged.expiresIn * 1000,
+    });
     this.saveSession(session);
     return session;
   };
 
   Client.prototype.me = async function () {
     var session = this.getSession();
-    if (!session) throw new AuthError("Chat session is not available", "CHAT_SESSION_REQUIRED", 401);
+    if (!session)
+      throw new AuthError(
+        "Chat session is not available",
+        "CHAT_SESSION_REQUIRED",
+        401,
+      );
     return this.request(this.chatBaseUrl + "/api/widget/auth/me", {
       method: "GET",
-      headers: { authorization: "Bearer " + session.accessToken }
+      headers: { authorization: "Bearer " + session.accessToken },
     });
   };
 
@@ -111,7 +149,7 @@
       var refreshed = Object.assign({}, session, {
         application: current.application,
         user: current.user,
-        sessionReference: current.sessionReference
+        sessionReference: current.sessionReference,
       });
       this.saveSession(refreshed);
       return refreshed;
@@ -125,10 +163,29 @@
   };
 
   Client.prototype.ensureAuthenticated = async function (bootstrapToken) {
+    /*
+     * Ketika bootstrap token diberikan, artinya host aplikasi
+     * sudah menyediakan identitas user terbaru.
+     *
+     * Jangan restore session lama karena session tersebut
+     * mungkin milik user sebelumnya.
+     */
+    if (bootstrapToken) {
+      this.clear();
+      return this.authenticate(bootstrapToken);
+    }
+
     var restored = await this.restore();
-    if (restored) return restored;
-    if (!bootstrapToken) throw new AuthError("A new signed bootstrap token is required", "WIDGET_BOOTSTRAP_TOKEN_REQUIRED", 401);
-    return this.authenticate(bootstrapToken);
+
+    if (restored) {
+      return restored;
+    }
+
+    throw new AuthError(
+      "A new signed bootstrap token is required",
+      "WIDGET_BOOTSTRAP_TOKEN_REQUIRED",
+      401,
+    );
   };
 
   Client.prototype.getAccessToken = function () {
@@ -143,15 +200,24 @@
     var storage = script.getAttribute("data-storage") || "session";
     if (!chatBaseUrl || !applicationKey) return;
 
-    var client = new Client({ chatBaseUrl: chatBaseUrl, applicationKey: applicationKey, storage: storage });
+    var client = new Client({
+      chatBaseUrl: chatBaseUrl,
+      applicationKey: applicationKey,
+      storage: storage,
+    });
     global.ChatWidgetAuth.client = client;
 
     try {
       var session = await client.ensureAuthenticated(bootstrapToken);
-      global.dispatchEvent(new CustomEvent("chatwidget:auth:success", { detail: session }));
+      global.dispatchEvent(
+        new CustomEvent("chatwidget:auth:success", { detail: session }),
+      );
     } catch (error) {
-      global.dispatchEvent(new CustomEvent("chatwidget:auth:error", { detail: error }));
-      if (global.console && console.error) console.error("[ChatWidgetAuth]", error);
+      global.dispatchEvent(
+        new CustomEvent("chatwidget:auth:error", { detail: error }),
+      );
+      if (global.console && console.error)
+        console.error("[ChatWidgetAuth]", error);
     }
   }
 
@@ -159,7 +225,9 @@
     Client: Client,
     AuthError: AuthError,
     client: null,
-    createClient: function (options) { return new Client(options); }
+    createClient: function (options) {
+      return new Client(options);
+    },
   };
 
   var currentScript = document.currentScript;

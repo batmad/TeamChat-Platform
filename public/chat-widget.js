@@ -1719,7 +1719,6 @@
 
     var clearAuth = options.clearAuth === true;
 
-    // Hentikan semua timer
     clearTimeout(this.contactSearchTimer);
     clearTimeout(this.typingTimer);
 
@@ -1727,7 +1726,6 @@
     this.typingTimer = null;
     this.contactSearchRequestId += 1;
 
-    // Keluar dari room aktif sebelum client dihancurkan
     try {
       this.leaveActiveRoom();
     } catch (error) {
@@ -1736,10 +1734,8 @@
       }
     }
 
-    // Hapus seluruh event listener global
     this.unbindAll();
 
-    // Hentikan notification client
     if (this.notifications) {
       try {
         await Promise.resolve(this.notifications.stop());
@@ -1750,7 +1746,6 @@
       }
     }
 
-    // Putuskan koneksi Socket.IO
     if (this.realtimeClient) {
       try {
         await Promise.resolve(this.realtimeClient.disconnect());
@@ -1762,33 +1757,62 @@
     }
 
     /*
-     * Bersihkan authentication hanya ketika logout.
-     *
-     * Nama method yang tersedia bergantung pada
-     * chat-widget-auth.js Anda.
+     * Hapus access token dan session chat ketika logout
+     * dari aplikasi utama.
      */
     if (clearAuth && this.authClient) {
       try {
         if (typeof this.authClient.logout === "function") {
           await this.authClient.logout();
-        } else if (typeof this.authClient.clearSession === "function") {
-          await Promise.resolve(this.authClient.clearSession());
-        } else if (typeof this.authClient.clearToken === "function") {
-          await Promise.resolve(this.authClient.clearToken());
+        } else if (typeof this.authClient.clear === "function") {
+          this.authClient.clear();
         }
       } catch (error) {
         if (global.console && console.error) {
-          console.error("[ChatWidget] Failed clearing auth session", error);
+          console.error("[ChatWidget] Failed clearing authentication", error);
         }
       }
     }
 
-    // Hapus elemen widget
+    if (
+      global.ChatWidgetAuth &&
+      global.ChatWidgetAuth.client === this.authClient
+    ) {
+      global.ChatWidgetAuth.client = null;
+    }
+
+    if (
+      global.ChatWidgetRealtime &&
+      global.ChatWidgetRealtime.client === this.realtimeClient
+    ) {
+      global.ChatWidgetRealtime.client = null;
+    }
+
+    if (
+      global.ChatWidgetGroupChat &&
+      global.ChatWidgetGroupChat.client === this.groupClient
+    ) {
+      global.ChatWidgetGroupChat.client = null;
+    }
+
+    if (
+      global.ChatWidgetPrivateChat &&
+      global.ChatWidgetPrivateChat.client === this.privateClient
+    ) {
+      global.ChatWidgetPrivateChat.client = null;
+    }
+
+    if (
+      global.ChatWidgetNotifications &&
+      global.ChatWidgetNotifications.client === this.notifications
+    ) {
+      global.ChatWidgetNotifications.client = null;
+    }
+
     if (this.host) {
       this.host.remove();
     }
 
-    // Bersihkan state user
     this.session = null;
     this.bootstrapToken = null;
     this.application = null;
@@ -1804,12 +1828,11 @@
     this.replyTo = null;
     this.typingText = "";
 
-    // Bersihkan reference client
-    this.notifications = null;
+    this.authClient = null;
+    this.realtimeClient = null;
     this.groupClient = null;
     this.privateClient = null;
-    this.realtimeClient = null;
-    this.authClient = null;
+    this.notifications = null;
 
     this.host = null;
     this.shadow = null;
@@ -1868,7 +1891,7 @@
 
       var instance = global.ChatWidget.instance;
 
-      // Kosongkan lebih dahulu agar tidak digunakan ulang
+      // Kosongkan sebelum proses destroy untuk mencegah reuse
       global.ChatWidget.instance = null;
 
       await instance.destroy(options || {});
