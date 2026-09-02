@@ -262,6 +262,7 @@ export type MessageWhereInput = {
   reads?: Prisma.MessageReadListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   groupContexts?: Prisma.MessageGroupContextListRelationFilter
+  attachments?: Prisma.MessageAttachmentListRelationFilter
 }
 
 export type MessageOrderByWithRelationInput = {
@@ -287,6 +288,7 @@ export type MessageOrderByWithRelationInput = {
   reads?: Prisma.MessageReadOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   groupContexts?: Prisma.MessageGroupContextOrderByRelationAggregateInput
+  attachments?: Prisma.MessageAttachmentOrderByRelationAggregateInput
 }
 
 export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -316,6 +318,7 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   reads?: Prisma.MessageReadListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   groupContexts?: Prisma.MessageGroupContextListRelationFilter
+  attachments?: Prisma.MessageAttachmentListRelationFilter
 }, "id" | "applicationId_clientMessageId">
 
 export type MessageOrderByWithAggregationInput = {
@@ -377,6 +380,7 @@ export type MessageCreateInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateInput = {
@@ -398,6 +402,7 @@ export type MessageUncheckedCreateInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUpdateInput = {
@@ -419,6 +424,7 @@ export type MessageUpdateInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateInput = {
@@ -440,6 +446,7 @@ export type MessageUncheckedUpdateInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateManyInput = {
@@ -753,6 +760,22 @@ export type MessageUncheckedUpdateManyWithoutReplyToNestedInput = {
   deleteMany?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
 }
 
+export type MessageCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.MessageCreateWithoutAttachmentsInput, Prisma.MessageUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.MessageWhereUniqueInput
+}
+
+export type MessageUpdateOneWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.MessageCreateWithoutAttachmentsInput, Prisma.MessageUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.MessageCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.MessageUpsertWithoutAttachmentsInput
+  disconnect?: Prisma.MessageWhereInput | boolean
+  delete?: Prisma.MessageWhereInput | boolean
+  connect?: Prisma.MessageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MessageUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.MessageUpdateWithoutAttachmentsInput>, Prisma.MessageUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type MessageCreateNestedOneWithoutGroupContextsInput = {
   create?: Prisma.XOR<Prisma.MessageCreateWithoutGroupContextsInput, Prisma.MessageUncheckedCreateWithoutGroupContextsInput>
   connectOrCreate?: Prisma.MessageCreateOrConnectWithoutGroupContextsInput
@@ -815,6 +838,7 @@ export type MessageCreateWithoutApplicationInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutApplicationInput = {
@@ -835,6 +859,7 @@ export type MessageUncheckedCreateWithoutApplicationInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutApplicationInput = {
@@ -901,6 +926,7 @@ export type MessageCreateWithoutSenderIdentityInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutSenderIdentityInput = {
@@ -921,6 +947,7 @@ export type MessageUncheckedCreateWithoutSenderIdentityInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutSenderIdentityInput = {
@@ -967,6 +994,7 @@ export type MessageCreateWithoutRoomInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutRoomInput = {
@@ -987,6 +1015,7 @@ export type MessageUncheckedCreateWithoutRoomInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutRoomInput = {
@@ -1033,6 +1062,7 @@ export type MessageCreateWithoutRepliesInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutRepliesInput = {
@@ -1053,6 +1083,7 @@ export type MessageUncheckedCreateWithoutRepliesInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutRepliesInput = {
@@ -1078,6 +1109,7 @@ export type MessageCreateWithoutReplyToInput = {
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutReplyToInput = {
@@ -1098,6 +1130,7 @@ export type MessageUncheckedCreateWithoutReplyToInput = {
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutReplyToInput = {
@@ -1139,6 +1172,7 @@ export type MessageUpdateWithoutRepliesInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutRepliesInput = {
@@ -1159,6 +1193,7 @@ export type MessageUncheckedUpdateWithoutRepliesInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUpsertWithWhereUniqueWithoutReplyToInput = {
@@ -1175,6 +1210,106 @@ export type MessageUpdateWithWhereUniqueWithoutReplyToInput = {
 export type MessageUpdateManyWithWhereWithoutReplyToInput = {
   where: Prisma.MessageScalarWhereInput
   data: Prisma.XOR<Prisma.MessageUpdateManyMutationInput, Prisma.MessageUncheckedUpdateManyWithoutReplyToInput>
+}
+
+export type MessageCreateWithoutAttachmentsInput = {
+  id?: string
+  senderUsername: string
+  senderName?: string | null
+  type?: $Enums.MessageType
+  content: string
+  clientMessageId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  editedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  application: Prisma.ApplicationCreateNestedOneWithoutMessagesInput
+  room: Prisma.RoomCreateNestedOneWithoutMessagesInput
+  senderIdentity?: Prisma.UserIdentityCreateNestedOneWithoutSentMessagesInput
+  replyTo?: Prisma.MessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
+  reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
+  groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+}
+
+export type MessageUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  applicationId: string
+  roomId: string
+  senderUserIdentityId?: string | null
+  senderUsername: string
+  senderName?: string | null
+  type?: $Enums.MessageType
+  content: string
+  clientMessageId?: string | null
+  replyMessageId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  editedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
+  reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
+  groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+}
+
+export type MessageCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.MessageWhereUniqueInput
+  create: Prisma.XOR<Prisma.MessageCreateWithoutAttachmentsInput, Prisma.MessageUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type MessageUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.MessageUpdateWithoutAttachmentsInput, Prisma.MessageUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.MessageCreateWithoutAttachmentsInput, Prisma.MessageUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.MessageWhereInput
+}
+
+export type MessageUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.MessageWhereInput
+  data: Prisma.XOR<Prisma.MessageUpdateWithoutAttachmentsInput, Prisma.MessageUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type MessageUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  senderUsername?: Prisma.StringFieldUpdateOperationsInput | string
+  senderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  clientMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  editedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  application?: Prisma.ApplicationUpdateOneRequiredWithoutMessagesNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutMessagesNestedInput
+  senderIdentity?: Prisma.UserIdentityUpdateOneWithoutSentMessagesNestedInput
+  replyTo?: Prisma.MessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
+  reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
+  groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+}
+
+export type MessageUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  senderUserIdentityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senderUsername?: Prisma.StringFieldUpdateOperationsInput | string
+  senderName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  clientMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  replyMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  editedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
+  reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
+  groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateWithoutGroupContextsInput = {
@@ -1195,6 +1330,7 @@ export type MessageCreateWithoutGroupContextsInput = {
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutGroupContextsInput = {
@@ -1215,6 +1351,7 @@ export type MessageUncheckedCreateWithoutGroupContextsInput = {
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutGroupContextsInput = {
@@ -1251,6 +1388,7 @@ export type MessageUpdateWithoutGroupContextsInput = {
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutGroupContextsInput = {
@@ -1271,6 +1409,7 @@ export type MessageUncheckedUpdateWithoutGroupContextsInput = {
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateWithoutReadsInput = {
@@ -1291,6 +1430,7 @@ export type MessageCreateWithoutReadsInput = {
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutReadsInput = {
@@ -1311,6 +1451,7 @@ export type MessageUncheckedCreateWithoutReadsInput = {
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutReadsInput = {
@@ -1347,6 +1488,7 @@ export type MessageUpdateWithoutReadsInput = {
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutReadsInput = {
@@ -1367,6 +1509,7 @@ export type MessageUncheckedUpdateWithoutReadsInput = {
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateWithoutNotificationsInput = {
@@ -1387,6 +1530,7 @@ export type MessageCreateWithoutNotificationsInput = {
   replies?: Prisma.MessageCreateNestedManyWithoutReplyToInput
   reads?: Prisma.MessageReadCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutMessageInput
 }
 
 export type MessageUncheckedCreateWithoutNotificationsInput = {
@@ -1407,6 +1551,7 @@ export type MessageUncheckedCreateWithoutNotificationsInput = {
   replies?: Prisma.MessageUncheckedCreateNestedManyWithoutReplyToInput
   reads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutMessageInput
   groupContexts?: Prisma.MessageGroupContextUncheckedCreateNestedManyWithoutMessageInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutMessageInput
 }
 
 export type MessageCreateOrConnectWithoutNotificationsInput = {
@@ -1443,6 +1588,7 @@ export type MessageUpdateWithoutNotificationsInput = {
   replies?: Prisma.MessageUpdateManyWithoutReplyToNestedInput
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutNotificationsInput = {
@@ -1463,6 +1609,7 @@ export type MessageUncheckedUpdateWithoutNotificationsInput = {
   replies?: Prisma.MessageUncheckedUpdateManyWithoutReplyToNestedInput
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageCreateManyApplicationInput = {
@@ -1499,6 +1646,7 @@ export type MessageUpdateWithoutApplicationInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutApplicationInput = {
@@ -1519,6 +1667,7 @@ export type MessageUncheckedUpdateWithoutApplicationInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutApplicationInput = {
@@ -1571,6 +1720,7 @@ export type MessageUpdateWithoutSenderIdentityInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutSenderIdentityInput = {
@@ -1591,6 +1741,7 @@ export type MessageUncheckedUpdateWithoutSenderIdentityInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutSenderIdentityInput = {
@@ -1643,6 +1794,7 @@ export type MessageUpdateWithoutRoomInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutRoomInput = {
@@ -1663,6 +1815,7 @@ export type MessageUncheckedUpdateWithoutRoomInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutRoomInput = {
@@ -1715,6 +1868,7 @@ export type MessageUpdateWithoutReplyToInput = {
   reads?: Prisma.MessageReadUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutReplyToInput = {
@@ -1735,6 +1889,7 @@ export type MessageUncheckedUpdateWithoutReplyToInput = {
   reads?: Prisma.MessageReadUncheckedUpdateManyWithoutMessageNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutMessageNestedInput
   groupContexts?: Prisma.MessageGroupContextUncheckedUpdateManyWithoutMessageNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutMessageNestedInput
 }
 
 export type MessageUncheckedUpdateManyWithoutReplyToInput = {
@@ -1763,6 +1918,7 @@ export type MessageCountOutputType = {
   reads: number
   notifications: number
   groupContexts: number
+  attachments: number
 }
 
 export type MessageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1770,6 +1926,7 @@ export type MessageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   reads?: boolean | MessageCountOutputTypeCountReadsArgs
   notifications?: boolean | MessageCountOutputTypeCountNotificationsArgs
   groupContexts?: boolean | MessageCountOutputTypeCountGroupContextsArgs
+  attachments?: boolean | MessageCountOutputTypeCountAttachmentsArgs
 }
 
 /**
@@ -1810,6 +1967,13 @@ export type MessageCountOutputTypeCountGroupContextsArgs<ExtArgs extends runtime
   where?: Prisma.MessageGroupContextWhereInput
 }
 
+/**
+ * MessageCountOutputType without action
+ */
+export type MessageCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageAttachmentWhereInput
+}
+
 
 export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1834,6 +1998,7 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   reads?: boolean | Prisma.Message$readsArgs<ExtArgs>
   notifications?: boolean | Prisma.Message$notificationsArgs<ExtArgs>
   groupContexts?: boolean | Prisma.Message$groupContextsArgs<ExtArgs>
+  attachments?: boolean | Prisma.Message$attachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
 
@@ -1906,6 +2071,7 @@ export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   reads?: boolean | Prisma.Message$readsArgs<ExtArgs>
   notifications?: boolean | Prisma.Message$notificationsArgs<ExtArgs>
   groupContexts?: boolean | Prisma.Message$groupContextsArgs<ExtArgs>
+  attachments?: boolean | Prisma.Message$attachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.MessageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MessageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1932,6 +2098,7 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     reads: Prisma.$MessageReadPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     groupContexts: Prisma.$MessageGroupContextPayload<ExtArgs>[]
+    attachments: Prisma.$MessageAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2350,6 +2517,7 @@ export interface Prisma__MessageClient<T, Null = never, ExtArgs extends runtime.
   reads<T extends Prisma.Message$readsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$readsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageReadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Message$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   groupContexts<T extends Prisma.Message$groupContextsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$groupContextsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageGroupContextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.Message$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Message$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2925,6 +3093,30 @@ export type Message$groupContextsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.MessageGroupContextScalarFieldEnum | Prisma.MessageGroupContextScalarFieldEnum[]
+}
+
+/**
+ * Message.attachments
+ */
+export type Message$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageAttachment
+   */
+  select?: Prisma.MessageAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageAttachment
+   */
+  omit?: Prisma.MessageAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageAttachmentInclude<ExtArgs> | null
+  where?: Prisma.MessageAttachmentWhereInput
+  orderBy?: Prisma.MessageAttachmentOrderByWithRelationInput | Prisma.MessageAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.MessageAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageAttachmentScalarFieldEnum | Prisma.MessageAttachmentScalarFieldEnum[]
 }
 
 /**

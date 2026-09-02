@@ -508,6 +508,158 @@ export type EnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
 }
 
+export type EnumStorageProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageProviderType | Prisma.EnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel> | $Enums.StorageProviderType
+}
+
+export type EnumStorageProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageProviderType | Prisma.EnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.StorageProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel>
+}
+
+export type EnumMalwareScannerProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MalwareScannerProviderType | Prisma.EnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel> | $Enums.MalwareScannerProviderType
+}
+
+export type EnumMalwareScannerProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MalwareScannerProviderType | Prisma.EnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMalwareScannerProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.MalwareScannerProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel>
+}
+
+export type BoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
+export type BigIntNullableFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+}
+
+export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+}
+
+export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+}
+
+export type EnumAttachmentFileCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentFileCategory | Prisma.EnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel> | $Enums.AttachmentFileCategory
+}
+
+export type EnumAttachmentFileCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentFileCategory | Prisma.EnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentFileCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentFileCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel>
+}
+
+export type BigIntFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
+}
+
+export type EnumAttachmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentStatus | Prisma.EnumAttachmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel> | $Enums.AttachmentStatus
+}
+
+export type EnumAttachmentScanStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentScanStatus | Prisma.EnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel> | $Enums.AttachmentScanStatus
+}
+
+export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type EnumAttachmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentStatus | Prisma.EnumAttachmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel>
+}
+
+export type EnumAttachmentScanStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentScanStatus | Prisma.EnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentScanStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentScanStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel>
+}
+
 export type EnumNotificationTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
   in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
@@ -1129,6 +1281,158 @@ export type NestedEnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumMessageTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumStorageProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageProviderType | Prisma.EnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel> | $Enums.StorageProviderType
+}
+
+export type NestedEnumStorageProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageProviderType | Prisma.EnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageProviderType[] | Prisma.ListEnumStorageProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.StorageProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStorageProviderTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.MalwareScannerProviderType | Prisma.EnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel> | $Enums.MalwareScannerProviderType
+}
+
+export type NestedEnumMalwareScannerProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MalwareScannerProviderType | Prisma.EnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MalwareScannerProviderType[] | Prisma.ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMalwareScannerProviderTypeWithAggregatesFilter<$PrismaModel> | $Enums.MalwareScannerProviderType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMalwareScannerProviderTypeFilter<$PrismaModel>
+}
+
+export type NestedBoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
+export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+}
+
+export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+}
+
+export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumAttachmentFileCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentFileCategory | Prisma.EnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel> | $Enums.AttachmentFileCategory
+}
+
+export type NestedEnumAttachmentFileCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentFileCategory | Prisma.EnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentFileCategory[] | Prisma.ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentFileCategoryWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentFileCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentFileCategoryFilter<$PrismaModel>
+}
+
+export type NestedBigIntFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntFilter<$PrismaModel> | bigint | number
+}
+
+export type NestedEnumAttachmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentStatus | Prisma.EnumAttachmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel> | $Enums.AttachmentStatus
+}
+
+export type NestedEnumAttachmentScanStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentScanStatus | Prisma.EnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel> | $Enums.AttachmentScanStatus
+}
+
+export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type NestedEnumAttachmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentStatus | Prisma.EnumAttachmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentStatus[] | Prisma.ListEnumAttachmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAttachmentScanStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AttachmentScanStatus | Prisma.EnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AttachmentScanStatus[] | Prisma.ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAttachmentScanStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttachmentScanStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAttachmentScanStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {

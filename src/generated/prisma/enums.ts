@@ -111,6 +111,67 @@ export const MessageType = {
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
 
 
+export const AttachmentStatus = {
+  TEMPORARY: 'TEMPORARY',
+  UPLOADING: 'UPLOADING',
+  SCANNING: 'SCANNING',
+  READY: 'READY',
+  FAILED: 'FAILED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED',
+  DELETING: 'DELETING',
+  DELETED: 'DELETED',
+  DELETE_FAILED: 'DELETE_FAILED'
+} as const
+
+export type AttachmentStatus = (typeof AttachmentStatus)[keyof typeof AttachmentStatus]
+
+
+export const AttachmentScanStatus = {
+  NOT_REQUIRED: 'NOT_REQUIRED',
+  PENDING: 'PENDING',
+  SCANNING: 'SCANNING',
+  CLEAN: 'CLEAN',
+  INFECTED: 'INFECTED',
+  FAILED: 'FAILED'
+} as const
+
+export type AttachmentScanStatus = (typeof AttachmentScanStatus)[keyof typeof AttachmentScanStatus]
+
+
+export const StorageProviderType = {
+  LOCAL: 'LOCAL',
+  S3: 'S3',
+  MINIO: 'MINIO',
+  AZURE_BLOB: 'AZURE_BLOB',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type StorageProviderType = (typeof StorageProviderType)[keyof typeof StorageProviderType]
+
+
+export const MalwareScannerProviderType = {
+  CLAMAV: 'CLAMAV',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type MalwareScannerProviderType = (typeof MalwareScannerProviderType)[keyof typeof MalwareScannerProviderType]
+
+
+export const AttachmentFileCategory = {
+  IMAGE: 'IMAGE',
+  DOCUMENT: 'DOCUMENT',
+  SPREADSHEET: 'SPREADSHEET',
+  ARCHIVE: 'ARCHIVE',
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO',
+  TEXT: 'TEXT',
+  OTHER: 'OTHER'
+} as const
+
+export type AttachmentFileCategory = (typeof AttachmentFileCategory)[keyof typeof AttachmentFileCategory]
+
+
 export const NotificationType = {
   MESSAGE: 'MESSAGE',
   SYSTEM: 'SYSTEM',
@@ -172,7 +233,8 @@ export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel]
 
 export const RetentionDataType = {
   LOG: 'LOG',
-  CHAT: 'CHAT'
+  CHAT: 'CHAT',
+  ATTACHMENT: 'ATTACHMENT'
 } as const
 
 export type RetentionDataType = (typeof RetentionDataType)[keyof typeof RetentionDataType]

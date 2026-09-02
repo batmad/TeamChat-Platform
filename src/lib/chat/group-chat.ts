@@ -1,5 +1,15 @@
 import { prisma } from "@/lib/db/prisma";
 import {
+  messageAttachmentSelect,
+  serializeMessageAttachments,
+  type MessageAttachmentPayload,
+  type MessageAttachmentRow,
+} from "@/lib/attachments/message/payload";
+import {
+  bindReadyAttachmentsToMessage,
+  normalizeAttachmentIds,
+} from "@/lib/attachments/message/binding";
+import {
   GroupChatAccessError,
   type GroupChatActor,
   actorHasPermission,
@@ -31,8 +41,8 @@ export type GroupMessagePayload = {
     id: string;
     senderUsername: string;
     senderName: string | null;
-    content: string;
-  } | null;
+    content: string;  } | null;
+  attachments: MessageAttachmentPayload[];
   createdAt: string;
   readCount: number;
   isReadByCurrentUser?: boolean;
@@ -216,14 +226,17 @@ export async function getGroupMessageHistory(input: {
       senderName: true,
       type: true,
       content: true,
-      createdAt: true,
-      replyTo: {
+      createdAt: true,      replyTo: {
         select: {
           id: true,
           senderUsername: true,
           senderName: true,
           content: true,
         },
+      },
+      attachments: {
+        select: messageAttachmentSelect,
+        orderBy: { createdAt: "asc" },
       },
       reads: {
         where: { userIdentityId: actor.userIdentityId },
@@ -233,7 +246,7 @@ export async function getGroupMessageHistory(input: {
     },
   });
 
-  const data: GroupMessagePayload[] = messages.map((message: { id: string; clientMessageId: string | null; applicationId: string; roomId: string; senderUserIdentityId: string | null; senderUsername: string; senderName: string | null; content: string; createdAt: Date; replyTo: { id: string; senderUsername: string; senderName: string | null; content: string } | null; reads: Array<{ id: string }>; _count: { reads: number } }) => ({
+  const data: GroupMessagePayload[] = messages.map((message: { id: string; clientMessageId: string | null; applicationId: string; roomId: string; senderUserIdentityId: string | null; senderUsername: string; senderName: string | null; content: string; createdAt: Date; replyTo: { id: string; senderUsername: string; senderName: string | null; content: string } | null; attachments: MessageAttachmentRow[]; reads: Array<{ id: string }>; _count: { reads: number } }) => ({
     id: message.id,
     clientMessageId: message.clientMessageId,
     applicationId: message.applicationId,
@@ -244,9 +257,9 @@ export async function getGroupMessageHistory(input: {
       username: message.senderUsername,
       name: message.senderName,
     },
-    type: "TEXT",
-    content: message.content,
+    type: "TEXT",    content: message.content,
     replyTo: message.replyTo,
+    attachments: serializeMessageAttachments(message.attachments),
     createdAt: message.createdAt.toISOString(),
     readCount: message._count.reads,
     isReadByCurrentUser: message.reads.length > 0,
@@ -261,18 +274,18 @@ export async function getGroupMessageHistory(input: {
 }
 
 export async function sendGroupMessage(input: {
-  userIdentityId: string;
-  groupId: string;
+  userIdentityId: string;  groupId: string;
   content: string;
+  attachmentIds?: string[];
   replyMessageId?: string | null;
   clientMessageId?: string | null;
 }) {
   const actor = await requireGroupChatActor(input.userIdentityId);
   const group = await requireGroupAccess(actor, input.groupId, { requireSend: true });
-  const room = await ensureGroupRoom(actor.applicationId, group);
-  await ensureRoomMember(room.id, actor);
+  const room = await ensureGroupRoom(actor.applicationId, group);  await ensureRoomMember(room.id, actor);
+  const attachmentIds = normalizeAttachmentIds(input.attachmentIds);
   const normalizedContent = normalizeGroupMessageContent(input.content);
-  if (!normalizedContent.ok) {
+  if (!normalizedContent.ok && !(normalizedContent.code === "MESSAGE_EMPTY" && attachmentIds.length > 0)) {
     throw new GroupChatAccessError(
       normalizedContent.code,
       normalizedContent.code === "MESSAGE_EMPTY"
@@ -281,7 +294,7 @@ export async function sendGroupMessage(input: {
       400,
     );
   }
-  const content = normalizedContent.content;
+  const content = normalizedContent.ok ? normalizedContent.content : "";
   const clientMessageId = input.clientMessageId?.trim() || null;
 
   if (clientMessageId) {
@@ -317,47 +330,57 @@ export async function sendGroupMessage(input: {
     if (!reply) {
       throw new GroupChatAccessError("REPLY_MESSAGE_INVALID", "Reply target is unavailable", 400);
     }
-  }
-
-  const moderation = await moderateOutgoingMessage({
-    applicationId: actor.applicationId,
-    userIdentityId: actor.userIdentityId,
-    username: actor.username,
-    userName: actor.displayName,
-    roomId: room.id,
-    roomType: "GROUP",
-    groupId: group.id,
-    content,
-    metadata: { chatType: "GROUP", clientMessageId },
-  });
+  }  const moderation = content
+    ? await moderateOutgoingMessage({
+        applicationId: actor.applicationId,
+        userIdentityId: actor.userIdentityId,
+        username: actor.username,
+        userName: actor.displayName,
+        roomId: room.id,
+        roomType: "GROUP",
+        groupId: group.id,
+        content,
+        metadata: { chatType: "GROUP", clientMessageId, attachmentCount: attachmentIds.length },
+      })
+    : { allowed: true as const };
   if (!moderation.allowed) {
     throw new GroupChatAccessError(moderation.code, moderation.message, 422);
   }
 
   let message;
-  try {
-    message = await prisma.message.create({
-      data: {
-        applicationId: actor.applicationId,
-        roomId: room.id,
-        senderUserIdentityId: actor.userIdentityId,
-        senderUsername: actor.username,
-        senderName: actor.displayName,
-        type: "TEXT",
-        content,
-        clientMessageId,
-        replyMessageId: input.replyMessageId || null,
-        groupContexts: {
-          create: { groupId: group.id },
-        },
-        reads: {
-          create: {
-            userIdentityId: actor.userIdentityId,
-            usernameSnapshot: actor.username,
+  try {    message = await prisma.$transaction(async (tx) => {
+      const created = await tx.message.create({
+        data: {
+          applicationId: actor.applicationId,
+          roomId: room.id,
+          senderUserIdentityId: actor.userIdentityId,
+          senderUsername: actor.username,
+          senderName: actor.displayName,
+          type: "TEXT",
+          content,
+          clientMessageId,
+          replyMessageId: input.replyMessageId || null,
+          groupContexts: {
+            create: { groupId: group.id },
+          },
+          reads: {
+            create: {
+              userIdentityId: actor.userIdentityId,
+              usernameSnapshot: actor.username,
+            },
           },
         },
-      },
-      select: { id: true },
+        select: { id: true },
+      });
+      await bindReadyAttachmentsToMessage({
+        tx,
+        applicationId: actor.applicationId,
+        userIdentityId: actor.userIdentityId,
+        roomType: "GROUP",
+        messageId: created.id,
+        attachmentIds,
+      });
+      return created;
     });
   } catch (error) {
     if (clientMessageId) {
@@ -389,9 +412,10 @@ export async function sendGroupMessage(input: {
     metadata: {
       messageId: message.id,
       roomId: room.id,
-      groupId: group.id,
-      clientMessageId,
+      groupId: group.id,      clientMessageId,
       replyMessageId: input.replyMessageId ?? null,
+      attachmentIds,
+      attachmentCount: attachmentIds.length,
     },
   });
 
@@ -423,6 +447,10 @@ async function getMessagePayload(
           content: true,
         },
       },
+      attachments: {
+        select: messageAttachmentSelect,
+        orderBy: { createdAt: "asc" },
+      },
       reads: {
         where: { userIdentityId: currentUserIdentityId },
         select: { id: true },
@@ -446,6 +474,7 @@ async function getMessagePayload(
     type: "TEXT",
     content: message.content,
     replyTo: message.replyTo,
+    attachments: serializeMessageAttachments(message.attachments),
     createdAt: message.createdAt.toISOString(),
     readCount: message._count.reads,
     isReadByCurrentUser: message.reads.length > 0,

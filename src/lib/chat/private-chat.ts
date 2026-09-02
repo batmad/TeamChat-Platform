@@ -1,5 +1,15 @@
 import { prisma } from "@/lib/db/prisma";
 import {
+  messageAttachmentSelect,
+  serializeMessageAttachments,
+  type MessageAttachmentPayload,
+  type MessageAttachmentRow,
+} from "@/lib/attachments/message/payload";
+import {
+  bindReadyAttachmentsToMessage,
+  normalizeAttachmentIds,
+} from "@/lib/attachments/message/binding";
+import {
   PrivateChatAccessError,
   type PrivateChatActor,
   type PrivateChatParticipant,
@@ -39,8 +49,8 @@ export type PrivateMessagePayload = {
     id: string;
     senderUsername: string;
     senderName: string | null;
-    content: string;
-  } | null;
+    content: string;  } | null;
+  attachments: MessageAttachmentPayload[];
   createdAt: string;
   readCount: number;
   isReadByCurrentUser?: boolean;
@@ -648,14 +658,17 @@ export async function getPrivateMessageHistory(input: {
       senderUsername: true,
       senderName: true,
       content: true,
-      createdAt: true,
-      replyTo: {
+      createdAt: true,      replyTo: {
         select: {
           id: true,
           senderUsername: true,
           senderName: true,
           content: true,
         },
+      },
+      attachments: {
+        select: messageAttachmentSelect,
+        orderBy: { createdAt: "asc" },
       },
       reads: {
         where: {
@@ -688,8 +701,8 @@ export async function getPrivateMessageHistory(input: {
         id: string;
         senderUsername: string;
         senderName: string | null;
-        content: string;
-      } | null;
+        content: string;      } | null;
+      attachments: MessageAttachmentRow[];
       reads: Array<{
         id: string;
       }>;
@@ -706,9 +719,9 @@ export async function getPrivateMessageHistory(input: {
         username: message.senderUsername,
         name: message.senderName,
       },
-      type: "TEXT",
-      content: message.content,
+      type: "TEXT",      content: message.content,
       replyTo: message.replyTo,
+      attachments: serializeMessageAttachments(message.attachments),
       createdAt: message.createdAt.toISOString(),
       readCount: message._count.reads,
       isReadByCurrentUser: message.reads.length > 0,
@@ -770,20 +783,18 @@ async function requirePrivateSendAccess(
 }
 
 export async function sendPrivateMessage(input: {
-  userIdentityId: string;
-  roomId: string;
+  userIdentityId: string;  roomId: string;
   content: string;
+  attachmentIds?: string[];
   replyMessageId?: string | null;
   clientMessageId?: string | null;
 }) {
   const { actor, room, access } = await requirePrivateSendAccess(
     input.userIdentityId,
     input.roomId,
-  );
-
+  );  const attachmentIds = normalizeAttachmentIds(input.attachmentIds);
   const normalizedContent = normalizePrivateMessageContent(input.content);
-
-  if (!normalizedContent.ok) {
+  if (!normalizedContent.ok && !(normalizedContent.code === "MESSAGE_EMPTY" && attachmentIds.length > 0)) {
     throw new PrivateChatAccessError(
       normalizedContent.code,
       normalizedContent.code === "MESSAGE_EMPTY"
@@ -792,6 +803,7 @@ export async function sendPrivateMessage(input: {
       400,
     );
   }
+  const messageContent = normalizedContent.ok ? normalizedContent.content : "";
 
   const clientMessageId = input.clientMessageId?.trim() || null;
 
@@ -840,21 +852,22 @@ export async function sendPrivateMessage(input: {
         400,
       );
     }
-  }
-
-  const moderation = await moderateOutgoingMessage({
-    applicationId: actor.applicationId,
-    userIdentityId: actor.userIdentityId,
-    username: actor.username,
-    userName: actor.displayName,
-    roomId: room.id,
-    roomType: "PRIVATE",
-    content: normalizedContent.content,
-    metadata: {
-      chatType: "PRIVATE",
-      clientMessageId,
-    },
-  });
+  }  const moderation = messageContent
+    ? await moderateOutgoingMessage({
+        applicationId: actor.applicationId,
+        userIdentityId: actor.userIdentityId,
+        username: actor.username,
+        userName: actor.displayName,
+        roomId: room.id,
+        roomType: "PRIVATE",
+        content: messageContent,
+        metadata: {
+          chatType: "PRIVATE",
+          clientMessageId,
+          attachmentCount: attachmentIds.length,
+        },
+      })
+    : { allowed: true as const };
 
   if (!moderation.allowed) {
     throw new PrivateChatAccessError(moderation.code, moderation.message, 422);
@@ -870,9 +883,8 @@ export async function sendPrivateMessage(input: {
           roomId: room.id,
           senderUserIdentityId: actor.userIdentityId,
           senderUsername: actor.username,
-          senderName: actor.displayName,
-          type: "TEXT",
-          content: normalizedContent.content,
+          senderName: actor.displayName,          type: "TEXT",
+          content: messageContent,
           clientMessageId,
           replyMessageId: input.replyMessageId || null,
           ...(access.sharedGroupIds.length
@@ -890,12 +902,18 @@ export async function sendPrivateMessage(input: {
               usernameSnapshot: actor.username,
             },
           },
-        },
-        select: {
+        },        select: {
           id: true,
         },
       });
-
+      await bindReadyAttachmentsToMessage({
+        tx,
+        applicationId: actor.applicationId,
+        userIdentityId: actor.userIdentityId,
+        roomType: "PRIVATE",
+        messageId: message.id,
+        attachmentIds,
+      });
       // Perbarui waktu room agar conversation terbaru naik ke atas
       await tx.room.update({
         where: {
@@ -946,9 +964,10 @@ export async function sendPrivateMessage(input: {
     message: "Private message sent",
     metadata: {
       messageId: created.id,
-      roomId: room.id,
-      clientMessageId,
+      roomId: room.id,      clientMessageId,
       replyMessageId: input.replyMessageId ?? null,
+      attachmentIds,
+      attachmentCount: attachmentIds.length,
     },
   });
 
@@ -980,6 +999,10 @@ async function getPrivateMessagePayload(
           senderName: true,
           content: true,
         },
+      },
+      attachments: {
+        select: messageAttachmentSelect,
+        orderBy: { createdAt: "asc" },
       },
       reads: {
         where: {
@@ -1018,6 +1041,7 @@ async function getPrivateMessagePayload(
     type: "TEXT",
     content: message.content,
     replyTo: message.replyTo,
+    attachments: serializeMessageAttachments(message.attachments),
     createdAt: message.createdAt.toISOString(),
     readCount: message._count.reads,
     isReadByCurrentUser: message.reads.length > 0,

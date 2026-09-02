@@ -33,6 +33,37 @@ type Row = {
     senderName: string | null;
     content: string;
   } | null;
+  attachments: Array<{
+    id: string;
+    originalName: string;
+    extension: string;
+    mimeType: string;
+    detectedMimeType: string | null;
+    sizeBytes: number;
+    status:
+      | "TEMPORARY"
+      | "UPLOADING"
+      | "SCANNING"
+      | "READY"
+      | "FAILED"
+      | "REJECTED"
+      | "EXPIRED"
+      | "DELETING"
+      | "DELETED"
+      | "DELETE_FAILED";
+    scanStatus:
+      | "NOT_REQUIRED"
+      | "PENDING"
+      | "SCANNING"
+      | "CLEAN"
+      | "INFECTED"
+      | "FAILED";
+    previewKind: "IMAGE" | "PDF" | null;
+    expiresAt: string | null;
+    deletedAt: string | null;
+    deleteReason: string | null;
+    createdAt: string;
+  }>;
 };
 type RoleSubject = { id: string; code: string; name: string };
 type UserSubject = {
@@ -80,6 +111,19 @@ function defaultDate(offsetDays: number) {
   const date = new Date();
   date.setDate(date.getDate() + offsetDays);
   return date.toISOString().slice(0, 10);
+}
+
+function formatBytes(bytes: number) {
+  if (!Number.isFinite(bytes) || bytes < 0) return "-";
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(bytes < 10240 ? 1 : 0)} KB`;
+  if (bytes < 1024 * 1024 * 1024)
+    return `${(bytes / 1024 / 1024).toFixed(bytes < 10485760 ? 1 : 0)} MB`;
+  return `${(bytes / 1024 / 1024 / 1024).toFixed(1)} GB`;
+}
+
+function attachmentStatusLabel(status: Row["attachments"][number]["status"]) {
+  return status.replaceAll("_", " ");
 }
 
 export function ChatLogsReportManager({
@@ -510,8 +554,84 @@ export function ChatLogsReportManager({
                       .map((participant) => participant.username)
                       .join(", ")}
                   </td>
-                  <td className="max-w-[500px] whitespace-pre-wrap break-words">
-                    {row.message}
+                  <td className="max-w-[560px]">
+                    {row.message ? (
+                      <div className="whitespace-pre-wrap break-words">
+                        {row.message}
+                      </div>
+                    ) : row.attachments.length ? (
+                      <p className="text-xs italic text-slate-500">
+                        Attachment-only message
+                      </p>
+                    ) : (
+                      <span className="text-slate-400">-</span>
+                    )}
+                    {row.attachments.length ? (
+                      <div className="mt-3 space-y-2">
+                        {row.attachments.map((attachment) => {
+                          const readable = attachment.status === "READY";
+                          const canPreview =
+                            readable && attachment.previewKind !== null;
+                          return (
+                            <div
+                              key={attachment.id}
+                              className="rounded-xl border border-slate-200 bg-slate-50 p-3"
+                            >
+                              <div className="flex flex-wrap items-start justify-between gap-3">
+                                <div className="min-w-0">
+                                  <p
+                                    className="truncate font-medium text-slate-900"
+                                    title={attachment.originalName}
+                                  >
+                                    {attachment.originalName}
+                                  </p>
+                                  <p className="mt-1 text-xs text-slate-500">
+                                    {attachment.extension.toUpperCase()} ·{" "}
+                                    {formatBytes(attachment.sizeBytes)} ·{" "}
+                                    {attachmentStatusLabel(attachment.status)}
+                                    {attachment.scanStatus !== "NOT_REQUIRED"
+                                      ? ` · scan ${attachment.scanStatus.toLowerCase()}`
+                                      : ""}
+                                  </p>
+                                </div>
+                                <div className="flex shrink-0 flex-wrap gap-2">
+                                  {canPreview ? (
+                                    <a
+                                      href={apiUrl(
+                                        `/api/reports/chat-logs/attachments/${attachment.id}/preview`,
+                                      )}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                                    >
+                                      Preview
+                                    </a>
+                                  ) : null}
+                                  {canExport && readable ? (
+                                    <a
+                                      href={apiUrl(
+                                        `/api/reports/chat-logs/attachments/${attachment.id}/download`,
+                                      )}
+                                      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                                    >
+                                      Download
+                                    </a>
+                                  ) : null}
+                                </div>
+                              </div>
+                              {!readable ? (
+                                <p className="mt-2 text-xs text-amber-700">
+                                  File tidak tersedia untuk preview/download
+                                  karena status {attachmentStatusLabel(
+                                    attachment.status,
+                                  )}.
+                                </p>
+                              ) : null}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : null}
                   </td>
                 </tr>
               ))}

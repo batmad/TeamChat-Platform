@@ -73,6 +73,52 @@ enum MessageType {
   TEXT
 }
 
+enum AttachmentStatus {
+  TEMPORARY
+  UPLOADING
+  SCANNING
+  READY
+  FAILED
+  REJECTED
+  EXPIRED
+  DELETING
+  DELETED
+  DELETE_FAILED
+}
+
+enum AttachmentScanStatus {
+  NOT_REQUIRED
+  PENDING
+  SCANNING
+  CLEAN
+  INFECTED
+  FAILED
+}
+
+enum StorageProviderType {
+  LOCAL
+  S3
+  MINIO
+  AZURE_BLOB
+  CUSTOM
+}
+
+enum MalwareScannerProviderType {
+  CLAMAV
+  CUSTOM
+}
+
+enum AttachmentFileCategory {
+  IMAGE
+  DOCUMENT
+  SPREADSHEET
+  ARCHIVE
+  AUDIO
+  VIDEO
+  TEXT
+  OTHER
+}
+
 enum NotificationType {
   MESSAGE
   SYSTEM
@@ -117,6 +163,7 @@ enum LogLevel {
 enum RetentionDataType {
   LOG
   CHAT
+  ATTACHMENT
 }
 
 enum ReportScopeType {
@@ -155,6 +202,12 @@ model Application {
   retentionPolicies  RetentionPolicy[]
   reportScopes       ReportScopeAssignment[]
   widgetConfig       WidgetConfig?
+  storageProviders   StorageProviderConfig[]
+  malwareScanners    MalwareScannerConfig[]
+  attachmentPolicy   AttachmentPolicy?
+  attachmentFileTypes AttachmentFileType[]
+  attachments        MessageAttachment[]
+  attachmentUploadRateBuckets AttachmentUploadRateBucket[]
 
   @@index([status])
   @@map("applications")
@@ -325,6 +378,9 @@ model UserIdentity {
   notifications        Notification[]
   violationLogs        ContentViolationLog[]
   reportScopes         ReportScopeAssignment[]
+  uploadedAttachments  MessageAttachment[] @relation("AttachmentUploader")
+  deletedAttachments   MessageAttachment[] @relation("AttachmentDeletedBy")
+  attachmentUploadRateBuckets AttachmentUploadRateBucket[]
 
   @@unique([applicationId, username])
   @@index([applicationId, source, isActive])
@@ -552,6 +608,7 @@ model Message {
   reads       MessageRead[]
   notifications Notification[]
   groupContexts MessageGroupContext[]
+  attachments   MessageAttachment[]
 
   @@unique([applicationId, clientMessageId])
   @@index([applicationId, roomId, createdAt])
@@ -560,6 +617,188 @@ model Message {
   @@map("messages")
 }
 
+
+model StorageProviderConfig {
+  id                  String              @id @default(uuid())
+  key                 String              @unique
+  applicationId       String?
+  name                String
+  type                StorageProviderType
+  isActive            Boolean             @default(true)
+  isDefault           Boolean             @default(false)
+  config              Json
+  credentialEncrypted String?
+  lastHealthCheckAt   DateTime?
+  lastHealthStatus    String?
+  lastHealthError     String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  application        Application?       @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  attachmentPolicies AttachmentPolicy[]
+  attachments         MessageAttachment[]
+
+  @@index([applicationId, isActive])
+  @@index([type, isActive])
+  @@map("storage_provider_configs")
+}
+
+model MalwareScannerConfig {
+  id                  String                     @id @default(uuid())
+  key                 String                     @unique
+  applicationId       String?
+  name                String
+  type                MalwareScannerProviderType
+  isActive            Boolean                    @default(true)
+  isDefault           Boolean                    @default(false)
+  config              Json
+  credentialEncrypted String?
+  lastHealthCheckAt   DateTime?
+  lastHealthStatus    String?
+  lastHealthError     String?
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+
+  application        Application?      @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  attachmentPolicies AttachmentPolicy[]
+
+  @@index([applicationId, isActive])
+  @@index([type, isActive])
+  @@map("malware_scanner_configs")
+}
+
+model AttachmentPolicy {
+  id                         String   @id @default(uuid())
+  key                        String   @unique
+  applicationId              String?  @unique
+  inheritGlobal              Boolean  @default(true)
+  enabled                    Boolean?
+  privateEnabled             Boolean?
+  groupEnabled               Boolean?
+  maxFileSizeBytes           BigInt?
+  maxFilesPerMessage         Int?
+  maxTotalSizeBytes          BigInt?
+  storageQuotaBytes          BigInt?
+  imagePreviewEnabled        Boolean?
+  pdfPreviewEnabled          Boolean?
+  malwareScanEnabled         Boolean?
+  malwareScannerProviderId   String?
+  validateMime               Boolean?
+  validateSignature          Boolean?
+  temporaryTtlMinutes        Int?
+  failedCleanupHours         Int?
+  uploadRateLimitEnabled     Boolean?
+  uploadRateLimitWindowMs    Int?
+  uploadRateLimitMaxRequests Int?
+  uploadRateLimitMaxBytes    BigInt?
+  deleteRetryMaxAttempts     Int?
+  deleteRetryBaseMinutes     Int?
+  auditDownloadEnabled       Boolean?
+  auditPreviewEnabled        Boolean?
+  storageProviderId          String?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  application      Application?          @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  storageProvider  StorageProviderConfig? @relation(fields: [storageProviderId], references: [id], onDelete: SetNull)
+  malwareScanner   MalwareScannerConfig? @relation(fields: [malwareScannerProviderId], references: [id], onDelete: SetNull)
+
+  @@index([applicationId])
+  @@index([storageProviderId])
+  @@index([malwareScannerProviderId])
+  @@map("attachment_policies")
+}
+
+model AttachmentFileType {
+  id             String                 @id @default(uuid())
+  key            String                 @unique
+  applicationId  String?
+  category       AttachmentFileCategory
+  extension      String
+  mimeTypes      String[]               @default([])
+  maxSizeBytes   BigInt?
+  previewable    Boolean                @default(false)
+  isAllowed      Boolean                @default(true)
+  isActive       Boolean                @default(true)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@unique([applicationId, extension])
+  @@index([applicationId, extension, isActive])
+  @@index([category, isAllowed, isActive])
+  @@map("attachment_file_types")
+}
+
+model MessageAttachment {
+  id                       String               @id @default(uuid())
+  applicationId            String
+  messageId                String?
+  uploadedByUserIdentityId String?
+  uploadedByUsername       String
+  uploadedByName           String?
+  originalName             String
+  storedName               String
+  extension                String
+  mimeType                 String
+  detectedMimeType         String?
+  sizeBytes                BigInt
+  checksum                 String?
+  checksumAlgorithm        String?              @default("SHA256")
+  storageProviderId        String?
+  storageKey               String?
+  status                   AttachmentStatus     @default(TEMPORARY)
+  scanStatus               AttachmentScanStatus @default(NOT_REQUIRED)
+  scanProvider             String?
+  scanResult               Json?
+  scannedAt                DateTime?
+  scanAttemptCount         Int                  @default(0)
+  scanLastError            String?
+  expiresAt                DateTime?
+  deletedAt                DateTime?
+  deletedByUserIdentityId  String?
+  deleteReason             String?
+  deleteRetryCount         Int                  @default(0)
+  deleteLastAttemptAt      DateTime?
+  deleteLastError          String?
+  createdAt                DateTime             @default(now())
+  updatedAt                DateTime             @updatedAt
+
+  application     Application            @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  message         Message?               @relation(fields: [messageId], references: [id], onDelete: SetNull)
+  uploadedBy      UserIdentity?          @relation("AttachmentUploader", fields: [uploadedByUserIdentityId], references: [id], onDelete: SetNull)
+  deletedBy       UserIdentity?          @relation("AttachmentDeletedBy", fields: [deletedByUserIdentityId], references: [id], onDelete: SetNull)
+  storageProvider StorageProviderConfig? @relation(fields: [storageProviderId], references: [id], onDelete: SetNull)
+
+  @@index([applicationId, messageId, createdAt])
+  @@index([applicationId, status, createdAt])
+  @@index([uploadedByUserIdentityId, createdAt])
+  @@index([expiresAt, status])
+  @@index([storageProviderId, status])
+  @@index([status, deleteLastAttemptAt])
+  @@map("message_attachments")
+}
+
+model AttachmentUploadRateBucket {
+  id             String   @id @default(uuid())
+  applicationId  String
+  userIdentityId String
+  windowStart    DateTime
+  windowMs       Int
+  requestCount   Int      @default(0)
+  byteCount      BigInt   @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  application  Application  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  userIdentity UserIdentity @relation(fields: [userIdentityId], references: [id], onDelete: Cascade)
+
+  @@unique([applicationId, userIdentityId, windowStart, windowMs])
+  @@index([windowStart])
+  @@index([applicationId, userIdentityId])
+  @@map("attachment_upload_rate_buckets")
+}
 
 model MessageGroupContext {
   id        String   @id @default(uuid())

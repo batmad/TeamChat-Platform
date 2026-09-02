@@ -18,7 +18,7 @@ type WidgetConfig = {
 } | null;
 
 type RetentionPolicy = {
-  dataType: "LOG" | "CHAT";
+  dataType: "LOG" | "CHAT" | "ATTACHMENT";
   category: string;
   label: string;
   retentionDays: number | null;

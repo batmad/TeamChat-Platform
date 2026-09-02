@@ -244,6 +244,9 @@ export type UserIdentityWhereInput = {
   notifications?: Prisma.NotificationListRelationFilter
   violationLogs?: Prisma.ContentViolationLogListRelationFilter
   reportScopes?: Prisma.ReportScopeAssignmentListRelationFilter
+  uploadedAttachments?: Prisma.MessageAttachmentListRelationFilter
+  deletedAttachments?: Prisma.MessageAttachmentListRelationFilter
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketListRelationFilter
 }
 
 export type UserIdentityOrderByWithRelationInput = {
@@ -272,6 +275,9 @@ export type UserIdentityOrderByWithRelationInput = {
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   violationLogs?: Prisma.ContentViolationLogOrderByRelationAggregateInput
   reportScopes?: Prisma.ReportScopeAssignmentOrderByRelationAggregateInput
+  uploadedAttachments?: Prisma.MessageAttachmentOrderByRelationAggregateInput
+  deletedAttachments?: Prisma.MessageAttachmentOrderByRelationAggregateInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketOrderByRelationAggregateInput
 }
 
 export type UserIdentityWhereUniqueInput = Prisma.AtLeast<{
@@ -304,6 +310,9 @@ export type UserIdentityWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   violationLogs?: Prisma.ContentViolationLogListRelationFilter
   reportScopes?: Prisma.ReportScopeAssignmentListRelationFilter
+  uploadedAttachments?: Prisma.MessageAttachmentListRelationFilter
+  deletedAttachments?: Prisma.MessageAttachmentListRelationFilter
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketListRelationFilter
 }, "id" | "applicationId_username">
 
 export type UserIdentityOrderByWithAggregationInput = {
@@ -364,6 +373,9 @@ export type UserIdentityCreateInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateInput = {
@@ -390,6 +402,9 @@ export type UserIdentityUncheckedCreateInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUpdateInput = {
@@ -416,6 +431,9 @@ export type UserIdentityUpdateInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateInput = {
@@ -442,6 +460,9 @@ export type UserIdentityUncheckedUpdateInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateManyInput = {
@@ -725,6 +746,52 @@ export type UserIdentityUpdateOneWithoutSentMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserIdentityUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.UserIdentityUpdateWithoutSentMessagesInput>, Prisma.UserIdentityUncheckedUpdateWithoutSentMessagesInput>
 }
 
+export type UserIdentityCreateNestedOneWithoutUploadedAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutUploadedAttachmentsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutUploadedAttachmentsInput
+  connect?: Prisma.UserIdentityWhereUniqueInput
+}
+
+export type UserIdentityCreateNestedOneWithoutDeletedAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutDeletedAttachmentsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutDeletedAttachmentsInput
+  connect?: Prisma.UserIdentityWhereUniqueInput
+}
+
+export type UserIdentityUpdateOneWithoutUploadedAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutUploadedAttachmentsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutUploadedAttachmentsInput
+  upsert?: Prisma.UserIdentityUpsertWithoutUploadedAttachmentsInput
+  disconnect?: Prisma.UserIdentityWhereInput | boolean
+  delete?: Prisma.UserIdentityWhereInput | boolean
+  connect?: Prisma.UserIdentityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserIdentityUpdateToOneWithWhereWithoutUploadedAttachmentsInput, Prisma.UserIdentityUpdateWithoutUploadedAttachmentsInput>, Prisma.UserIdentityUncheckedUpdateWithoutUploadedAttachmentsInput>
+}
+
+export type UserIdentityUpdateOneWithoutDeletedAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutDeletedAttachmentsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutDeletedAttachmentsInput
+  upsert?: Prisma.UserIdentityUpsertWithoutDeletedAttachmentsInput
+  disconnect?: Prisma.UserIdentityWhereInput | boolean
+  delete?: Prisma.UserIdentityWhereInput | boolean
+  connect?: Prisma.UserIdentityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserIdentityUpdateToOneWithWhereWithoutDeletedAttachmentsInput, Prisma.UserIdentityUpdateWithoutDeletedAttachmentsInput>, Prisma.UserIdentityUncheckedUpdateWithoutDeletedAttachmentsInput>
+}
+
+export type UserIdentityCreateNestedOneWithoutAttachmentUploadRateBucketsInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutAttachmentUploadRateBucketsInput
+  connect?: Prisma.UserIdentityWhereUniqueInput
+}
+
+export type UserIdentityUpdateOneRequiredWithoutAttachmentUploadRateBucketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutAttachmentUploadRateBucketsInput
+  upsert?: Prisma.UserIdentityUpsertWithoutAttachmentUploadRateBucketsInput
+  connect?: Prisma.UserIdentityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserIdentityUpdateToOneWithWhereWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUpdateWithoutAttachmentUploadRateBucketsInput>, Prisma.UserIdentityUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+}
+
 export type UserIdentityCreateNestedOneWithoutMessageReadsInput = {
   create?: Prisma.XOR<Prisma.UserIdentityCreateWithoutMessageReadsInput, Prisma.UserIdentityUncheckedCreateWithoutMessageReadsInput>
   connectOrCreate?: Prisma.UserIdentityCreateOrConnectWithoutMessageReadsInput
@@ -836,6 +903,9 @@ export type UserIdentityCreateWithoutApplicationInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutApplicationInput = {
@@ -861,6 +931,9 @@ export type UserIdentityUncheckedCreateWithoutApplicationInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutApplicationInput = {
@@ -929,6 +1002,9 @@ export type UserIdentityCreateWithoutInternalUserInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutInternalUserInput = {
@@ -954,6 +1030,9 @@ export type UserIdentityUncheckedCreateWithoutInternalUserInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutInternalUserInput = {
@@ -1005,6 +1084,9 @@ export type UserIdentityCreateWithoutUserOverrideInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutUserOverrideInput = {
@@ -1030,6 +1112,9 @@ export type UserIdentityUncheckedCreateWithoutUserOverrideInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutUserOverrideInput = {
@@ -1071,6 +1156,9 @@ export type UserIdentityUpdateWithoutUserOverrideInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutUserOverrideInput = {
@@ -1096,6 +1184,9 @@ export type UserIdentityUncheckedUpdateWithoutUserOverrideInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutPermissionOverridesInput = {
@@ -1121,6 +1212,9 @@ export type UserIdentityCreateWithoutPermissionOverridesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutPermissionOverridesInput = {
@@ -1146,6 +1240,9 @@ export type UserIdentityUncheckedCreateWithoutPermissionOverridesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutPermissionOverridesInput = {
@@ -1187,6 +1284,9 @@ export type UserIdentityUpdateWithoutPermissionOverridesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutPermissionOverridesInput = {
@@ -1212,6 +1312,9 @@ export type UserIdentityUncheckedUpdateWithoutPermissionOverridesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutGroupMembershipsInput = {
@@ -1237,6 +1340,9 @@ export type UserIdentityCreateWithoutGroupMembershipsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutGroupMembershipsInput = {
@@ -1262,6 +1368,9 @@ export type UserIdentityUncheckedCreateWithoutGroupMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutGroupMembershipsInput = {
@@ -1303,6 +1412,9 @@ export type UserIdentityUpdateWithoutGroupMembershipsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutGroupMembershipsInput = {
@@ -1328,6 +1440,9 @@ export type UserIdentityUncheckedUpdateWithoutGroupMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutPresenceInput = {
@@ -1353,6 +1468,9 @@ export type UserIdentityCreateWithoutPresenceInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutPresenceInput = {
@@ -1378,6 +1496,9 @@ export type UserIdentityUncheckedCreateWithoutPresenceInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutPresenceInput = {
@@ -1419,6 +1540,9 @@ export type UserIdentityUpdateWithoutPresenceInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutPresenceInput = {
@@ -1444,6 +1568,9 @@ export type UserIdentityUncheckedUpdateWithoutPresenceInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutRoomMembershipsInput = {
@@ -1469,6 +1596,9 @@ export type UserIdentityCreateWithoutRoomMembershipsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutRoomMembershipsInput = {
@@ -1494,6 +1624,9 @@ export type UserIdentityUncheckedCreateWithoutRoomMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutRoomMembershipsInput = {
@@ -1535,6 +1668,9 @@ export type UserIdentityUpdateWithoutRoomMembershipsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutRoomMembershipsInput = {
@@ -1560,6 +1696,9 @@ export type UserIdentityUncheckedUpdateWithoutRoomMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutSentMessagesInput = {
@@ -1585,6 +1724,9 @@ export type UserIdentityCreateWithoutSentMessagesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutSentMessagesInput = {
@@ -1610,6 +1752,9 @@ export type UserIdentityUncheckedCreateWithoutSentMessagesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutSentMessagesInput = {
@@ -1651,6 +1796,9 @@ export type UserIdentityUpdateWithoutSentMessagesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutSentMessagesInput = {
@@ -1676,6 +1824,393 @@ export type UserIdentityUncheckedUpdateWithoutSentMessagesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
+}
+
+export type UserIdentityCreateWithoutUploadedAttachmentsInput = {
+  id?: string
+  username: string
+  source: $Enums.UserSource
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  application: Prisma.ApplicationCreateNestedOneWithoutUserIdentitiesInput
+  internalUser?: Prisma.InternalUserCreateNestedOneWithoutIdentitiesInput
+  userOverride?: Prisma.UserOverrideCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
+}
+
+export type UserIdentityUncheckedCreateWithoutUploadedAttachmentsInput = {
+  id?: string
+  applicationId: string
+  username: string
+  source: $Enums.UserSource
+  internalUserId?: string | null
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userOverride?: Prisma.UserOverrideUncheckedCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupUncheckedCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberUncheckedCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
+}
+
+export type UserIdentityCreateOrConnectWithoutUploadedAttachmentsInput = {
+  where: Prisma.UserIdentityWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutUploadedAttachmentsInput>
+}
+
+export type UserIdentityCreateWithoutDeletedAttachmentsInput = {
+  id?: string
+  username: string
+  source: $Enums.UserSource
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  application: Prisma.ApplicationCreateNestedOneWithoutUserIdentitiesInput
+  internalUser?: Prisma.InternalUserCreateNestedOneWithoutIdentitiesInput
+  userOverride?: Prisma.UserOverrideCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
+}
+
+export type UserIdentityUncheckedCreateWithoutDeletedAttachmentsInput = {
+  id?: string
+  applicationId: string
+  username: string
+  source: $Enums.UserSource
+  internalUserId?: string | null
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userOverride?: Prisma.UserOverrideUncheckedCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupUncheckedCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberUncheckedCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
+}
+
+export type UserIdentityCreateOrConnectWithoutDeletedAttachmentsInput = {
+  where: Prisma.UserIdentityWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutDeletedAttachmentsInput>
+}
+
+export type UserIdentityUpsertWithoutUploadedAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserIdentityUpdateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedUpdateWithoutUploadedAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutUploadedAttachmentsInput>
+  where?: Prisma.UserIdentityWhereInput
+}
+
+export type UserIdentityUpdateToOneWithWhereWithoutUploadedAttachmentsInput = {
+  where?: Prisma.UserIdentityWhereInput
+  data: Prisma.XOR<Prisma.UserIdentityUpdateWithoutUploadedAttachmentsInput, Prisma.UserIdentityUncheckedUpdateWithoutUploadedAttachmentsInput>
+}
+
+export type UserIdentityUpdateWithoutUploadedAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  application?: Prisma.ApplicationUpdateOneRequiredWithoutUserIdentitiesNestedInput
+  internalUser?: Prisma.InternalUserUpdateOneWithoutIdentitiesNestedInput
+  userOverride?: Prisma.UserOverrideUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
+}
+
+export type UserIdentityUncheckedUpdateWithoutUploadedAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  internalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverride?: Prisma.UserOverrideUncheckedUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUncheckedUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUncheckedUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
+}
+
+export type UserIdentityUpsertWithoutDeletedAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserIdentityUpdateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedUpdateWithoutDeletedAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedCreateWithoutDeletedAttachmentsInput>
+  where?: Prisma.UserIdentityWhereInput
+}
+
+export type UserIdentityUpdateToOneWithWhereWithoutDeletedAttachmentsInput = {
+  where?: Prisma.UserIdentityWhereInput
+  data: Prisma.XOR<Prisma.UserIdentityUpdateWithoutDeletedAttachmentsInput, Prisma.UserIdentityUncheckedUpdateWithoutDeletedAttachmentsInput>
+}
+
+export type UserIdentityUpdateWithoutDeletedAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  application?: Prisma.ApplicationUpdateOneRequiredWithoutUserIdentitiesNestedInput
+  internalUser?: Prisma.InternalUserUpdateOneWithoutIdentitiesNestedInput
+  userOverride?: Prisma.UserOverrideUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
+}
+
+export type UserIdentityUncheckedUpdateWithoutDeletedAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  internalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverride?: Prisma.UserOverrideUncheckedUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUncheckedUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUncheckedUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
+}
+
+export type UserIdentityCreateWithoutAttachmentUploadRateBucketsInput = {
+  id?: string
+  username: string
+  source: $Enums.UserSource
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  application: Prisma.ApplicationCreateNestedOneWithoutUserIdentitiesInput
+  internalUser?: Prisma.InternalUserCreateNestedOneWithoutIdentitiesInput
+  userOverride?: Prisma.UserOverrideCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserIdentityUncheckedCreateWithoutAttachmentUploadRateBucketsInput = {
+  id?: string
+  applicationId: string
+  username: string
+  source: $Enums.UserSource
+  internalUserId?: string | null
+  displayNameSnapshot?: string | null
+  sourceReference?: string | null
+  isActive?: boolean
+  lastSyncedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userOverride?: Prisma.UserOverrideUncheckedCreateNestedOneWithoutUserIdentityInput
+  presence?: Prisma.UserPresenceUncheckedCreateNestedOneWithoutUserIdentityInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedCreateNestedManyWithoutUserIdentityInput
+  groupMemberships?: Prisma.UserGroupUncheckedCreateNestedManyWithoutUserIdentityInput
+  roomMemberships?: Prisma.RoomMemberUncheckedCreateNestedManyWithoutUserIdentityInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderIdentityInput
+  messageReads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutUserIdentityInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedCreateNestedOneWithoutUserIdentityInput
+  roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserIdentityCreateOrConnectWithoutAttachmentUploadRateBucketsInput = {
+  where: Prisma.UserIdentityWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+}
+
+export type UserIdentityUpsertWithoutAttachmentUploadRateBucketsInput = {
+  update: Prisma.XOR<Prisma.UserIdentityUpdateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+  create: Prisma.XOR<Prisma.UserIdentityCreateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  where?: Prisma.UserIdentityWhereInput
+}
+
+export type UserIdentityUpdateToOneWithWhereWithoutAttachmentUploadRateBucketsInput = {
+  where?: Prisma.UserIdentityWhereInput
+  data: Prisma.XOR<Prisma.UserIdentityUpdateWithoutAttachmentUploadRateBucketsInput, Prisma.UserIdentityUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+}
+
+export type UserIdentityUpdateWithoutAttachmentUploadRateBucketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  application?: Prisma.ApplicationUpdateOneRequiredWithoutUserIdentitiesNestedInput
+  internalUser?: Prisma.InternalUserUpdateOneWithoutIdentitiesNestedInput
+  userOverride?: Prisma.UserOverrideUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserIdentityUncheckedUpdateWithoutAttachmentUploadRateBucketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumUserSourceFieldUpdateOperationsInput | $Enums.UserSource
+  internalUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayNameSnapshot?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userOverride?: Prisma.UserOverrideUncheckedUpdateOneWithoutUserIdentityNestedInput
+  presence?: Prisma.UserPresenceUncheckedUpdateOneWithoutUserIdentityNestedInput
+  permissionOverrides?: Prisma.UserPermissionOverrideUncheckedUpdateManyWithoutUserIdentityNestedInput
+  groupMemberships?: Prisma.UserGroupUncheckedUpdateManyWithoutUserIdentityNestedInput
+  roomMemberships?: Prisma.RoomMemberUncheckedUpdateManyWithoutUserIdentityNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderIdentityNestedInput
+  messageReads?: Prisma.MessageReadUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notificationSetting?: Prisma.NotificationSettingUncheckedUpdateOneWithoutUserIdentityNestedInput
+  roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserIdentityCreateWithoutMessageReadsInput = {
@@ -1701,6 +2236,9 @@ export type UserIdentityCreateWithoutMessageReadsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutMessageReadsInput = {
@@ -1726,6 +2264,9 @@ export type UserIdentityUncheckedCreateWithoutMessageReadsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutMessageReadsInput = {
@@ -1767,6 +2308,9 @@ export type UserIdentityUpdateWithoutMessageReadsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutMessageReadsInput = {
@@ -1792,6 +2336,9 @@ export type UserIdentityUncheckedUpdateWithoutMessageReadsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutNotificationSettingInput = {
@@ -1817,6 +2364,9 @@ export type UserIdentityCreateWithoutNotificationSettingInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutNotificationSettingInput = {
@@ -1842,6 +2392,9 @@ export type UserIdentityUncheckedCreateWithoutNotificationSettingInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutNotificationSettingInput = {
@@ -1883,6 +2436,9 @@ export type UserIdentityUpdateWithoutNotificationSettingInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutNotificationSettingInput = {
@@ -1908,6 +2464,9 @@ export type UserIdentityUncheckedUpdateWithoutNotificationSettingInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutRoomMutesInput = {
@@ -1933,6 +2492,9 @@ export type UserIdentityCreateWithoutRoomMutesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutRoomMutesInput = {
@@ -1958,6 +2520,9 @@ export type UserIdentityUncheckedCreateWithoutRoomMutesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutRoomMutesInput = {
@@ -1999,6 +2564,9 @@ export type UserIdentityUpdateWithoutRoomMutesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutRoomMutesInput = {
@@ -2024,6 +2592,9 @@ export type UserIdentityUncheckedUpdateWithoutRoomMutesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutNotificationsInput = {
@@ -2049,6 +2620,9 @@ export type UserIdentityCreateWithoutNotificationsInput = {
   roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutNotificationsInput = {
@@ -2074,6 +2648,9 @@ export type UserIdentityUncheckedCreateWithoutNotificationsInput = {
   roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutNotificationsInput = {
@@ -2115,6 +2692,9 @@ export type UserIdentityUpdateWithoutNotificationsInput = {
   roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutNotificationsInput = {
@@ -2140,6 +2720,9 @@ export type UserIdentityUncheckedUpdateWithoutNotificationsInput = {
   roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutViolationLogsInput = {
@@ -2165,6 +2748,9 @@ export type UserIdentityCreateWithoutViolationLogsInput = {
   roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutViolationLogsInput = {
@@ -2190,6 +2776,9 @@ export type UserIdentityUncheckedCreateWithoutViolationLogsInput = {
   roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutViolationLogsInput = {
@@ -2231,6 +2820,9 @@ export type UserIdentityUpdateWithoutViolationLogsInput = {
   roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutViolationLogsInput = {
@@ -2256,6 +2848,9 @@ export type UserIdentityUncheckedUpdateWithoutViolationLogsInput = {
   roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateWithoutReportScopesInput = {
@@ -2281,6 +2876,9 @@ export type UserIdentityCreateWithoutReportScopesInput = {
   roomMutes?: Prisma.RoomMuteCreateNestedManyWithoutUserIdentityInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityUncheckedCreateWithoutReportScopesInput = {
@@ -2306,6 +2904,9 @@ export type UserIdentityUncheckedCreateWithoutReportScopesInput = {
   roomMutes?: Prisma.RoomMuteUncheckedCreateNestedManyWithoutUserIdentityInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutUserIdentityInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutDeletedByInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutUserIdentityInput
 }
 
 export type UserIdentityCreateOrConnectWithoutReportScopesInput = {
@@ -2347,6 +2948,9 @@ export type UserIdentityUpdateWithoutReportScopesInput = {
   roomMutes?: Prisma.RoomMuteUpdateManyWithoutUserIdentityNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutReportScopesInput = {
@@ -2372,6 +2976,9 @@ export type UserIdentityUncheckedUpdateWithoutReportScopesInput = {
   roomMutes?: Prisma.RoomMuteUncheckedUpdateManyWithoutUserIdentityNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityCreateManyApplicationInput = {
@@ -2410,6 +3017,9 @@ export type UserIdentityUpdateWithoutApplicationInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutApplicationInput = {
@@ -2435,6 +3045,9 @@ export type UserIdentityUncheckedUpdateWithoutApplicationInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateManyWithoutApplicationInput = {
@@ -2486,6 +3099,9 @@ export type UserIdentityUpdateWithoutInternalUserInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateWithoutInternalUserInput = {
@@ -2511,6 +3127,9 @@ export type UserIdentityUncheckedUpdateWithoutInternalUserInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutUserIdentityNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutUserIdentityNestedInput
+  uploadedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedAttachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutUserIdentityNestedInput
 }
 
 export type UserIdentityUncheckedUpdateManyWithoutInternalUserInput = {
@@ -2541,6 +3160,9 @@ export type UserIdentityCountOutputType = {
   notifications: number
   violationLogs: number
   reportScopes: number
+  uploadedAttachments: number
+  deletedAttachments: number
+  attachmentUploadRateBuckets: number
 }
 
 export type UserIdentityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2553,6 +3175,9 @@ export type UserIdentityCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   notifications?: boolean | UserIdentityCountOutputTypeCountNotificationsArgs
   violationLogs?: boolean | UserIdentityCountOutputTypeCountViolationLogsArgs
   reportScopes?: boolean | UserIdentityCountOutputTypeCountReportScopesArgs
+  uploadedAttachments?: boolean | UserIdentityCountOutputTypeCountUploadedAttachmentsArgs
+  deletedAttachments?: boolean | UserIdentityCountOutputTypeCountDeletedAttachmentsArgs
+  attachmentUploadRateBuckets?: boolean | UserIdentityCountOutputTypeCountAttachmentUploadRateBucketsArgs
 }
 
 /**
@@ -2628,6 +3253,27 @@ export type UserIdentityCountOutputTypeCountReportScopesArgs<ExtArgs extends run
   where?: Prisma.ReportScopeAssignmentWhereInput
 }
 
+/**
+ * UserIdentityCountOutputType without action
+ */
+export type UserIdentityCountOutputTypeCountUploadedAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageAttachmentWhereInput
+}
+
+/**
+ * UserIdentityCountOutputType without action
+ */
+export type UserIdentityCountOutputTypeCountDeletedAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageAttachmentWhereInput
+}
+
+/**
+ * UserIdentityCountOutputType without action
+ */
+export type UserIdentityCountOutputTypeCountAttachmentUploadRateBucketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentUploadRateBucketWhereInput
+}
+
 
 export type UserIdentitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2655,6 +3301,9 @@ export type UserIdentitySelect<ExtArgs extends runtime.Types.Extensions.Internal
   notifications?: boolean | Prisma.UserIdentity$notificationsArgs<ExtArgs>
   violationLogs?: boolean | Prisma.UserIdentity$violationLogsArgs<ExtArgs>
   reportScopes?: boolean | Prisma.UserIdentity$reportScopesArgs<ExtArgs>
+  uploadedAttachments?: boolean | Prisma.UserIdentity$uploadedAttachmentsArgs<ExtArgs>
+  deletedAttachments?: boolean | Prisma.UserIdentity$deletedAttachmentsArgs<ExtArgs>
+  attachmentUploadRateBuckets?: boolean | Prisma.UserIdentity$attachmentUploadRateBucketsArgs<ExtArgs>
   _count?: boolean | Prisma.UserIdentityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userIdentity"]>
 
@@ -2720,6 +3369,9 @@ export type UserIdentityInclude<ExtArgs extends runtime.Types.Extensions.Interna
   notifications?: boolean | Prisma.UserIdentity$notificationsArgs<ExtArgs>
   violationLogs?: boolean | Prisma.UserIdentity$violationLogsArgs<ExtArgs>
   reportScopes?: boolean | Prisma.UserIdentity$reportScopesArgs<ExtArgs>
+  uploadedAttachments?: boolean | Prisma.UserIdentity$uploadedAttachmentsArgs<ExtArgs>
+  deletedAttachments?: boolean | Prisma.UserIdentity$deletedAttachmentsArgs<ExtArgs>
+  attachmentUploadRateBuckets?: boolean | Prisma.UserIdentity$attachmentUploadRateBucketsArgs<ExtArgs>
   _count?: boolean | Prisma.UserIdentityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIdentityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2748,6 +3400,9 @@ export type $UserIdentityPayload<ExtArgs extends runtime.Types.Extensions.Intern
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     violationLogs: Prisma.$ContentViolationLogPayload<ExtArgs>[]
     reportScopes: Prisma.$ReportScopeAssignmentPayload<ExtArgs>[]
+    uploadedAttachments: Prisma.$MessageAttachmentPayload<ExtArgs>[]
+    deletedAttachments: Prisma.$MessageAttachmentPayload<ExtArgs>[]
+    attachmentUploadRateBuckets: Prisma.$AttachmentUploadRateBucketPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3169,6 +3824,9 @@ export interface Prisma__UserIdentityClient<T, Null = never, ExtArgs extends run
   notifications<T extends Prisma.UserIdentity$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violationLogs<T extends Prisma.UserIdentity$violationLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$violationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContentViolationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportScopes<T extends Prisma.UserIdentity$reportScopesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$reportScopesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportScopeAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  uploadedAttachments<T extends Prisma.UserIdentity$uploadedAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$uploadedAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deletedAttachments<T extends Prisma.UserIdentity$deletedAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$deletedAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachmentUploadRateBuckets<T extends Prisma.UserIdentity$attachmentUploadRateBucketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserIdentity$attachmentUploadRateBucketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentUploadRateBucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3899,6 +4557,78 @@ export type UserIdentity$reportScopesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ReportScopeAssignmentScalarFieldEnum | Prisma.ReportScopeAssignmentScalarFieldEnum[]
+}
+
+/**
+ * UserIdentity.uploadedAttachments
+ */
+export type UserIdentity$uploadedAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageAttachment
+   */
+  select?: Prisma.MessageAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageAttachment
+   */
+  omit?: Prisma.MessageAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageAttachmentInclude<ExtArgs> | null
+  where?: Prisma.MessageAttachmentWhereInput
+  orderBy?: Prisma.MessageAttachmentOrderByWithRelationInput | Prisma.MessageAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.MessageAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageAttachmentScalarFieldEnum | Prisma.MessageAttachmentScalarFieldEnum[]
+}
+
+/**
+ * UserIdentity.deletedAttachments
+ */
+export type UserIdentity$deletedAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageAttachment
+   */
+  select?: Prisma.MessageAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageAttachment
+   */
+  omit?: Prisma.MessageAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageAttachmentInclude<ExtArgs> | null
+  where?: Prisma.MessageAttachmentWhereInput
+  orderBy?: Prisma.MessageAttachmentOrderByWithRelationInput | Prisma.MessageAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.MessageAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageAttachmentScalarFieldEnum | Prisma.MessageAttachmentScalarFieldEnum[]
+}
+
+/**
+ * UserIdentity.attachmentUploadRateBuckets
+ */
+export type UserIdentity$attachmentUploadRateBucketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttachmentUploadRateBucket
+   */
+  select?: Prisma.AttachmentUploadRateBucketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttachmentUploadRateBucket
+   */
+  omit?: Prisma.AttachmentUploadRateBucketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentUploadRateBucketInclude<ExtArgs> | null
+  where?: Prisma.AttachmentUploadRateBucketWhereInput
+  orderBy?: Prisma.AttachmentUploadRateBucketOrderByWithRelationInput | Prisma.AttachmentUploadRateBucketOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentUploadRateBucketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentUploadRateBucketScalarFieldEnum | Prisma.AttachmentUploadRateBucketScalarFieldEnum[]
 }
 
 /**

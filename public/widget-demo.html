@@ -475,13 +475,13 @@
           return result;
         }
 
-        function destroyWidget() {
+        async function destroyWidget() {
           try {
             if (
               window.ChatWidget &&
               typeof window.ChatWidget.destroy === "function"
             ) {
-              window.ChatWidget.destroy();
+              await window.ChatWidget.destroy();
             }
           } catch (error) {
             console.warn("ChatWidget.destroy() menghasilkan error:", error);
@@ -500,9 +500,10 @@
             });
         }
 
-        function mountWidget(data, bootstrapToken) {
+        async function mountWidget(data, bootstrapToken) {
+          await destroyWidget();
+
           return new Promise(function (resolve, reject) {
-            destroyWidget();
 
             var script = document.createElement("script");
 
@@ -605,8 +606,8 @@
         form.addEventListener("submit", generateAndMount);
         generateButton.addEventListener("click", generateOnly);
 
-        destroyButton.addEventListener("click", function () {
-          destroyWidget();
+        destroyButton.addEventListener("click", async function () {
+          await destroyWidget();
           showStatus("Widget berhasil dihancurkan.", "success");
         });
 

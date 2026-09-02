@@ -1,5 +1,6 @@
 import type { GroupMessagePayload } from "@/lib/chat/group-chat";
 import type { PrivateMessagePayload } from "@/lib/chat/private-chat";
+import type { DeletedAttachmentEvent } from "@/lib/attachments/message/delete";
 
 export type PresenceStatusPayload = {
   userIdentityId: string;
@@ -129,9 +130,9 @@ export type ServerToClientEvents = {
   "group:typing": (payload: GroupTypingPayload) => void;
   "private:joined": (payload: PrivateJoinedPayload) => void;
   "private:left": (payload: { roomId: string }) => void;
-  "private:message:new": (payload: PrivateMessagePayload) => void;
-  "private:messages:read": (payload: PrivateReadPayload) => void;
+  "private:message:new": (payload: PrivateMessagePayload) => void;  "private:messages:read": (payload: PrivateReadPayload) => void;
   "private:typing": (payload: PrivateTypingPayload) => void;
+  "attachment:deleted": (payload: DeletedAttachmentEvent) => void;
   "notification:new": (payload: NotificationNewPayload) => void;
   "notification:badge": (payload: NotificationBadgePayload) => void;
   "realtime:error": (payload: { code: string; message: string }) => void;
@@ -148,9 +149,9 @@ export type ClientToServerEvents = {
     ack?: (result: RealtimeAck<{ groupId: string; roomId: string }>) => void,
   ) => void;
   "group:message:send": (
-    payload: {
-      groupId: string;
+    payload: {      groupId: string;
       content: string;
+      attachmentIds?: string[];
       replyMessageId?: string | null;
       clientMessageId?: string | null;
     },
@@ -175,13 +176,16 @@ export type ClientToServerEvents = {
     ack?: (result: RealtimeAck<{ roomId: string }>) => void,
   ) => void;
   "private:message:send": (
-    payload: {
-      roomId: string;
+    payload: {      roomId: string;
       content: string;
+      attachmentIds?: string[];
       replyMessageId?: string | null;
       clientMessageId?: string | null;
-    },
-    ack?: (result: RealtimeAck<PrivateMessagePayload>) => void,
+    },    ack?: (result: RealtimeAck<PrivateMessagePayload>) => void,
+  ) => void;
+  "attachment:delete": (
+    payload: { attachmentId: string },
+    ack?: (result: RealtimeAck<DeletedAttachmentEvent>) => void,
   ) => void;
   "private:messages:read": (
     payload: { roomId: string; upToMessageId?: string | null },

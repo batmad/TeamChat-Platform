@@ -24,6 +24,14 @@ function rowToFlat(row: ChatLogsReportRow) {
       )
       .join(" | "),
     message: row.message,
+    attachments: row.attachments
+      .map(
+        (attachment) =>
+          `${attachment.originalName} [${attachment.status}] (${attachment.sizeBytes} bytes)`,
+      )
+      .join(" | "),
+    attachmentIds: row.attachments.map((attachment) => attachment.id).join(" | "),
+    attachmentCount: row.attachments.length,
     replyTo: row.replyTo
       ? `${row.replyTo.senderUsername}: ${row.replyTo.content}`
       : "",
@@ -42,6 +50,9 @@ export function createChatLogsCsv(rows: ChatLogsReportRow[]) {
     "Sender Name",
     "Participants",
     "Message",
+    "Attachments",
+    "Attachment IDs",
+    "Attachment Count",
     "Reply To",
     "Message ID",
   ];
@@ -59,6 +70,9 @@ export function createChatLogsCsv(rows: ChatLogsReportRow[]) {
         flat.senderName,
         flat.participants,
         flat.message,
+        flat.attachments,
+        flat.attachmentIds,
+        flat.attachmentCount,
         flat.replyTo,
         flat.messageId,
       ]
@@ -84,13 +98,16 @@ export async function createChatLogsXlsx(rows: ChatLogsReportRow[]) {
     { header: "Sender Name", key: "senderName", width: 24 },
     { header: "Participants", key: "participants", width: 40 },
     { header: "Message", key: "message", width: 60 },
+    { header: "Attachments", key: "attachments", width: 60 },
+    { header: "Attachment IDs", key: "attachmentIds", width: 50 },
+    { header: "Attachment Count", key: "attachmentCount", width: 18 },
     { header: "Reply To", key: "replyTo", width: 45 },
     { header: "Message ID", key: "messageId", width: 38 },
   ];
   for (const row of rows) sheet.addRow(rowToFlat(row));
   sheet.getRow(1).font = { bold: true };
   sheet.views = [{ state: "frozen", ySplit: 1 }];
-  sheet.autoFilter = { from: "A1", to: "K1" };
+  sheet.autoFilter = { from: "A1", to: "N1" };
   const buffer = await workbook.xlsx.writeBuffer();
   return Buffer.from(buffer);
 }

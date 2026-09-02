@@ -1,6 +1,8 @@
 import "dotenv/config";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
+import { AppError } from "../src/lib/api/app-error";
+import { deleteMessageAttachment } from "../src/lib/attachments/message/delete";
 import { getServerEnv } from "../src/lib/env/server";
 import { logger } from "../src/lib/logger/logger";
 import { writeSystemLogSafe } from "../src/lib/logs/system-log";
@@ -18,10 +20,10 @@ import {
 } from "../src/lib/presence/rules";
 import { authenticateRealtimeSocket } from "../src/lib/realtime/auth";
 import { SlidingWindowRateLimiter } from "../src/lib/security/sliding-window-rate-limiter";
-import {
-  groupMessagePayloadSchema,
+import {  groupMessagePayloadSchema,
   groupReadPayloadSchema,
   groupReferencePayloadSchema,
+  attachmentDeletePayloadSchema,
   parseRealtimePayload,
   privateMessagePayloadSchema,
   privateReadPayloadSchema,
@@ -123,8 +125,10 @@ function userRoom(userIdentityId: string) {
   return `user:${userIdentityId}`;
 }
 
-function groupError(error: unknown) {
-  if (error instanceof RealtimePayloadError) {
+function groupError(error: unknown) {  if (error instanceof RealtimePayloadError) {
+    return { code: error.code, message: error.message };
+  }
+  if (error instanceof AppError) {
     return { code: error.code, message: error.message };
   }
   if (error instanceof GroupChatAccessError) {
@@ -137,8 +141,10 @@ function groupError(error: unknown) {
   };
 }
 
-function privateError(error: unknown) {
-  if (error instanceof RealtimePayloadError) {
+function privateError(error: unknown) {  if (error instanceof RealtimePayloadError) {
+    return { code: error.code, message: error.message };
+  }
+  if (error instanceof AppError) {
     return { code: error.code, message: error.message };
   }
   if (error instanceof PrivateChatAccessError) {
@@ -405,9 +411,9 @@ io.on("connection", async (socket) => {
         return;
       }
       const message = await sendGroupMessage({
-        userIdentityId: socket.data.userIdentityId,
-        groupId: payload.groupId,
+        userIdentityId: socket.data.userIdentityId,        groupId: payload.groupId,
         content: payload.content,
+        attachmentIds: payload.attachmentIds,
         replyMessageId: payload.replyMessageId,
         clientMessageId: payload.clientMessageId,
       });
@@ -421,10 +427,9 @@ io.on("connection", async (socket) => {
           groupId: message.groupId,
           roomId: message.roomId,
           messageId: message.id,
-          senderUserIdentityId: socket.data.userIdentityId,
-          senderUsername: message.sender.username,
+          senderUserIdentityId: socket.data.userIdentityId,          senderUsername: message.sender.username,
           senderName: message.sender.name,
-          content: message.content,
+          content: message.content || "Sent an attachment",
         });
         for (const notification of notifications) {
           io.to(userRoom(notification.recipientUserIdentityId)).emit(
@@ -626,9 +631,9 @@ io.on("connection", async (socket) => {
         payload.roomId,
       );
       const message = await sendPrivateMessage({
-        userIdentityId: socket.data.userIdentityId,
-        roomId: payload.roomId,
+        userIdentityId: socket.data.userIdentityId,        roomId: payload.roomId,
         content: payload.content,
+        attachmentIds: payload.attachmentIds,
         replyMessageId: payload.replyMessageId,
         clientMessageId: payload.clientMessageId,
       });
@@ -669,8 +674,25 @@ io.on("connection", async (socket) => {
       ack?.({ ok: false, error: normalized });
       socket.emit("realtime:error", normalized);
     }
+  });  socket.on("attachment:delete", async (rawPayload, ack) => {
+    try {
+      const payload = parseRealtimePayload(attachmentDeletePayloadSchema, rawPayload);
+      const deleted = await deleteMessageAttachment({
+        attachmentId: payload.attachmentId,
+        applicationId: socket.data.applicationId,
+        userIdentityId: socket.data.userIdentityId,
+      });
+      io.to(`room:${deleted.roomId}`).emit("attachment:deleted", deleted);
+      ack?.({ ok: true, data: deleted });
+    } catch (error) {
+      const normalized =
+        error instanceof AppError || error instanceof RealtimePayloadError
+          ? { code: error.code, message: error.message }
+          : { code: "ATTACHMENT_DELETE_FAILED", message: "Unable to delete attachment" };
+      ack?.({ ok: false, error: normalized });
+      socket.emit("realtime:error", normalized);
+    }
   });
-
   socket.on("private:messages:read", async (rawPayload, ack) => {
     try {
       const payload = parseRealtimePayload(

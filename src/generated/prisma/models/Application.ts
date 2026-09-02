@@ -217,6 +217,12 @@ export type ApplicationWhereInput = {
   retentionPolicies?: Prisma.RetentionPolicyListRelationFilter
   reportScopes?: Prisma.ReportScopeAssignmentListRelationFilter
   widgetConfig?: Prisma.XOR<Prisma.WidgetConfigNullableScalarRelationFilter, Prisma.WidgetConfigWhereInput> | null
+  storageProviders?: Prisma.StorageProviderConfigListRelationFilter
+  malwareScanners?: Prisma.MalwareScannerConfigListRelationFilter
+  attachmentPolicy?: Prisma.XOR<Prisma.AttachmentPolicyNullableScalarRelationFilter, Prisma.AttachmentPolicyWhereInput> | null
+  attachmentFileTypes?: Prisma.AttachmentFileTypeListRelationFilter
+  attachments?: Prisma.MessageAttachmentListRelationFilter
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketListRelationFilter
 }
 
 export type ApplicationOrderByWithRelationInput = {
@@ -243,6 +249,12 @@ export type ApplicationOrderByWithRelationInput = {
   retentionPolicies?: Prisma.RetentionPolicyOrderByRelationAggregateInput
   reportScopes?: Prisma.ReportScopeAssignmentOrderByRelationAggregateInput
   widgetConfig?: Prisma.WidgetConfigOrderByWithRelationInput
+  storageProviders?: Prisma.StorageProviderConfigOrderByRelationAggregateInput
+  malwareScanners?: Prisma.MalwareScannerConfigOrderByRelationAggregateInput
+  attachmentPolicy?: Prisma.AttachmentPolicyOrderByWithRelationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeOrderByRelationAggregateInput
+  attachments?: Prisma.MessageAttachmentOrderByRelationAggregateInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketOrderByRelationAggregateInput
 }
 
 export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +284,12 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   retentionPolicies?: Prisma.RetentionPolicyListRelationFilter
   reportScopes?: Prisma.ReportScopeAssignmentListRelationFilter
   widgetConfig?: Prisma.XOR<Prisma.WidgetConfigNullableScalarRelationFilter, Prisma.WidgetConfigWhereInput> | null
+  storageProviders?: Prisma.StorageProviderConfigListRelationFilter
+  malwareScanners?: Prisma.MalwareScannerConfigListRelationFilter
+  attachmentPolicy?: Prisma.XOR<Prisma.AttachmentPolicyNullableScalarRelationFilter, Prisma.AttachmentPolicyWhereInput> | null
+  attachmentFileTypes?: Prisma.AttachmentFileTypeListRelationFilter
+  attachments?: Prisma.MessageAttachmentListRelationFilter
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketListRelationFilter
 }, "id" | "key">
 
 export type ApplicationOrderByWithAggregationInput = {
@@ -326,6 +344,12 @@ export type ApplicationCreateInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateInput = {
@@ -352,6 +376,12 @@ export type ApplicationUncheckedCreateInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUpdateInput = {
@@ -378,6 +408,12 @@ export type ApplicationUpdateInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateInput = {
@@ -404,6 +440,12 @@ export type ApplicationUncheckedUpdateInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateManyInput = {
@@ -611,6 +653,98 @@ export type ApplicationUpdateOneRequiredWithoutMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutMessagesInput, Prisma.ApplicationUpdateWithoutMessagesInput>, Prisma.ApplicationUncheckedUpdateWithoutMessagesInput>
 }
 
+export type ApplicationCreateNestedOneWithoutStorageProvidersInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedCreateWithoutStorageProvidersInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutStorageProvidersInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneWithoutStorageProvidersNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedCreateWithoutStorageProvidersInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutStorageProvidersInput
+  upsert?: Prisma.ApplicationUpsertWithoutStorageProvidersInput
+  disconnect?: Prisma.ApplicationWhereInput | boolean
+  delete?: Prisma.ApplicationWhereInput | boolean
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutStorageProvidersInput, Prisma.ApplicationUpdateWithoutStorageProvidersInput>, Prisma.ApplicationUncheckedUpdateWithoutStorageProvidersInput>
+}
+
+export type ApplicationCreateNestedOneWithoutMalwareScannersInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedCreateWithoutMalwareScannersInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutMalwareScannersInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneWithoutMalwareScannersNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedCreateWithoutMalwareScannersInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutMalwareScannersInput
+  upsert?: Prisma.ApplicationUpsertWithoutMalwareScannersInput
+  disconnect?: Prisma.ApplicationWhereInput | boolean
+  delete?: Prisma.ApplicationWhereInput | boolean
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutMalwareScannersInput, Prisma.ApplicationUpdateWithoutMalwareScannersInput>, Prisma.ApplicationUncheckedUpdateWithoutMalwareScannersInput>
+}
+
+export type ApplicationCreateNestedOneWithoutAttachmentPolicyInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentPolicyInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentPolicyInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneWithoutAttachmentPolicyNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentPolicyInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentPolicyInput
+  upsert?: Prisma.ApplicationUpsertWithoutAttachmentPolicyInput
+  disconnect?: Prisma.ApplicationWhereInput | boolean
+  delete?: Prisma.ApplicationWhereInput | boolean
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutAttachmentPolicyInput, Prisma.ApplicationUpdateWithoutAttachmentPolicyInput>, Prisma.ApplicationUncheckedUpdateWithoutAttachmentPolicyInput>
+}
+
+export type ApplicationCreateNestedOneWithoutAttachmentFileTypesInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentFileTypesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentFileTypesInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneWithoutAttachmentFileTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentFileTypesInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentFileTypesInput
+  upsert?: Prisma.ApplicationUpsertWithoutAttachmentFileTypesInput
+  disconnect?: Prisma.ApplicationWhereInput | boolean
+  delete?: Prisma.ApplicationWhereInput | boolean
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutAttachmentFileTypesInput, Prisma.ApplicationUpdateWithoutAttachmentFileTypesInput>, Prisma.ApplicationUncheckedUpdateWithoutAttachmentFileTypesInput>
+}
+
+export type ApplicationCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.ApplicationUpsertWithoutAttachmentsInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.ApplicationUpdateWithoutAttachmentsInput>, Prisma.ApplicationUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type ApplicationCreateNestedOneWithoutAttachmentUploadRateBucketsInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentUploadRateBucketsInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+}
+
+export type ApplicationUpdateOneRequiredWithoutAttachmentUploadRateBucketsNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutAttachmentUploadRateBucketsInput
+  upsert?: Prisma.ApplicationUpsertWithoutAttachmentUploadRateBucketsInput
+  connect?: Prisma.ApplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUpdateWithoutAttachmentUploadRateBucketsInput>, Prisma.ApplicationUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+}
+
 export type ApplicationCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.ApplicationCreateWithoutNotificationsInput, Prisma.ApplicationUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.ApplicationCreateOrConnectWithoutNotificationsInput
@@ -754,6 +888,12 @@ export type ApplicationCreateWithoutCredentialsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutCredentialsInput = {
@@ -779,6 +919,12 @@ export type ApplicationUncheckedCreateWithoutCredentialsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutCredentialsInput = {
@@ -820,6 +966,12 @@ export type ApplicationUpdateWithoutCredentialsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutCredentialsInput = {
@@ -845,6 +997,12 @@ export type ApplicationUncheckedUpdateWithoutCredentialsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutIntegrationsInput = {
@@ -870,6 +1028,12 @@ export type ApplicationCreateWithoutIntegrationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutIntegrationsInput = {
@@ -895,6 +1059,12 @@ export type ApplicationUncheckedCreateWithoutIntegrationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutIntegrationsInput = {
@@ -936,6 +1106,12 @@ export type ApplicationUpdateWithoutIntegrationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutIntegrationsInput = {
@@ -961,6 +1137,12 @@ export type ApplicationUncheckedUpdateWithoutIntegrationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutUserIdentitiesInput = {
@@ -986,6 +1168,12 @@ export type ApplicationCreateWithoutUserIdentitiesInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutUserIdentitiesInput = {
@@ -1011,6 +1199,12 @@ export type ApplicationUncheckedCreateWithoutUserIdentitiesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutUserIdentitiesInput = {
@@ -1052,6 +1246,12 @@ export type ApplicationUpdateWithoutUserIdentitiesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutUserIdentitiesInput = {
@@ -1077,6 +1277,12 @@ export type ApplicationUncheckedUpdateWithoutUserIdentitiesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutRolesInput = {
@@ -1102,6 +1308,12 @@ export type ApplicationCreateWithoutRolesInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutRolesInput = {
@@ -1127,6 +1339,12 @@ export type ApplicationUncheckedCreateWithoutRolesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutRolesInput = {
@@ -1168,6 +1386,12 @@ export type ApplicationUpdateWithoutRolesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutRolesInput = {
@@ -1193,6 +1417,12 @@ export type ApplicationUncheckedUpdateWithoutRolesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutGroupsInput = {
@@ -1218,6 +1448,12 @@ export type ApplicationCreateWithoutGroupsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutGroupsInput = {
@@ -1243,6 +1479,12 @@ export type ApplicationUncheckedCreateWithoutGroupsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutGroupsInput = {
@@ -1284,6 +1526,12 @@ export type ApplicationUpdateWithoutGroupsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutGroupsInput = {
@@ -1309,6 +1557,12 @@ export type ApplicationUncheckedUpdateWithoutGroupsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutRoomsInput = {
@@ -1334,6 +1588,12 @@ export type ApplicationCreateWithoutRoomsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutRoomsInput = {
@@ -1359,6 +1619,12 @@ export type ApplicationUncheckedCreateWithoutRoomsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutRoomsInput = {
@@ -1400,6 +1666,12 @@ export type ApplicationUpdateWithoutRoomsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutRoomsInput = {
@@ -1425,6 +1697,12 @@ export type ApplicationUncheckedUpdateWithoutRoomsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutMessagesInput = {
@@ -1450,6 +1728,12 @@ export type ApplicationCreateWithoutMessagesInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutMessagesInput = {
@@ -1475,6 +1759,12 @@ export type ApplicationUncheckedCreateWithoutMessagesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutMessagesInput = {
@@ -1516,6 +1806,12 @@ export type ApplicationUpdateWithoutMessagesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutMessagesInput = {
@@ -1541,6 +1837,852 @@ export type ApplicationUncheckedUpdateWithoutMessagesInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutStorageProvidersInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutStorageProvidersInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutStorageProvidersInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedCreateWithoutStorageProvidersInput>
+}
+
+export type ApplicationUpsertWithoutStorageProvidersInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedUpdateWithoutStorageProvidersInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedCreateWithoutStorageProvidersInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutStorageProvidersInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutStorageProvidersInput, Prisma.ApplicationUncheckedUpdateWithoutStorageProvidersInput>
+}
+
+export type ApplicationUpdateWithoutStorageProvidersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutStorageProvidersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutMalwareScannersInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutMalwareScannersInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutMalwareScannersInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedCreateWithoutMalwareScannersInput>
+}
+
+export type ApplicationUpsertWithoutMalwareScannersInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedUpdateWithoutMalwareScannersInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedCreateWithoutMalwareScannersInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutMalwareScannersInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutMalwareScannersInput, Prisma.ApplicationUncheckedUpdateWithoutMalwareScannersInput>
+}
+
+export type ApplicationUpdateWithoutMalwareScannersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutMalwareScannersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutAttachmentPolicyInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutAttachmentPolicyInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutAttachmentPolicyInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentPolicyInput>
+}
+
+export type ApplicationUpsertWithoutAttachmentPolicyInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentPolicyInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentPolicyInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutAttachmentPolicyInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentPolicyInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentPolicyInput>
+}
+
+export type ApplicationUpdateWithoutAttachmentPolicyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutAttachmentPolicyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutAttachmentFileTypesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutAttachmentFileTypesInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutAttachmentFileTypesInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentFileTypesInput>
+}
+
+export type ApplicationUpsertWithoutAttachmentFileTypesInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentFileTypesInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentFileTypesInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutAttachmentFileTypesInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentFileTypesInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentFileTypesInput>
+}
+
+export type ApplicationUpdateWithoutAttachmentFileTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutAttachmentFileTypesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutAttachmentsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type ApplicationUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentsInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentsInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type ApplicationUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationCreateWithoutAttachmentUploadRateBucketsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationUncheckedCreateWithoutAttachmentUploadRateBucketsInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  status?: $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationCreateallowedOriginsInput | string[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedCreateNestedManyWithoutApplicationInput
+  integrations?: Prisma.IntegrationConfigUncheckedCreateNestedManyWithoutApplicationInput
+  userIdentities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutApplicationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutApplicationInput
+  groups?: Prisma.GroupUncheckedCreateNestedManyWithoutApplicationInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutApplicationInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutApplicationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutApplicationInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedCreateNestedManyWithoutApplicationInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedCreateNestedManyWithoutApplicationInput
+  systemLogs?: Prisma.SystemLogUncheckedCreateNestedManyWithoutApplicationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+}
+
+export type ApplicationCreateOrConnectWithoutAttachmentUploadRateBucketsInput = {
+  where: Prisma.ApplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+}
+
+export type ApplicationUpsertWithoutAttachmentUploadRateBucketsInput = {
+  update: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+  create: Prisma.XOR<Prisma.ApplicationCreateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedCreateWithoutAttachmentUploadRateBucketsInput>
+  where?: Prisma.ApplicationWhereInput
+}
+
+export type ApplicationUpdateToOneWithWhereWithoutAttachmentUploadRateBucketsInput = {
+  where?: Prisma.ApplicationWhereInput
+  data: Prisma.XOR<Prisma.ApplicationUpdateWithoutAttachmentUploadRateBucketsInput, Prisma.ApplicationUncheckedUpdateWithoutAttachmentUploadRateBucketsInput>
+}
+
+export type ApplicationUpdateWithoutAttachmentUploadRateBucketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+}
+
+export type ApplicationUncheckedUpdateWithoutAttachmentUploadRateBucketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  allowedOrigins?: Prisma.ApplicationUpdateallowedOriginsInput | string[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  credentials?: Prisma.ApplicationCredentialUncheckedUpdateManyWithoutApplicationNestedInput
+  integrations?: Prisma.IntegrationConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  userIdentities?: Prisma.UserIdentityUncheckedUpdateManyWithoutApplicationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutApplicationNestedInput
+  groups?: Prisma.GroupUncheckedUpdateManyWithoutApplicationNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutApplicationNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutApplicationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutApplicationNestedInput
+  forbiddenWords?: Prisma.ForbiddenWordUncheckedUpdateManyWithoutApplicationNestedInput
+  violationLogs?: Prisma.ContentViolationLogUncheckedUpdateManyWithoutApplicationNestedInput
+  systemLogs?: Prisma.SystemLogUncheckedUpdateManyWithoutApplicationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
+  retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
+  reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutNotificationsInput = {
@@ -1566,6 +2708,12 @@ export type ApplicationCreateWithoutNotificationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutNotificationsInput = {
@@ -1591,6 +2739,12 @@ export type ApplicationUncheckedCreateWithoutNotificationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutNotificationsInput = {
@@ -1632,6 +2786,12 @@ export type ApplicationUpdateWithoutNotificationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutNotificationsInput = {
@@ -1657,6 +2817,12 @@ export type ApplicationUncheckedUpdateWithoutNotificationsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutForbiddenWordsInput = {
@@ -1682,6 +2848,12 @@ export type ApplicationCreateWithoutForbiddenWordsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutForbiddenWordsInput = {
@@ -1707,6 +2879,12 @@ export type ApplicationUncheckedCreateWithoutForbiddenWordsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutForbiddenWordsInput = {
@@ -1748,6 +2926,12 @@ export type ApplicationUpdateWithoutForbiddenWordsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutForbiddenWordsInput = {
@@ -1773,6 +2957,12 @@ export type ApplicationUncheckedUpdateWithoutForbiddenWordsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutViolationLogsInput = {
@@ -1798,6 +2988,12 @@ export type ApplicationCreateWithoutViolationLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutViolationLogsInput = {
@@ -1823,6 +3019,12 @@ export type ApplicationUncheckedCreateWithoutViolationLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutViolationLogsInput = {
@@ -1864,6 +3066,12 @@ export type ApplicationUpdateWithoutViolationLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutViolationLogsInput = {
@@ -1889,6 +3097,12 @@ export type ApplicationUncheckedUpdateWithoutViolationLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutSystemLogsInput = {
@@ -1914,6 +3128,12 @@ export type ApplicationCreateWithoutSystemLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutSystemLogsInput = {
@@ -1939,6 +3159,12 @@ export type ApplicationUncheckedCreateWithoutSystemLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutSystemLogsInput = {
@@ -1980,6 +3206,12 @@ export type ApplicationUpdateWithoutSystemLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutSystemLogsInput = {
@@ -2005,6 +3237,12 @@ export type ApplicationUncheckedUpdateWithoutSystemLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutAuditLogsInput = {
@@ -2030,6 +3268,12 @@ export type ApplicationCreateWithoutAuditLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutAuditLogsInput = {
@@ -2055,6 +3299,12 @@ export type ApplicationUncheckedCreateWithoutAuditLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutAuditLogsInput = {
@@ -2096,6 +3346,12 @@ export type ApplicationUpdateWithoutAuditLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutAuditLogsInput = {
@@ -2121,6 +3377,12 @@ export type ApplicationUncheckedUpdateWithoutAuditLogsInput = {
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutRetentionPoliciesInput = {
@@ -2146,6 +3408,12 @@ export type ApplicationCreateWithoutRetentionPoliciesInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutRetentionPoliciesInput = {
@@ -2171,6 +3439,12 @@ export type ApplicationUncheckedCreateWithoutRetentionPoliciesInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutRetentionPoliciesInput = {
@@ -2212,6 +3486,12 @@ export type ApplicationUpdateWithoutRetentionPoliciesInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutRetentionPoliciesInput = {
@@ -2237,6 +3517,12 @@ export type ApplicationUncheckedUpdateWithoutRetentionPoliciesInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutReportScopesInput = {
@@ -2262,6 +3548,12 @@ export type ApplicationCreateWithoutReportScopesInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutReportScopesInput = {
@@ -2287,6 +3579,12 @@ export type ApplicationUncheckedCreateWithoutReportScopesInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   widgetConfig?: Prisma.WidgetConfigUncheckedCreateNestedOneWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutReportScopesInput = {
@@ -2328,6 +3626,12 @@ export type ApplicationUpdateWithoutReportScopesInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutReportScopesInput = {
@@ -2353,6 +3657,12 @@ export type ApplicationUncheckedUpdateWithoutReportScopesInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   widgetConfig?: Prisma.WidgetConfigUncheckedUpdateOneWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationCreateWithoutWidgetConfigInput = {
@@ -2378,6 +3688,12 @@ export type ApplicationCreateWithoutWidgetConfigInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutApplicationInput
   retentionPolicies?: Prisma.RetentionPolicyCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentCreateNestedManyWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationUncheckedCreateWithoutWidgetConfigInput = {
@@ -2403,6 +3719,12 @@ export type ApplicationUncheckedCreateWithoutWidgetConfigInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutApplicationInput
   retentionPolicies?: Prisma.RetentionPolicyUncheckedCreateNestedManyWithoutApplicationInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedCreateNestedManyWithoutApplicationInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedCreateNestedManyWithoutApplicationInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedCreateNestedOneWithoutApplicationInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedCreateNestedManyWithoutApplicationInput
+  attachments?: Prisma.MessageAttachmentUncheckedCreateNestedManyWithoutApplicationInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedCreateNestedManyWithoutApplicationInput
 }
 
 export type ApplicationCreateOrConnectWithoutWidgetConfigInput = {
@@ -2444,6 +3766,12 @@ export type ApplicationUpdateWithoutWidgetConfigInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutApplicationNestedInput
   retentionPolicies?: Prisma.RetentionPolicyUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUpdateManyWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUpdateManyWithoutApplicationNestedInput
 }
 
 export type ApplicationUncheckedUpdateWithoutWidgetConfigInput = {
@@ -2469,6 +3797,12 @@ export type ApplicationUncheckedUpdateWithoutWidgetConfigInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutApplicationNestedInput
   retentionPolicies?: Prisma.RetentionPolicyUncheckedUpdateManyWithoutApplicationNestedInput
   reportScopes?: Prisma.ReportScopeAssignmentUncheckedUpdateManyWithoutApplicationNestedInput
+  storageProviders?: Prisma.StorageProviderConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  malwareScanners?: Prisma.MalwareScannerConfigUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentPolicy?: Prisma.AttachmentPolicyUncheckedUpdateOneWithoutApplicationNestedInput
+  attachmentFileTypes?: Prisma.AttachmentFileTypeUncheckedUpdateManyWithoutApplicationNestedInput
+  attachments?: Prisma.MessageAttachmentUncheckedUpdateManyWithoutApplicationNestedInput
+  attachmentUploadRateBuckets?: Prisma.AttachmentUploadRateBucketUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
 
@@ -2491,6 +3825,11 @@ export type ApplicationCountOutputType = {
   auditLogs: number
   retentionPolicies: number
   reportScopes: number
+  storageProviders: number
+  malwareScanners: number
+  attachmentFileTypes: number
+  attachments: number
+  attachmentUploadRateBuckets: number
 }
 
 export type ApplicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2508,6 +3847,11 @@ export type ApplicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   auditLogs?: boolean | ApplicationCountOutputTypeCountAuditLogsArgs
   retentionPolicies?: boolean | ApplicationCountOutputTypeCountRetentionPoliciesArgs
   reportScopes?: boolean | ApplicationCountOutputTypeCountReportScopesArgs
+  storageProviders?: boolean | ApplicationCountOutputTypeCountStorageProvidersArgs
+  malwareScanners?: boolean | ApplicationCountOutputTypeCountMalwareScannersArgs
+  attachmentFileTypes?: boolean | ApplicationCountOutputTypeCountAttachmentFileTypesArgs
+  attachments?: boolean | ApplicationCountOutputTypeCountAttachmentsArgs
+  attachmentUploadRateBuckets?: boolean | ApplicationCountOutputTypeCountAttachmentUploadRateBucketsArgs
 }
 
 /**
@@ -2618,6 +3962,41 @@ export type ApplicationCountOutputTypeCountReportScopesArgs<ExtArgs extends runt
   where?: Prisma.ReportScopeAssignmentWhereInput
 }
 
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountStorageProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StorageProviderConfigWhereInput
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountMalwareScannersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MalwareScannerConfigWhereInput
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountAttachmentFileTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentFileTypeWhereInput
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageAttachmentWhereInput
+}
+
+/**
+ * ApplicationCountOutputType without action
+ */
+export type ApplicationCountOutputTypeCountAttachmentUploadRateBucketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentUploadRateBucketWhereInput
+}
+
 
 export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2643,6 +4022,12 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   retentionPolicies?: boolean | Prisma.Application$retentionPoliciesArgs<ExtArgs>
   reportScopes?: boolean | Prisma.Application$reportScopesArgs<ExtArgs>
   widgetConfig?: boolean | Prisma.Application$widgetConfigArgs<ExtArgs>
+  storageProviders?: boolean | Prisma.Application$storageProvidersArgs<ExtArgs>
+  malwareScanners?: boolean | Prisma.Application$malwareScannersArgs<ExtArgs>
+  attachmentPolicy?: boolean | Prisma.Application$attachmentPolicyArgs<ExtArgs>
+  attachmentFileTypes?: boolean | Prisma.Application$attachmentFileTypesArgs<ExtArgs>
+  attachments?: boolean | Prisma.Application$attachmentsArgs<ExtArgs>
+  attachmentUploadRateBuckets?: boolean | Prisma.Application$attachmentUploadRateBucketsArgs<ExtArgs>
   _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -2696,6 +4081,12 @@ export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.Internal
   retentionPolicies?: boolean | Prisma.Application$retentionPoliciesArgs<ExtArgs>
   reportScopes?: boolean | Prisma.Application$reportScopesArgs<ExtArgs>
   widgetConfig?: boolean | Prisma.Application$widgetConfigArgs<ExtArgs>
+  storageProviders?: boolean | Prisma.Application$storageProvidersArgs<ExtArgs>
+  malwareScanners?: boolean | Prisma.Application$malwareScannersArgs<ExtArgs>
+  attachmentPolicy?: boolean | Prisma.Application$attachmentPolicyArgs<ExtArgs>
+  attachmentFileTypes?: boolean | Prisma.Application$attachmentFileTypesArgs<ExtArgs>
+  attachments?: boolean | Prisma.Application$attachmentsArgs<ExtArgs>
+  attachmentUploadRateBuckets?: boolean | Prisma.Application$attachmentUploadRateBucketsArgs<ExtArgs>
   _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ApplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2719,6 +4110,12 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     retentionPolicies: Prisma.$RetentionPolicyPayload<ExtArgs>[]
     reportScopes: Prisma.$ReportScopeAssignmentPayload<ExtArgs>[]
     widgetConfig: Prisma.$WidgetConfigPayload<ExtArgs> | null
+    storageProviders: Prisma.$StorageProviderConfigPayload<ExtArgs>[]
+    malwareScanners: Prisma.$MalwareScannerConfigPayload<ExtArgs>[]
+    attachmentPolicy: Prisma.$AttachmentPolicyPayload<ExtArgs> | null
+    attachmentFileTypes: Prisma.$AttachmentFileTypePayload<ExtArgs>[]
+    attachments: Prisma.$MessageAttachmentPayload<ExtArgs>[]
+    attachmentUploadRateBuckets: Prisma.$AttachmentUploadRateBucketPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3138,6 +4535,12 @@ export interface Prisma__ApplicationClient<T, Null = never, ExtArgs extends runt
   retentionPolicies<T extends Prisma.Application$retentionPoliciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$retentionPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RetentionPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reportScopes<T extends Prisma.Application$reportScopesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$reportScopesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportScopeAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   widgetConfig<T extends Prisma.Application$widgetConfigArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$widgetConfigArgs<ExtArgs>>): Prisma.Prisma__WidgetConfigClient<runtime.Types.Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  storageProviders<T extends Prisma.Application$storageProvidersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$storageProvidersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorageProviderConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  malwareScanners<T extends Prisma.Application$malwareScannersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$malwareScannersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MalwareScannerConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachmentPolicy<T extends Prisma.Application$attachmentPolicyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$attachmentPolicyArgs<ExtArgs>>): Prisma.Prisma__AttachmentPolicyClient<runtime.Types.Result.GetResult<Prisma.$AttachmentPolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attachmentFileTypes<T extends Prisma.Application$attachmentFileTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$attachmentFileTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentFileTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.Application$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessageAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachmentUploadRateBuckets<T extends Prisma.Application$attachmentUploadRateBucketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Application$attachmentUploadRateBucketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentUploadRateBucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3920,6 +5323,145 @@ export type Application$widgetConfigArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.WidgetConfigInclude<ExtArgs> | null
   where?: Prisma.WidgetConfigWhereInput
+}
+
+/**
+ * Application.storageProviders
+ */
+export type Application$storageProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StorageProviderConfig
+   */
+  select?: Prisma.StorageProviderConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StorageProviderConfig
+   */
+  omit?: Prisma.StorageProviderConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StorageProviderConfigInclude<ExtArgs> | null
+  where?: Prisma.StorageProviderConfigWhereInput
+  orderBy?: Prisma.StorageProviderConfigOrderByWithRelationInput | Prisma.StorageProviderConfigOrderByWithRelationInput[]
+  cursor?: Prisma.StorageProviderConfigWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StorageProviderConfigScalarFieldEnum | Prisma.StorageProviderConfigScalarFieldEnum[]
+}
+
+/**
+ * Application.malwareScanners
+ */
+export type Application$malwareScannersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MalwareScannerConfig
+   */
+  select?: Prisma.MalwareScannerConfigSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MalwareScannerConfig
+   */
+  omit?: Prisma.MalwareScannerConfigOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MalwareScannerConfigInclude<ExtArgs> | null
+  where?: Prisma.MalwareScannerConfigWhereInput
+  orderBy?: Prisma.MalwareScannerConfigOrderByWithRelationInput | Prisma.MalwareScannerConfigOrderByWithRelationInput[]
+  cursor?: Prisma.MalwareScannerConfigWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MalwareScannerConfigScalarFieldEnum | Prisma.MalwareScannerConfigScalarFieldEnum[]
+}
+
+/**
+ * Application.attachmentPolicy
+ */
+export type Application$attachmentPolicyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttachmentPolicy
+   */
+  select?: Prisma.AttachmentPolicySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttachmentPolicy
+   */
+  omit?: Prisma.AttachmentPolicyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentPolicyInclude<ExtArgs> | null
+  where?: Prisma.AttachmentPolicyWhereInput
+}
+
+/**
+ * Application.attachmentFileTypes
+ */
+export type Application$attachmentFileTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttachmentFileType
+   */
+  select?: Prisma.AttachmentFileTypeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttachmentFileType
+   */
+  omit?: Prisma.AttachmentFileTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentFileTypeInclude<ExtArgs> | null
+  where?: Prisma.AttachmentFileTypeWhereInput
+  orderBy?: Prisma.AttachmentFileTypeOrderByWithRelationInput | Prisma.AttachmentFileTypeOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentFileTypeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentFileTypeScalarFieldEnum | Prisma.AttachmentFileTypeScalarFieldEnum[]
+}
+
+/**
+ * Application.attachments
+ */
+export type Application$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessageAttachment
+   */
+  select?: Prisma.MessageAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessageAttachment
+   */
+  omit?: Prisma.MessageAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageAttachmentInclude<ExtArgs> | null
+  where?: Prisma.MessageAttachmentWhereInput
+  orderBy?: Prisma.MessageAttachmentOrderByWithRelationInput | Prisma.MessageAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.MessageAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageAttachmentScalarFieldEnum | Prisma.MessageAttachmentScalarFieldEnum[]
+}
+
+/**
+ * Application.attachmentUploadRateBuckets
+ */
+export type Application$attachmentUploadRateBucketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttachmentUploadRateBucket
+   */
+  select?: Prisma.AttachmentUploadRateBucketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttachmentUploadRateBucket
+   */
+  omit?: Prisma.AttachmentUploadRateBucketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentUploadRateBucketInclude<ExtArgs> | null
+  where?: Prisma.AttachmentUploadRateBucketWhereInput
+  orderBy?: Prisma.AttachmentUploadRateBucketOrderByWithRelationInput | Prisma.AttachmentUploadRateBucketOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentUploadRateBucketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentUploadRateBucketScalarFieldEnum | Prisma.AttachmentUploadRateBucketScalarFieldEnum[]
 }
 
 /**

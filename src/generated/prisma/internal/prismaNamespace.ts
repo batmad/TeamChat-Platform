@@ -404,6 +404,12 @@ export const ModelName = {
   Room: 'Room',
   RoomMember: 'RoomMember',
   Message: 'Message',
+  StorageProviderConfig: 'StorageProviderConfig',
+  MalwareScannerConfig: 'MalwareScannerConfig',
+  AttachmentPolicy: 'AttachmentPolicy',
+  AttachmentFileType: 'AttachmentFileType',
+  MessageAttachment: 'MessageAttachment',
+  AttachmentUploadRateBucket: 'AttachmentUploadRateBucket',
   MessageGroupContext: 'MessageGroupContext',
   MessageRead: 'MessageRead',
   NotificationSetting: 'NotificationSetting',
@@ -434,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "application" | "applicationCredential" | "integrationConfig" | "databaseIntegrationConfig" | "apiIntegrationConfig" | "integrationFieldMapping" | "integrationRoleMapping" | "internalUser" | "userIdentity" | "userOverride" | "role" | "permission" | "rolePermission" | "userPermissionOverride" | "group" | "userGroup" | "userPresence" | "room" | "roomMember" | "message" | "messageGroupContext" | "messageRead" | "notificationSetting" | "roomMute" | "notification" | "forbiddenWord" | "contentViolationLog" | "systemLog" | "auditLog" | "retentionPolicy" | "reportDefinition" | "reportScopeAssignment" | "reportScopeGroup" | "widgetConfig" | "systemSetting"
+    modelProps: "application" | "applicationCredential" | "integrationConfig" | "databaseIntegrationConfig" | "apiIntegrationConfig" | "integrationFieldMapping" | "integrationRoleMapping" | "internalUser" | "userIdentity" | "userOverride" | "role" | "permission" | "rolePermission" | "userPermissionOverride" | "group" | "userGroup" | "userPresence" | "room" | "roomMember" | "message" | "storageProviderConfig" | "malwareScannerConfig" | "attachmentPolicy" | "attachmentFileType" | "messageAttachment" | "attachmentUploadRateBucket" | "messageGroupContext" | "messageRead" | "notificationSetting" | "roomMute" | "notification" | "forbiddenWord" | "contentViolationLog" | "systemLog" | "auditLog" | "retentionPolicy" | "reportDefinition" | "reportScopeAssignment" | "reportScopeGroup" | "widgetConfig" | "systemSetting"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1918,6 +1924,450 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StorageProviderConfig: {
+      payload: Prisma.$StorageProviderConfigPayload<ExtArgs>
+      fields: Prisma.StorageProviderConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StorageProviderConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StorageProviderConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.StorageProviderConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StorageProviderConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        findMany: {
+          args: Prisma.StorageProviderConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>[]
+        }
+        create: {
+          args: Prisma.StorageProviderConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        createMany: {
+          args: Prisma.StorageProviderConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StorageProviderConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.StorageProviderConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        update: {
+          args: Prisma.StorageProviderConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.StorageProviderConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StorageProviderConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StorageProviderConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.StorageProviderConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageProviderConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.StorageProviderConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStorageProviderConfig>
+        }
+        groupBy: {
+          args: Prisma.StorageProviderConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StorageProviderConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StorageProviderConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StorageProviderConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    MalwareScannerConfig: {
+      payload: Prisma.$MalwareScannerConfigPayload<ExtArgs>
+      fields: Prisma.MalwareScannerConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MalwareScannerConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MalwareScannerConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.MalwareScannerConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MalwareScannerConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        findMany: {
+          args: Prisma.MalwareScannerConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>[]
+        }
+        create: {
+          args: Prisma.MalwareScannerConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        createMany: {
+          args: Prisma.MalwareScannerConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MalwareScannerConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.MalwareScannerConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        update: {
+          args: Prisma.MalwareScannerConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.MalwareScannerConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MalwareScannerConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MalwareScannerConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.MalwareScannerConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MalwareScannerConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.MalwareScannerConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMalwareScannerConfig>
+        }
+        groupBy: {
+          args: Prisma.MalwareScannerConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MalwareScannerConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MalwareScannerConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MalwareScannerConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    AttachmentPolicy: {
+      payload: Prisma.$AttachmentPolicyPayload<ExtArgs>
+      fields: Prisma.AttachmentPolicyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AttachmentPolicyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AttachmentPolicyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        findFirst: {
+          args: Prisma.AttachmentPolicyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AttachmentPolicyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        findMany: {
+          args: Prisma.AttachmentPolicyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>[]
+        }
+        create: {
+          args: Prisma.AttachmentPolicyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        createMany: {
+          args: Prisma.AttachmentPolicyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AttachmentPolicyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>[]
+        }
+        delete: {
+          args: Prisma.AttachmentPolicyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        update: {
+          args: Prisma.AttachmentPolicyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        deleteMany: {
+          args: Prisma.AttachmentPolicyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AttachmentPolicyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AttachmentPolicyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>[]
+        }
+        upsert: {
+          args: Prisma.AttachmentPolicyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentPolicyPayload>
+        }
+        aggregate: {
+          args: Prisma.AttachmentPolicyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAttachmentPolicy>
+        }
+        groupBy: {
+          args: Prisma.AttachmentPolicyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentPolicyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AttachmentPolicyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentPolicyCountAggregateOutputType> | number
+        }
+      }
+    }
+    AttachmentFileType: {
+      payload: Prisma.$AttachmentFileTypePayload<ExtArgs>
+      fields: Prisma.AttachmentFileTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AttachmentFileTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AttachmentFileTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        findFirst: {
+          args: Prisma.AttachmentFileTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AttachmentFileTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        findMany: {
+          args: Prisma.AttachmentFileTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>[]
+        }
+        create: {
+          args: Prisma.AttachmentFileTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        createMany: {
+          args: Prisma.AttachmentFileTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AttachmentFileTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>[]
+        }
+        delete: {
+          args: Prisma.AttachmentFileTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        update: {
+          args: Prisma.AttachmentFileTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.AttachmentFileTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AttachmentFileTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AttachmentFileTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.AttachmentFileTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentFileTypePayload>
+        }
+        aggregate: {
+          args: Prisma.AttachmentFileTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAttachmentFileType>
+        }
+        groupBy: {
+          args: Prisma.AttachmentFileTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentFileTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AttachmentFileTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentFileTypeCountAggregateOutputType> | number
+        }
+      }
+    }
+    MessageAttachment: {
+      payload: Prisma.$MessageAttachmentPayload<ExtArgs>
+      fields: Prisma.MessageAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MessageAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MessageAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.MessageAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MessageAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.MessageAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.MessageAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.MessageAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MessageAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.MessageAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        update: {
+          args: Prisma.MessageAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.MessageAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MessageAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MessageAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.MessageAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MessageAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.MessageAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMessageAttachment>
+        }
+        groupBy: {
+          args: Prisma.MessageAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MessageAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MessageAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MessageAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    AttachmentUploadRateBucket: {
+      payload: Prisma.$AttachmentUploadRateBucketPayload<ExtArgs>
+      fields: Prisma.AttachmentUploadRateBucketFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AttachmentUploadRateBucketFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AttachmentUploadRateBucketFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        findFirst: {
+          args: Prisma.AttachmentUploadRateBucketFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AttachmentUploadRateBucketFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        findMany: {
+          args: Prisma.AttachmentUploadRateBucketFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>[]
+        }
+        create: {
+          args: Prisma.AttachmentUploadRateBucketCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        createMany: {
+          args: Prisma.AttachmentUploadRateBucketCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AttachmentUploadRateBucketCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>[]
+        }
+        delete: {
+          args: Prisma.AttachmentUploadRateBucketDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        update: {
+          args: Prisma.AttachmentUploadRateBucketUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        deleteMany: {
+          args: Prisma.AttachmentUploadRateBucketDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AttachmentUploadRateBucketUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AttachmentUploadRateBucketUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>[]
+        }
+        upsert: {
+          args: Prisma.AttachmentUploadRateBucketUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttachmentUploadRateBucketPayload>
+        }
+        aggregate: {
+          args: Prisma.AttachmentUploadRateBucketAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAttachmentUploadRateBucket>
+        }
+        groupBy: {
+          args: Prisma.AttachmentUploadRateBucketGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentUploadRateBucketGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AttachmentUploadRateBucketCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttachmentUploadRateBucketCountAggregateOutputType> | number
+        }
+      }
+    }
     MessageGroupContext: {
       payload: Prisma.$MessageGroupContextPayload<ExtArgs>
       fields: Prisma.MessageGroupContextFieldRefs
@@ -3374,6 +3824,153 @@ export const MessageScalarFieldEnum = {
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
+export const StorageProviderConfigScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  name: 'name',
+  type: 'type',
+  isActive: 'isActive',
+  isDefault: 'isDefault',
+  config: 'config',
+  credentialEncrypted: 'credentialEncrypted',
+  lastHealthCheckAt: 'lastHealthCheckAt',
+  lastHealthStatus: 'lastHealthStatus',
+  lastHealthError: 'lastHealthError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StorageProviderConfigScalarFieldEnum = (typeof StorageProviderConfigScalarFieldEnum)[keyof typeof StorageProviderConfigScalarFieldEnum]
+
+
+export const MalwareScannerConfigScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  name: 'name',
+  type: 'type',
+  isActive: 'isActive',
+  isDefault: 'isDefault',
+  config: 'config',
+  credentialEncrypted: 'credentialEncrypted',
+  lastHealthCheckAt: 'lastHealthCheckAt',
+  lastHealthStatus: 'lastHealthStatus',
+  lastHealthError: 'lastHealthError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MalwareScannerConfigScalarFieldEnum = (typeof MalwareScannerConfigScalarFieldEnum)[keyof typeof MalwareScannerConfigScalarFieldEnum]
+
+
+export const AttachmentPolicyScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  inheritGlobal: 'inheritGlobal',
+  enabled: 'enabled',
+  privateEnabled: 'privateEnabled',
+  groupEnabled: 'groupEnabled',
+  maxFileSizeBytes: 'maxFileSizeBytes',
+  maxFilesPerMessage: 'maxFilesPerMessage',
+  maxTotalSizeBytes: 'maxTotalSizeBytes',
+  storageQuotaBytes: 'storageQuotaBytes',
+  imagePreviewEnabled: 'imagePreviewEnabled',
+  pdfPreviewEnabled: 'pdfPreviewEnabled',
+  malwareScanEnabled: 'malwareScanEnabled',
+  malwareScannerProviderId: 'malwareScannerProviderId',
+  validateMime: 'validateMime',
+  validateSignature: 'validateSignature',
+  temporaryTtlMinutes: 'temporaryTtlMinutes',
+  failedCleanupHours: 'failedCleanupHours',
+  uploadRateLimitEnabled: 'uploadRateLimitEnabled',
+  uploadRateLimitWindowMs: 'uploadRateLimitWindowMs',
+  uploadRateLimitMaxRequests: 'uploadRateLimitMaxRequests',
+  uploadRateLimitMaxBytes: 'uploadRateLimitMaxBytes',
+  deleteRetryMaxAttempts: 'deleteRetryMaxAttempts',
+  deleteRetryBaseMinutes: 'deleteRetryBaseMinutes',
+  auditDownloadEnabled: 'auditDownloadEnabled',
+  auditPreviewEnabled: 'auditPreviewEnabled',
+  storageProviderId: 'storageProviderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentPolicyScalarFieldEnum = (typeof AttachmentPolicyScalarFieldEnum)[keyof typeof AttachmentPolicyScalarFieldEnum]
+
+
+export const AttachmentFileTypeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  category: 'category',
+  extension: 'extension',
+  mimeTypes: 'mimeTypes',
+  maxSizeBytes: 'maxSizeBytes',
+  previewable: 'previewable',
+  isAllowed: 'isAllowed',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentFileTypeScalarFieldEnum = (typeof AttachmentFileTypeScalarFieldEnum)[keyof typeof AttachmentFileTypeScalarFieldEnum]
+
+
+export const MessageAttachmentScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  messageId: 'messageId',
+  uploadedByUserIdentityId: 'uploadedByUserIdentityId',
+  uploadedByUsername: 'uploadedByUsername',
+  uploadedByName: 'uploadedByName',
+  originalName: 'originalName',
+  storedName: 'storedName',
+  extension: 'extension',
+  mimeType: 'mimeType',
+  detectedMimeType: 'detectedMimeType',
+  sizeBytes: 'sizeBytes',
+  checksum: 'checksum',
+  checksumAlgorithm: 'checksumAlgorithm',
+  storageProviderId: 'storageProviderId',
+  storageKey: 'storageKey',
+  status: 'status',
+  scanStatus: 'scanStatus',
+  scanProvider: 'scanProvider',
+  scanResult: 'scanResult',
+  scannedAt: 'scannedAt',
+  scanAttemptCount: 'scanAttemptCount',
+  scanLastError: 'scanLastError',
+  expiresAt: 'expiresAt',
+  deletedAt: 'deletedAt',
+  deletedByUserIdentityId: 'deletedByUserIdentityId',
+  deleteReason: 'deleteReason',
+  deleteRetryCount: 'deleteRetryCount',
+  deleteLastAttemptAt: 'deleteLastAttemptAt',
+  deleteLastError: 'deleteLastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MessageAttachmentScalarFieldEnum = (typeof MessageAttachmentScalarFieldEnum)[keyof typeof MessageAttachmentScalarFieldEnum]
+
+
+export const AttachmentUploadRateBucketScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  userIdentityId: 'userIdentityId',
+  windowStart: 'windowStart',
+  windowMs: 'windowMs',
+  requestCount: 'requestCount',
+  byteCount: 'byteCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentUploadRateBucketScalarFieldEnum = (typeof AttachmentUploadRateBucketScalarFieldEnum)[keyof typeof AttachmentUploadRateBucketScalarFieldEnum]
+
+
 export const MessageGroupContextScalarFieldEnum = {
   id: 'id',
   messageId: 'messageId',
@@ -3881,6 +4478,90 @@ export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'StorageProviderType'
+ */
+export type EnumStorageProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StorageProviderType'>
+    
+
+
+/**
+ * Reference to a field of type 'StorageProviderType[]'
+ */
+export type ListEnumStorageProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StorageProviderType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MalwareScannerProviderType'
+ */
+export type EnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MalwareScannerProviderType'>
+    
+
+
+/**
+ * Reference to a field of type 'MalwareScannerProviderType[]'
+ */
+export type ListEnumMalwareScannerProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MalwareScannerProviderType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentFileCategory'
+ */
+export type EnumAttachmentFileCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentFileCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentFileCategory[]'
+ */
+export type ListEnumAttachmentFileCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentFileCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentStatus'
+ */
+export type EnumAttachmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentStatus[]'
+ */
+export type ListEnumAttachmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentScanStatus'
+ */
+export type EnumAttachmentScanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentScanStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentScanStatus[]'
+ */
+export type ListEnumAttachmentScanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentScanStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'NotificationType'
  */
 export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
@@ -4149,6 +4830,12 @@ export type GlobalOmitConfig = {
   room?: Prisma.RoomOmit
   roomMember?: Prisma.RoomMemberOmit
   message?: Prisma.MessageOmit
+  storageProviderConfig?: Prisma.StorageProviderConfigOmit
+  malwareScannerConfig?: Prisma.MalwareScannerConfigOmit
+  attachmentPolicy?: Prisma.AttachmentPolicyOmit
+  attachmentFileType?: Prisma.AttachmentFileTypeOmit
+  messageAttachment?: Prisma.MessageAttachmentOmit
+  attachmentUploadRateBucket?: Prisma.AttachmentUploadRateBucketOmit
   messageGroupContext?: Prisma.MessageGroupContextOmit
   messageRead?: Prisma.MessageReadOmit
   notificationSetting?: Prisma.NotificationSettingOmit

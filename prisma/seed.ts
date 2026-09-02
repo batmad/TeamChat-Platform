@@ -36,9 +36,19 @@ const permissions = [
   ["chat.private.view", "View private chat", "chat"],
   ["chat.private.send", "Send private chat messages", "chat"],
   ["chat.private.all", "Private chat across groups", "chat"],
+  ["chat.private.attachment.send", "Send attachments in private chat", "chat"],
+  ["chat.private.attachment.download", "Download attachments in private chat", "chat"],
+  ["chat.private.attachment.preview", "Preview attachments in private chat", "chat"],
+  ["chat.private.attachment.delete", "Delete own attachments in private chat", "chat"],
+  ["chat.private.attachment.delete_others", "Delete other users' attachments in private chat", "chat"],
   ["chat.group.view", "View assigned group chats", "chat"],
   ["chat.group.send", "Send group chat messages", "chat"],
   ["chat.group.view_all", "View all application group chats", "chat"],
+  ["chat.group.attachment.send", "Send attachments in group chat", "chat"],
+  ["chat.group.attachment.download", "Download attachments in group chat", "chat"],
+  ["chat.group.attachment.preview", "Preview attachments in group chat", "chat"],
+  ["chat.group.attachment.delete", "Delete own attachments in group chat", "chat"],
+  ["chat.group.attachment.delete_others", "Delete other users' attachments in group chat", "chat"],
   ["moderation.view", "View content moderation", "moderation"],
   ["moderation.manage", "Manage forbidden words", "moderation"],
   ["reports.chat_logs.view", "View chat logs report", "reports"],
@@ -70,6 +80,40 @@ const defaultRetentionPolicies = [
   ["GLOBAL:log.report", "LOG", "report", 365, false],
   ["GLOBAL:log.audit", "LOG", "audit", null, true],
   ["GLOBAL:chat.messages", "CHAT", "messages", null, true],
+  ["GLOBAL:attachment.files", "ATTACHMENT", "files", 30, false],
+] as const;
+
+const defaultAttachmentFileTypes = [
+  { extension: "jpg", category: "IMAGE", mimeTypes: ["image/jpeg"], previewable: true, isAllowed: true },
+  { extension: "jpeg", category: "IMAGE", mimeTypes: ["image/jpeg"], previewable: true, isAllowed: true },
+  { extension: "png", category: "IMAGE", mimeTypes: ["image/png"], previewable: true, isAllowed: true },
+  { extension: "webp", category: "IMAGE", mimeTypes: ["image/webp"], previewable: true, isAllowed: true },
+  { extension: "pdf", category: "DOCUMENT", mimeTypes: ["application/pdf"], previewable: true, isAllowed: true },
+  { extension: "doc", category: "DOCUMENT", mimeTypes: ["application/msword"], previewable: false, isAllowed: true },
+  {
+    extension: "docx",
+    category: "DOCUMENT",
+    mimeTypes: ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+    previewable: false,
+    isAllowed: true,
+  },
+  { extension: "xls", category: "SPREADSHEET", mimeTypes: ["application/vnd.ms-excel"], previewable: false, isAllowed: true },
+  {
+    extension: "xlsx",
+    category: "SPREADSHEET",
+    mimeTypes: ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+    previewable: false,
+    isAllowed: true,
+  },
+  { extension: "csv", category: "SPREADSHEET", mimeTypes: ["text/csv", "application/csv"], previewable: false, isAllowed: true },
+  { extension: "txt", category: "TEXT", mimeTypes: ["text/plain"], previewable: false, isAllowed: true },
+  { extension: "zip", category: "ARCHIVE", mimeTypes: ["application/zip", "application/x-zip-compressed"], previewable: false, isAllowed: false },
+  { extension: "rar", category: "ARCHIVE", mimeTypes: ["application/vnd.rar", "application/x-rar-compressed"], previewable: false, isAllowed: false },
+  { extension: "7z", category: "ARCHIVE", mimeTypes: ["application/x-7z-compressed"], previewable: false, isAllowed: false },
+  { extension: "mp3", category: "AUDIO", mimeTypes: ["audio/mpeg"], previewable: false, isAllowed: false },
+  { extension: "wav", category: "AUDIO", mimeTypes: ["audio/wav", "audio/x-wav"], previewable: false, isAllowed: false },
+  { extension: "mp4", category: "VIDEO", mimeTypes: ["video/mp4"], previewable: false, isAllowed: false },
+  { extension: "webm", category: "VIDEO", mimeTypes: ["video/webm"], previewable: false, isAllowed: false },
 ] as const;
 
 async function main() {
@@ -148,6 +192,145 @@ async function main() {
       });
     }
 
+    const existingApplications = await tx.application.findMany({ select: { id: true } });
+    for (const application of existingApplications) {
+      const key = `APP:${application.id}:attachment:files`;
+      await tx.retentionPolicy.upsert({
+        where: { key },
+        update: {},
+        create: {
+          key,
+          applicationId: application.id,
+          dataType: "ATTACHMENT",
+          category: "files",
+          retentionDays: 30,
+          keepForever: false,
+          isActive: true,
+        },
+      });
+    }
+
+    const localStorageProvider = await tx.storageProviderConfig.upsert({
+      where: { key: "GLOBAL:local-primary" },
+      update: {
+        name: "Local Primary",
+        type: "LOCAL",
+        isActive: true,
+        isDefault: true,
+        config: { basePath: "storage/attachments" },
+      },
+      create: {
+        key: "GLOBAL:local-primary",
+        name: "Local Primary",
+        type: "LOCAL",
+        isActive: true,
+        isDefault: true,
+        config: { basePath: "storage/attachments" },
+      },
+    });
+
+    const malwareScannerProvider = await tx.malwareScannerConfig.upsert({
+      where: { key: "GLOBAL:clamav-primary" },
+      update: {
+        name: "ClamAV Primary",
+        type: "CLAMAV",
+        isActive: true,
+        isDefault: true,
+        config: { host: "127.0.0.1", port: 3310, timeoutMs: 10000, chunkSizeBytes: 65536 },
+      },
+      create: {
+        key: "GLOBAL:clamav-primary",
+        name: "ClamAV Primary",
+        type: "CLAMAV",
+        isActive: true,
+        isDefault: true,
+        config: { host: "127.0.0.1", port: 3310, timeoutMs: 10000, chunkSizeBytes: 65536 },
+      },
+    });
+
+    await tx.attachmentPolicy.upsert({
+      where: { key: "GLOBAL" },
+      update: {
+        inheritGlobal: false,
+        enabled: true,
+        privateEnabled: true,
+        groupEnabled: true,
+        maxFileSizeBytes: BigInt(25 * 1024 * 1024),
+        maxFilesPerMessage: 5,
+        maxTotalSizeBytes: BigInt(50 * 1024 * 1024),
+        storageQuotaBytes: BigInt(50 * 1024 * 1024 * 1024),
+        imagePreviewEnabled: true,
+        pdfPreviewEnabled: true,
+        malwareScanEnabled: false,
+        malwareScannerProviderId: malwareScannerProvider.id,
+        validateMime: true,
+        validateSignature: true,
+        temporaryTtlMinutes: 60,
+        failedCleanupHours: 24,
+        uploadRateLimitEnabled: true,
+        uploadRateLimitWindowMs: 60_000,
+        uploadRateLimitMaxRequests: 10,
+        uploadRateLimitMaxBytes: BigInt(100 * 1024 * 1024),
+        deleteRetryMaxAttempts: 8,
+        deleteRetryBaseMinutes: 5,
+        auditDownloadEnabled: true,
+        auditPreviewEnabled: true,
+        storageProviderId: localStorageProvider.id,
+      },
+      create: {
+        key: "GLOBAL",
+        inheritGlobal: false,
+        enabled: true,
+        privateEnabled: true,
+        groupEnabled: true,
+        maxFileSizeBytes: BigInt(25 * 1024 * 1024),
+        maxFilesPerMessage: 5,
+        maxTotalSizeBytes: BigInt(50 * 1024 * 1024),
+        storageQuotaBytes: BigInt(50 * 1024 * 1024 * 1024),
+        imagePreviewEnabled: true,
+        pdfPreviewEnabled: true,
+        malwareScanEnabled: false,
+        malwareScannerProviderId: malwareScannerProvider.id,
+        validateMime: true,
+        validateSignature: true,
+        temporaryTtlMinutes: 60,
+        failedCleanupHours: 24,
+        uploadRateLimitEnabled: true,
+        uploadRateLimitWindowMs: 60_000,
+        uploadRateLimitMaxRequests: 10,
+        uploadRateLimitMaxBytes: BigInt(100 * 1024 * 1024),
+        deleteRetryMaxAttempts: 8,
+        deleteRetryBaseMinutes: 5,
+        auditDownloadEnabled: true,
+        auditPreviewEnabled: true,
+        storageProviderId: localStorageProvider.id,
+      },
+    });
+
+    for (const fileType of defaultAttachmentFileTypes) {
+      const key = `GLOBAL:${fileType.extension}`;
+      await tx.attachmentFileType.upsert({
+        where: { key },
+        update: {
+          category: fileType.category,
+          extension: fileType.extension,
+          mimeTypes: [...fileType.mimeTypes],
+          previewable: fileType.previewable,
+          isAllowed: fileType.isAllowed,
+          isActive: true,
+        },
+        create: {
+          key,
+          category: fileType.category,
+          extension: fileType.extension,
+          mimeTypes: [...fileType.mimeTypes],
+          previewable: fileType.previewable,
+          isAllowed: fileType.isAllowed,
+          isActive: true,
+        },
+      });
+    }
+
     await tx.systemSetting.upsert({
       where: { key: "presence.cleanup_offline_after_hours" },
       update: {
@@ -164,7 +347,8 @@ async function main() {
 
   console.log(`Protected ROOT account '${rootUsername}' is ready.`);
   console.log(`${permissions.length} base permissions are ready.`);
-  console.log("System report and default retention configuration are ready.");
+  console.log(`${defaultAttachmentFileTypes.length} attachment file-type policies are ready.`);
+  console.log("System report, retention, and attachment foundation configuration are ready.");
 }
 
 main()

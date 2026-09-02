@@ -118,6 +118,36 @@ export type RoomMember = Prisma.RoomMemberModel
  */
 export type Message = Prisma.MessageModel
 /**
+ * Model StorageProviderConfig
+ * 
+ */
+export type StorageProviderConfig = Prisma.StorageProviderConfigModel
+/**
+ * Model MalwareScannerConfig
+ * 
+ */
+export type MalwareScannerConfig = Prisma.MalwareScannerConfigModel
+/**
+ * Model AttachmentPolicy
+ * 
+ */
+export type AttachmentPolicy = Prisma.AttachmentPolicyModel
+/**
+ * Model AttachmentFileType
+ * 
+ */
+export type AttachmentFileType = Prisma.AttachmentFileTypeModel
+/**
+ * Model MessageAttachment
+ * 
+ */
+export type MessageAttachment = Prisma.MessageAttachmentModel
+/**
+ * Model AttachmentUploadRateBucket
+ * 
+ */
+export type AttachmentUploadRateBucket = Prisma.AttachmentUploadRateBucketModel
+/**
  * Model MessageGroupContext
  * 
  */

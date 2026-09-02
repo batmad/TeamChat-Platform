@@ -1604,12 +1604,21 @@
     var socketScript =
       this.realtimeUrl + normalizeSocketPath(this.socketPath) + "/socket.io.js";
     if (!global.io) await loadScript(socketScript);
-    await loadScript(base + "/chat-widget-realtime.js");
-    await Promise.all([
+    await loadScript(base + "/chat-widget-realtime.js");    await Promise.all([
       loadScript(base + "/chat-widget-group-chat.js"),
       loadScript(base + "/chat-widget-private-chat.js"),
       loadScript(base + "/chat-widget-notifications.js"),
     ]);
+    await loadScript(base + "/chat-widget-attachments.js");
+    // chat-widget.js dapat dimuat ulang saat demo destroy/remount, sedangkan
+    // dependency attachment tetap berada di cache global. Pastikan prototype
+    // Widget yang baru selalu dipatch ulang tanpa perlu reload dependency.
+    if (
+      global.ChatWidgetAttachments &&
+      typeof global.ChatWidgetAttachments.installWidgetIntegration === "function"
+    ) {
+      global.ChatWidgetAttachments.installWidgetIntegration();
+    }
   };
 
   Widget.prototype.initializeSession = async function () {

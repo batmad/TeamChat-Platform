@@ -71,6 +71,12 @@ export const ModelName = {
   Room: 'Room',
   RoomMember: 'RoomMember',
   Message: 'Message',
+  StorageProviderConfig: 'StorageProviderConfig',
+  MalwareScannerConfig: 'MalwareScannerConfig',
+  AttachmentPolicy: 'AttachmentPolicy',
+  AttachmentFileType: 'AttachmentFileType',
+  MessageAttachment: 'MessageAttachment',
+  AttachmentUploadRateBucket: 'AttachmentUploadRateBucket',
   MessageGroupContext: 'MessageGroupContext',
   MessageRead: 'MessageRead',
   NotificationSetting: 'NotificationSetting',
@@ -409,6 +415,153 @@ export const MessageScalarFieldEnum = {
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const StorageProviderConfigScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  name: 'name',
+  type: 'type',
+  isActive: 'isActive',
+  isDefault: 'isDefault',
+  config: 'config',
+  credentialEncrypted: 'credentialEncrypted',
+  lastHealthCheckAt: 'lastHealthCheckAt',
+  lastHealthStatus: 'lastHealthStatus',
+  lastHealthError: 'lastHealthError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StorageProviderConfigScalarFieldEnum = (typeof StorageProviderConfigScalarFieldEnum)[keyof typeof StorageProviderConfigScalarFieldEnum]
+
+
+export const MalwareScannerConfigScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  name: 'name',
+  type: 'type',
+  isActive: 'isActive',
+  isDefault: 'isDefault',
+  config: 'config',
+  credentialEncrypted: 'credentialEncrypted',
+  lastHealthCheckAt: 'lastHealthCheckAt',
+  lastHealthStatus: 'lastHealthStatus',
+  lastHealthError: 'lastHealthError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MalwareScannerConfigScalarFieldEnum = (typeof MalwareScannerConfigScalarFieldEnum)[keyof typeof MalwareScannerConfigScalarFieldEnum]
+
+
+export const AttachmentPolicyScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  inheritGlobal: 'inheritGlobal',
+  enabled: 'enabled',
+  privateEnabled: 'privateEnabled',
+  groupEnabled: 'groupEnabled',
+  maxFileSizeBytes: 'maxFileSizeBytes',
+  maxFilesPerMessage: 'maxFilesPerMessage',
+  maxTotalSizeBytes: 'maxTotalSizeBytes',
+  storageQuotaBytes: 'storageQuotaBytes',
+  imagePreviewEnabled: 'imagePreviewEnabled',
+  pdfPreviewEnabled: 'pdfPreviewEnabled',
+  malwareScanEnabled: 'malwareScanEnabled',
+  malwareScannerProviderId: 'malwareScannerProviderId',
+  validateMime: 'validateMime',
+  validateSignature: 'validateSignature',
+  temporaryTtlMinutes: 'temporaryTtlMinutes',
+  failedCleanupHours: 'failedCleanupHours',
+  uploadRateLimitEnabled: 'uploadRateLimitEnabled',
+  uploadRateLimitWindowMs: 'uploadRateLimitWindowMs',
+  uploadRateLimitMaxRequests: 'uploadRateLimitMaxRequests',
+  uploadRateLimitMaxBytes: 'uploadRateLimitMaxBytes',
+  deleteRetryMaxAttempts: 'deleteRetryMaxAttempts',
+  deleteRetryBaseMinutes: 'deleteRetryBaseMinutes',
+  auditDownloadEnabled: 'auditDownloadEnabled',
+  auditPreviewEnabled: 'auditPreviewEnabled',
+  storageProviderId: 'storageProviderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentPolicyScalarFieldEnum = (typeof AttachmentPolicyScalarFieldEnum)[keyof typeof AttachmentPolicyScalarFieldEnum]
+
+
+export const AttachmentFileTypeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  applicationId: 'applicationId',
+  category: 'category',
+  extension: 'extension',
+  mimeTypes: 'mimeTypes',
+  maxSizeBytes: 'maxSizeBytes',
+  previewable: 'previewable',
+  isAllowed: 'isAllowed',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentFileTypeScalarFieldEnum = (typeof AttachmentFileTypeScalarFieldEnum)[keyof typeof AttachmentFileTypeScalarFieldEnum]
+
+
+export const MessageAttachmentScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  messageId: 'messageId',
+  uploadedByUserIdentityId: 'uploadedByUserIdentityId',
+  uploadedByUsername: 'uploadedByUsername',
+  uploadedByName: 'uploadedByName',
+  originalName: 'originalName',
+  storedName: 'storedName',
+  extension: 'extension',
+  mimeType: 'mimeType',
+  detectedMimeType: 'detectedMimeType',
+  sizeBytes: 'sizeBytes',
+  checksum: 'checksum',
+  checksumAlgorithm: 'checksumAlgorithm',
+  storageProviderId: 'storageProviderId',
+  storageKey: 'storageKey',
+  status: 'status',
+  scanStatus: 'scanStatus',
+  scanProvider: 'scanProvider',
+  scanResult: 'scanResult',
+  scannedAt: 'scannedAt',
+  scanAttemptCount: 'scanAttemptCount',
+  scanLastError: 'scanLastError',
+  expiresAt: 'expiresAt',
+  deletedAt: 'deletedAt',
+  deletedByUserIdentityId: 'deletedByUserIdentityId',
+  deleteReason: 'deleteReason',
+  deleteRetryCount: 'deleteRetryCount',
+  deleteLastAttemptAt: 'deleteLastAttemptAt',
+  deleteLastError: 'deleteLastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MessageAttachmentScalarFieldEnum = (typeof MessageAttachmentScalarFieldEnum)[keyof typeof MessageAttachmentScalarFieldEnum]
+
+
+export const AttachmentUploadRateBucketScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  userIdentityId: 'userIdentityId',
+  windowStart: 'windowStart',
+  windowMs: 'windowMs',
+  requestCount: 'requestCount',
+  byteCount: 'byteCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttachmentUploadRateBucketScalarFieldEnum = (typeof AttachmentUploadRateBucketScalarFieldEnum)[keyof typeof AttachmentUploadRateBucketScalarFieldEnum]
 
 
 export const MessageGroupContextScalarFieldEnum = {

@@ -148,11 +148,14 @@
       global.dispatchEvent(
         new CustomEvent("chatwidget:private:left", { detail: payload }),
       );
-    });
-
-    socket.on("private:message:new", function (payload) {
+    });    socket.on("private:message:new", function (payload) {
       global.dispatchEvent(
         new CustomEvent("chatwidget:private:message:new", { detail: payload }),
+      );
+    });
+    socket.on("attachment:deleted", function (payload) {
+      global.dispatchEvent(
+        new CustomEvent("chatwidget:attachment:deleted", { detail: payload }),
       );
     });
 
@@ -382,8 +385,22 @@
           );
       });
     });
+  };  Client.prototype.deleteAttachment = function (attachmentId) {
+    if (!this.socket) throw new Error("Realtime client is not connected");
+    return new Promise((resolve, reject) => {
+      this.socket.emit("attachment:delete", { attachmentId: attachmentId }, function (result) {
+        if (result && result.ok) resolve(result.data);
+        else
+          reject(
+            new Error(
+              result && result.error
+                ? result.error.message
+                : "Unable to delete attachment",
+            ),
+          );
+      });
+    });
   };
-
   Client.prototype.markPrivateRead = function (roomId, upToMessageId) {
     if (!this.socket) throw new Error("Realtime client is not connected");
     return new Promise((resolve, reject) => {

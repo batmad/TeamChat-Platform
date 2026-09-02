@@ -75,9 +75,9 @@
     options = options || {};
     return this.requireRealtime().sendGroupMessage({
       groupId: groupId,
-      content: content,
-      replyMessageId: options.replyMessageId || null,
-      clientMessageId: options.clientMessageId || null
+      content: content,      replyMessageId: options.replyMessageId || null,
+      clientMessageId: options.clientMessageId || null,
+      attachmentIds: Array.isArray(options.attachmentIds) ? options.attachmentIds : []
     });
   };
 

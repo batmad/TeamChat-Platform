@@ -1,5 +1,11 @@
 import "server-only";
 import { AppError } from "@/lib/api/app-error";
+import {
+  messageAttachmentSelect,
+  serializeMessageAttachments,
+  type MessageAttachmentPayload,
+  type MessageAttachmentRow,
+} from "@/lib/attachments/message/payload";
 import { prisma } from "@/lib/db/prisma";
 import type { ChatLogsScope } from "@/lib/reports/chat-logs-scope";
 import { ensureRequestedGroupInScope } from "@/lib/reports/chat-logs-scope";
@@ -27,6 +33,7 @@ export type ChatLogsReportRow = {
   participants: Array<{ userIdentityId: string; username: string; name: string | null }>;
   message: string;
   replyTo: { id: string; senderUsername: string; senderName: string | null; content: string } | null;
+  attachments: MessageAttachmentPayload[];
 };
 
 
@@ -45,6 +52,7 @@ type RawReportMessage = {
   };
   groupContexts: Array<{ group: { id: string; code: string; name: string } }>;
   replyTo: { id: string; senderUsername: string; senderName: string | null; content: string } | null;
+  attachments: MessageAttachmentRow[];
 };
 
 const rowSelect = {
@@ -80,6 +88,10 @@ const rowSelect = {
       senderName: true,
       content: true,
     },
+  },
+  attachments: {
+    select: messageAttachmentSelect,
+    orderBy: { createdAt: "asc" as const },
   },
 } as const;
 
@@ -143,6 +155,7 @@ function mapRow(message: RawReportMessage): ChatLogsReportRow {
     })),
     message: message.content,
     replyTo: message.replyTo,
+    attachments: serializeMessageAttachments(message.attachments),
   };
 }
 
