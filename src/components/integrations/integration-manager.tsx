@@ -162,6 +162,7 @@ export function IntegrationManager({
   const [tables, setTables] = useState<
     Array<{ schema?: string | null; name: string }>
   >([]);
+  const [sourceResponse, setSourceResponse] = useState<unknown>(null);
   const [preview, setPreview] = useState<NormalizedUser[]>([]);
   const [busy, setBusy] = useState(false);
   const [sampleUser, setSampleUser] = useState("");
@@ -406,8 +407,13 @@ export function IntegrationManager({
           ),
         ),
       );
-      if (result.data.kind === "tables") setTables(result.data.tables);
-      else setFields(result.data.fields);
+      if (result.data.kind === "tables") {
+        setTables(result.data.tables);
+        setSourceResponse(null);
+      } else {
+        setFields(result.data.fields);
+        setSourceResponse(result.data);
+      }
       toast.success(
         result.data.kind === "tables"
           ? `${result.data.tables.length} table ditemukan.`
@@ -706,6 +712,8 @@ export function IntegrationManager({
                     </button>
                   ) : null}
                 </div>
+
+                {/* Rendered Read Tables */}
                 {tables.length ? (
                   <div className="mt-5 flex flex-wrap gap-2">
                     {tables.map((table) => (
@@ -719,6 +727,41 @@ export function IntegrationManager({
                         {table.name}
                       </button>
                     ))}
+                  </div>
+                ) : null}
+
+                {/* Rendered Read API Fields */}
+                {fields.length ? (
+                  <div className="mt-5">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                      Source Fields
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {fields.map((field) => (
+                        <span
+                          key={field.name}
+                          className="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700"
+                        >
+                          {field.name}
+                          <span className="ml-2 text-slate-400">
+                            {field.type}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+
+                    {sourceResponse ? (
+                      <div className="mt-4">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                          API Response
+                        </p>
+
+                        <pre className="max-h-80 overflow-auto rounded-xl bg-slate-950 p-4 text-xs leading-relaxed text-slate-200">
+                          {JSON.stringify(sourceResponse, null, 2)}
+                        </pre>
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
