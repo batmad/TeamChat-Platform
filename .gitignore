@@ -11,13 +11,13 @@ out/
 dist/
 build/
 
-# Environment variables dan rahasia
+# Environment variables dan secrets
 
 .env
 .env.*
 !.env.example
 
-# Jangan commit credential atau key
+# Credentials, certificates, private keys
 
 *.pem
 *.key
@@ -30,7 +30,7 @@ secrets/
 .secret/
 private/
 
-# Database lokal
+# Local database files
 
 *.db
 *.db-journal
@@ -39,27 +39,26 @@ private/
 prisma/dev.db
 prisma/dev.db-journal
 
-# Logs
+# Runtime logs
 
-logs/
+# Hanya ignore folder logs di root project.
+
+# Folder seperti src/lib/logs atau src/**/logs tetap di-track.
+
+/logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Source code logs
-
-!src/lib/logs/
-!src/lib/logs/**
-
-# Runtime
+# Runtime files
 
 *.pid
 *.pid.lock
 pids/
 
-# Test dan coverage
+# Tests and coverage
 
 coverage/
 .nyc_output/
@@ -75,18 +74,13 @@ blob-report/
 .eslintcache
 *.tsbuildinfo
 
-# Upload atau file sementara aplikasi
+# Runtime uploads / temporary storage
 
-uploads/
-tmp/
-temp/
-storage/
-public/uploads/
-
-# Source code attachment storage
-
-!src/lib/attachments/storage/
-!src/lib/attachments/storage/**
+/uploads/
+/tmp/
+/temp/
+/storage/
+/public/uploads/
 
 # IDE
 
@@ -94,7 +88,7 @@ public/uploads/
 .idea/
 *.iml
 
-# Sistem operasi
+# Operating system files
 
 .DS_Store
 Thumbs.db
@@ -104,12 +98,12 @@ desktop.ini
 
 .vercel/
 
-# Local certificates
+# Local certificates/directories
 
-certs/
-ssl/
+/certs/
+/ssl/
 
-# Archive
+# Archives
 
 *.zip
 *.rar
@@ -117,7 +111,7 @@ ssl/
 *.tar
 *.tar.gz
 
-# Backup
+# Backup files
 
 *.bak
 *.backup
