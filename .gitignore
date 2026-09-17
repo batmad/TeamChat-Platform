@@ -26,9 +26,10 @@ build/
 *.pfx
 credentials.json
 service-account*.json
-secrets/
-.secret/
-private/
+
+/secrets/
+/.secret/
+/private/
 
 # Local database files
 
@@ -43,7 +44,7 @@ prisma/dev.db-journal
 
 # Hanya ignore folder logs di root project.
 
-# Folder seperti src/lib/logs atau src/**/logs tetap di-track.
+# Folder logs di dalam src tetap di-track.
 
 /logs/
 *.log
